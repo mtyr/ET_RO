@@ -94,7 +94,7 @@ void frLog::LOG( SINT id, const SCHR* message,... )
 	/* ログ出力 */
 	memset( &str[0], 0, sizeof( str ));
 	va_start( args, message );
-	vsprintf_s( str, message, args );
+	vsprintf( str, message, args );
 	va_end( args );
 	
 #ifdef __BLUETOOTH_DEBUG__
