@@ -1,65 +1,65 @@
 /* ------------------------------------------------------------------------- */
 /* Log.cpp																	 */
-/* ‚q‚n‚R‚R																	 */
-/* ƒƒOî•ñ‚ð“Š‡‚·‚éƒNƒ‰ƒX									 				 */
+/* ï¼²ï¼¯ï¼“ï¼“																	 */
+/* ãƒ­ã‚°æƒ…å ±ã‚’çµ±æ‹¬ã™ã‚‹ã‚¯ãƒ©ã‚¹									 				 */
 /* ------------------------------------------------------------------------- */
-/* ƒ^[ƒ~ƒiƒ‹‚©‚ç‚Ì“ü—ÍƒRƒ}ƒ“ƒh‚ð‰ðÍ‚µA‚a‚Œ‚•‚”‚…‚”‚‚‚”‚ˆ‚Öî•ñ‘—M‚·‚é‚©*/
-/* ”Û‚©‚ð”»’fA•K—v‚É‰ž‚¶‚ÄƒƒO‚ðo—ÍE”pŠü‚µ‚Ü‚·B							 */
+/* ã‚¿ãƒ¼ãƒŸãƒŠãƒ«ã‹ã‚‰ã®å…¥åŠ›ã‚³ãƒžãƒ³ãƒ‰ã‚’è§£æžã—ã€ï¼¢ï½Œï½•ï½”ï½…ï½”ï½ï½ï½”ï½ˆã¸æƒ…å ±é€ä¿¡ã™ã‚‹ã‹*/
+/* å¦ã‹ã‚’åˆ¤æ–­ã€å¿…è¦ã«å¿œã˜ã¦ãƒ­ã‚°ã‚’å‡ºåŠ›ãƒ»å»ƒæ£„ã—ã¾ã™ã€‚							 */
 /*																			 */
 /* ------------------------------------------------------------------------- */
-/* 	”Ô†	XV“à—e								XV“ú		–¼‘O		 */
+/* 	ç•ªå·	æ›´æ–°å†…å®¹								æ›´æ–°æ—¥		åå‰		 */
 /* ------------------------------------------------------------------------- */
-/* 000000	V‹Kì¬								2018/06/22	–‘ˆä  —²Ž¡	 */
-/* 000001	ƒVƒ“ƒOƒ‹ƒgƒ“‘Î‰ž						2018/06/25	–‘ˆä  —²Ž¡	 */
-/* 000002	Bluetooth‘Î‰ž							2018/07/02	–‘ˆä  —²Ž¡	 */
+/* 000000	æ–°è¦ä½œæˆ								2018/06/22	æ¡äº•  éš†æ²»	 */
+/* 000001	ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³å¯¾å¿œ						2018/06/25	æ¡äº•  éš†æ²»	 */
+/* 000002	Bluetoothå¯¾å¿œ							2018/07/02	æ¡äº•  éš†æ²»	 */
 /* ------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------- */
-/* ƒRƒ“ƒpƒCƒ‹ƒXƒCƒbƒ`														 */
+/* ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã‚¹ã‚¤ãƒƒãƒ														 */
 /* ------------------------------------------------------------------------- */
 #define __BLUETOOTH_DEBUG__
 
 /* ------------------------------------------------------------------------- */
-/* includeƒtƒ@ƒCƒ‹															 */
+/* includeãƒ•ã‚¡ã‚¤ãƒ«															 */
 /* ------------------------------------------------------------------------- */
-#include "frLog.h"								/* ƒƒOƒwƒbƒ_				 */
-#include "frBluetooth.h"						/* Bluetoothƒwƒbƒ_			 */
-#include <stdio.h>								/* Šî–{“üo—Í				 */
-#include <string.h>								/* •¶Žš—ñ‘€ìŒn				 */
-#include <stdlib.h>								/* ‰Šú‰»Œn					 */
-#include <stdarg.h>								/* ‰Â•Ï’·ˆø”‘€ìŒn			 */
+#include "frLog.h"								/* ãƒ­ã‚°ãƒ˜ãƒƒãƒ€				 */
+#include "frBluetooth.h"						/* Bluetoothãƒ˜ãƒƒãƒ€			 */
+#include <stdio.h>								/* åŸºæœ¬å…¥å‡ºåŠ›				 */
+#include <string.h>								/* æ–‡å­—åˆ—æ“ä½œç³»				 */
+#include <stdlib.h>								/* åˆæœŸåŒ–ç³»					 */
+#include <stdarg.h>								/* å¯å¤‰é•·å¼•æ•°æ“ä½œç³»			 */
 
 /* ------------------------------------------------------------------------- */
-/* ’è”’è‹`																	 */
+/* å®šæ•°å®šç¾©																	 */
 /* ------------------------------------------------------------------------- */
-#define LOG_KEY_DELETE		(       0x7F )		/* DeleteƒL[				 */
-#define LOG_KEY_BACKSPACE	(       0x08 )		/* BackspaceƒL[			 */
-#define LOG_KEY_ENTER_CR	(       0x0D )		/* ƒGƒ“ƒ^[ƒL[(1)			 */
-#define LOG_KEY_ENTER_LF	(       0x0A )		/* ƒGƒ“ƒ^[ƒL[(2)			 */
-#define LOG_KEY_SPACE		(       0x20 )		/* ƒXƒy[ƒXƒL[				 */
-#define LOG_KEY_HYPHEN		(       0x2D )		/* -ƒL[					 */
+#define LOG_KEY_DELETE		(       0x7F )		/* Deleteã‚­ãƒ¼				 */
+#define LOG_KEY_BACKSPACE	(       0x08 )		/* Backspaceã‚­ãƒ¼			 */
+#define LOG_KEY_ENTER_CR	(       0x0D )		/* ã‚¨ãƒ³ã‚¿ãƒ¼ã‚­ãƒ¼(1)			 */
+#define LOG_KEY_ENTER_LF	(       0x0A )		/* ã‚¨ãƒ³ã‚¿ãƒ¼ã‚­ãƒ¼(2)			 */
+#define LOG_KEY_SPACE		(       0x20 )		/* ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼				 */
+#define LOG_KEY_HYPHEN		(       0x2D )		/* -ã‚­ãƒ¼					 */
 
-#define LOG_FLG_ON			(       0x01 )		/* ƒtƒ‰ƒO‚n‚m				 */
-#define LOG_FLG_OFF			(       0x00 )		/* ƒtƒ‰ƒO‚n‚e‚e				 */
+#define LOG_FLG_ON			(       0x01 )		/* ãƒ•ãƒ©ã‚°ï¼¯ï¼®				 */
+#define LOG_FLG_OFF			(       0x00 )		/* ãƒ•ãƒ©ã‚°ï¼¯ï¼¦ï¼¦				 */
 
 
 /* ------------------------------------------------------------------------- */
-/* \‘¢‘Ì’è‹`																 */
+/* æ§‹é€ ä½“å®šç¾©																 */
 /* ------------------------------------------------------------------------- */
-typedef struct _LogLink {						/* ‚h‚cEƒRƒ}ƒ“ƒhƒŠƒ“ƒN\‘¢‘Ì*/
-	const SCHR* strings;						/* ƒRƒ}ƒ“ƒh•¶Žš—ñ			 */
-	const ULNG id;								/* ƒRƒ}ƒ“ƒh‚É‘Î‰ž‚·‚é‚h‚c	 */
+typedef struct _LogLink {						/* ï¼©ï¼¤ãƒ»ã‚³ãƒžãƒ³ãƒ‰ãƒªãƒ³ã‚¯æ§‹é€ ä½“*/
+	const SCHR* strings;						/* ã‚³ãƒžãƒ³ãƒ‰æ–‡å­—åˆ—			 */
+	const ULNG id;								/* ã‚³ãƒžãƒ³ãƒ‰ã«å¯¾å¿œã™ã‚‹ï¼©ï¼¤	 */
 } LOGLINK;
 
 /* ------------------------------------------------------------------------- */
-/* ¡¡¡ public ¡¡¡														 */
+/* â– â– â–  public â– â– â– 														 */
 /* ------------------------------------------------------------------------- */
-/* ŠÖ”–¼	: frLog::frLog													 */
-/* ‹@”\–¼	: ƒƒO§ŒäFƒRƒ“ƒXƒgƒ‰ƒNƒ^										 */
-/* ‹@”\ŠT—v	: ‰‰ñƒCƒ“ƒXƒ^ƒ“ƒX¶¬Žž‚ÉƒR[ƒ‹‚³‚ê‚Ü‚·						 */
-/* ˆø”		: void			: ‚È‚µ											 */
-/* –ß‚è’l	: void			: ‚È‚µ											 */
-/* ì¬“ú	: 2018/06/22		–‘ˆä  —²Ž¡		V‹Kì¬					 */
+/* é–¢æ•°å	: frLog::frLog													 */
+/* æ©Ÿèƒ½å	: ãƒ­ã‚°åˆ¶å¾¡ï¼šã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿										 */
+/* æ©Ÿèƒ½æ¦‚è¦	: åˆå›žã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆæ™‚ã«ã‚³ãƒ¼ãƒ«ã•ã‚Œã¾ã™						 */
+/* å¼•æ•°		: void			: ãªã—											 */
+/* æˆ»ã‚Šå€¤	: void			: ãªã—											 */
+/* ä½œæˆæ—¥	: 2018/06/22		æ¡äº•  éš†æ²»		æ–°è¦ä½œæˆ					 */
 /* ------------------------------------------------------------------------- */
 frLog& frLog::GetInstance(void)
 {
@@ -68,37 +68,37 @@ frLog& frLog::GetInstance(void)
 }
 
 /* ------------------------------------------------------------------------- */
-/* ŠÖ”–¼	: frLog::LOG													 */
-/* ‹@”\–¼	: ƒƒO§ŒäFƒƒOo—Í											 */
-/* ‹@”\ŠT—v	: Ý’è‚É‰ž‚¶‚ÄAƒƒOo—Í‚ðs‚¢‚Ü‚·B							 */
-/* 			  ƒRƒ“ƒpƒCƒ‹ƒXƒCƒbƒ`‚É‰ž‚¶‚ÄBluetooth / ƒ‚ƒjƒ^‚Öo—Í‚ð•ª‚¯‚Ä‚Ü‚· */
-/* ˆø”		: ULNG	:id 	:[I N] Ž¯•Ê‚h‚c 								 */
-/* –ß‚è’l	: void			: ‚È‚µ											 */
-/* ì¬“ú	: 2018/06/22		–‘ˆä  —²Ž¡		V‹Kì¬					 */
+/* é–¢æ•°å	: frLog::LOG													 */
+/* æ©Ÿèƒ½å	: ãƒ­ã‚°åˆ¶å¾¡ï¼šãƒ­ã‚°å‡ºåŠ›											 */
+/* æ©Ÿèƒ½æ¦‚è¦	: è¨­å®šã«å¿œã˜ã¦ã€ãƒ­ã‚°å‡ºåŠ›ã‚’è¡Œã„ã¾ã™ã€‚							 */
+/* 			  ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã‚¹ã‚¤ãƒƒãƒã«å¿œã˜ã¦Bluetooth / ãƒ¢ãƒ‹ã‚¿ã¸å‡ºåŠ›ã‚’åˆ†ã‘ã¦ã¾ã™ */
+/* å¼•æ•°		: ULNG	:id 	:[I N] è­˜åˆ¥ï¼©ï¼¤ 								 */
+/* æˆ»ã‚Šå€¤	: void			: ãªã—											 */
+/* ä½œæˆæ—¥	: 2018/06/22		æ¡äº•  éš†æ²»		æ–°è¦ä½œæˆ					 */
 /* ------------------------------------------------------------------------- */
 void frLog::LOG( SINT id, const SCHR* message,... )
 {
-	char    str[LOG_MAX_BUF];					/* ƒƒOƒoƒbƒtƒ@				 */
+	char    str[LOG_MAX_BUF];					/* ãƒ­ã‚°ãƒãƒƒãƒ•ã‚¡				 */
 	SINT    iIndex = 0;							/* index					 */
-	SINT    iMax   = 0;							/* ƒoƒbƒtƒ@Å‘å’·			 */
-	va_list args;								/* ‰Â•Ï’·ƒ|ƒCƒ“ƒ^			 */
+	SINT    iMax   = 0;							/* ãƒãƒƒãƒ•ã‚¡æœ€å¤§é•·			 */
+	va_list args;								/* å¯å¤‰é•·ãƒã‚¤ãƒ³ã‚¿			 */
 	
-	/* Žw’èƒJŠ‚ÌƒƒO‚ªo—Íƒ‚[ƒh‚É‚È‚Á‚Ä‚¢‚È‚¢ê‡‚Í‰½‚à‚µ‚È‚¢ */
+	/* æŒ‡å®šã‚«æ‰€ã®ãƒ­ã‚°ãŒå‡ºåŠ›ãƒ¢ãƒ¼ãƒ‰ã«ãªã£ã¦ã„ãªã„å ´åˆã¯ä½•ã‚‚ã—ãªã„ */
 	if(( _logmode & id ) != id ) {
-		/* ƒGƒ‰[ƒƒO‚Í‹­§o—Í‚Ìˆ×A—áŠO‘[’u */
+		/* ã‚¨ãƒ©ãƒ¼ãƒ­ã‚°ã¯å¼·åˆ¶å‡ºåŠ›ã®ç‚ºã€ä¾‹å¤–æŽªç½® */
 		if( id != LOG_ID_ERR ) {
 			return;
 		}
 	}
 	
-	/* ƒƒOo—Í */
+	/* ãƒ­ã‚°å‡ºåŠ› */
 	memset( &str[0], 0, sizeof( str ));
 	va_start( args, message );
 	vsprintf_s( str, message, args );
 	va_end( args );
 	
 #ifdef __BLUETOOTH_DEBUG__
-	/* BluetoothƒCƒ“ƒXƒ^ƒ“ƒXŽæ“¾ */
+	/* Bluetoothã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å–å¾— */
 	frBluetooth& bt= frBluetooth::GetInstance();
 	for( iMax = ( strlen( str ) - 1 ); iIndex < iMax; iIndex ++ ) {
 		bt.Send( str[iIndex] );
@@ -111,30 +111,30 @@ void frLog::LOG( SINT id, const SCHR* message,... )
 }
 
 /* ------------------------------------------------------------------------- */
-/* ŠÖ”–¼	: frLog::SetLog													 */
-/* ‹@”\–¼	: ƒƒO§ŒäFƒƒOƒRƒ}ƒ“ƒhƒv[ƒ‹									 */
-/* ‹@”\ŠT—v	: ƒ^[ƒ~ƒiƒ‹‚©‚çƒRƒ}ƒ“ƒh“ü—ÍEƒv[ƒ‹‚µ‚Ü‚·B					 */
-/* 			: EnterƒL[‰Ÿ‰º‚ÅAƒv[ƒ‹‚³‚ê‚½ƒRƒ}ƒ“ƒh‚ð‰ðÍAˆ—‚ðŽÀs‚µ‚Ü‚·B*/
-/* ˆø”		: char			: code	: [I N]“ü—ÍƒR[ƒh(1•¶Žš)				 */
-/* –ß‚è’l	: void			: ‚È‚µ											 */
-/* ì¬“ú	: 2018/06/22		–‘ˆä  —²Ž¡		V‹Kì¬					 */
+/* é–¢æ•°å	: frLog::SetLog													 */
+/* æ©Ÿèƒ½å	: ãƒ­ã‚°åˆ¶å¾¡ï¼šãƒ­ã‚°ã‚³ãƒžãƒ³ãƒ‰ãƒ—ãƒ¼ãƒ«									 */
+/* æ©Ÿèƒ½æ¦‚è¦	: ã‚¿ãƒ¼ãƒŸãƒŠãƒ«ã‹ã‚‰ã‚³ãƒžãƒ³ãƒ‰å…¥åŠ›ãƒ»ãƒ—ãƒ¼ãƒ«ã—ã¾ã™ã€‚					 */
+/* 			: Enterã‚­ãƒ¼æŠ¼ä¸‹ã§ã€ãƒ—ãƒ¼ãƒ«ã•ã‚ŒãŸã‚³ãƒžãƒ³ãƒ‰ã‚’è§£æžã€å‡¦ç†ã‚’å®Ÿè¡Œã—ã¾ã™ã€‚*/
+/* å¼•æ•°		: char			: code	: [I N]å…¥åŠ›ã‚³ãƒ¼ãƒ‰(1æ–‡å­—)				 */
+/* æˆ»ã‚Šå€¤	: void			: ãªã—											 */
+/* ä½œæˆæ—¥	: 2018/06/22		æ¡äº•  éš†æ²»		æ–°è¦ä½œæˆ					 */
 /* ------------------------------------------------------------------------- */
 void frLog::SetLog( SCHR code )
 {
-	ULNG ulLength = 0;							/* •¶Žš‚Å’Ã’·				 */
+	ULNG ulLength = 0;							/* æ–‡å­—ã§æ´¥é•·				 */
 
-	/* EnterƒL[“ü—ÍŽž‚ÍƒRƒ}ƒ“ƒh‰ðÍ */
+	/* Enterã‚­ãƒ¼å…¥åŠ›æ™‚ã¯ã‚³ãƒžãƒ³ãƒ‰è§£æž */
 	if (code == LOG_KEY_ENTER_LF) {
 		CommandAnaryze();
 		return;
 	}
 
-	/* ƒR[ƒh‚ªÅ‘å’l‚Ìê‡‚Íˆ—‚µ‚È‚¢ */
+	/* ã‚³ãƒ¼ãƒ‰ãŒæœ€å¤§å€¤ã®å ´åˆã¯å‡¦ç†ã—ãªã„ */
 	if (strlen(_buf) >= LOG_MAX_BUF) {
 		return;
 	}
 
-	/* BackspaceƒL[‰Ÿ‰ºŽž‚Í‚P•¶Žšíœ */
+	/* Backspaceã‚­ãƒ¼æŠ¼ä¸‹æ™‚ã¯ï¼‘æ–‡å­—å‰Šé™¤ */
 	if (code == LOG_KEY_BACKSPACE) {
 		ulLength = strlen(_buf);
 		if (ulLength > 0) {
@@ -143,31 +143,31 @@ void frLog::SetLog( SCHR code )
 		return;
 	}
 
-	/* •¶Žš—ñƒRƒ}ƒ“ƒh‚Ìê‡‚Í‚P•¶Žš’Ç‰Á */
+	/* æ–‡å­—åˆ—ã‚³ãƒžãƒ³ãƒ‰ã®å ´åˆã¯ï¼‘æ–‡å­—è¿½åŠ  */
 	if ((code >= 'a') && (code <= 'z')) {
 		_buf[strlen(_buf)] = code;
 		return;
 	}
 
-	/* ‚»‚Ì‘¼ƒR[ƒh‰ðÍ */
+	/* ãã®ä»–ã‚³ãƒ¼ãƒ‰è§£æž */
 	switch (code) {
-	case LOG_KEY_SPACE:							/* ƒXƒy[ƒXƒL[				 */
-	case LOG_KEY_HYPHEN:						/* -ƒL[					 */
-		_buf[strlen(_buf)] = code;				/* ‚P•¶Žš’Ç‰Á				 */
+	case LOG_KEY_SPACE:							/* ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼				 */
+	case LOG_KEY_HYPHEN:						/* -ã‚­ãƒ¼					 */
+		_buf[strlen(_buf)] = code;				/* ï¼‘æ–‡å­—è¿½åŠ 				 */
 		break;
 	}
 	return;
 }
 
 /* ------------------------------------------------------------------------- */
-/* ¡¡¡ private ¡¡¡													 */
+/* â– â– â–  private â– â– â– 													 */
 /* ------------------------------------------------------------------------- */
-/* ŠÖ”–¼	: frLog::frLog													 */
-/* ‹@”\–¼	: ƒƒO§ŒäFƒRƒ“ƒXƒgƒ‰ƒNƒ^										 */
-/* ‹@”\ŠT—v	: ‰‰ñƒCƒ“ƒXƒ^ƒ“ƒX¶¬Žž‚ÉƒR[ƒ‹‚³‚ê‚Ü‚·						 */
-/* ˆø”		: void			: ‚È‚µ											 */
-/* –ß‚è’l	: void			: ‚È‚µ											 */
-/* ì¬“ú	: 2018/06/22		–‘ˆä  —²Ž¡		V‹Kì¬					 */
+/* é–¢æ•°å	: frLog::frLog													 */
+/* æ©Ÿèƒ½å	: ãƒ­ã‚°åˆ¶å¾¡ï¼šã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿										 */
+/* æ©Ÿèƒ½æ¦‚è¦	: åˆå›žã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆæ™‚ã«ã‚³ãƒ¼ãƒ«ã•ã‚Œã¾ã™						 */
+/* å¼•æ•°		: void			: ãªã—											 */
+/* æˆ»ã‚Šå€¤	: void			: ãªã—											 */
+/* ä½œæˆæ—¥	: 2018/06/22		æ¡äº•  éš†æ²»		æ–°è¦ä½œæˆ					 */
 /* ------------------------------------------------------------------------- */
 frLog::frLog()
 {
@@ -176,12 +176,12 @@ frLog::frLog()
 }
 
 /* ------------------------------------------------------------------------- */
-/* ŠÖ”–¼	: frLog::~frLog													 */
-/* ‹@”\–¼	: ƒƒO§ŒäFƒfƒXƒgƒ‰ƒNƒ^										 */
-/* ‹@”\ŠT—v	: staticƒNƒ‰ƒX‚Ìˆ×AƒR[ƒ‹‚³‚ê‚é‚±‚Æ‚Í–³‚¢						 */
-/* ˆø”		: void			: ‚È‚µ											 */
-/* –ß‚è’l	: void			: ‚È‚µ											 */
-/* ì¬“ú	: 2018/06/22		–‘ˆä  —²Ž¡		V‹Kì¬					 */
+/* é–¢æ•°å	: frLog::~frLog													 */
+/* æ©Ÿèƒ½å	: ãƒ­ã‚°åˆ¶å¾¡ï¼šãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿										 */
+/* æ©Ÿèƒ½æ¦‚è¦	: staticã‚¯ãƒ©ã‚¹ã®ç‚ºã€ã‚³ãƒ¼ãƒ«ã•ã‚Œã‚‹ã“ã¨ã¯ç„¡ã„						 */
+/* å¼•æ•°		: void			: ãªã—											 */
+/* æˆ»ã‚Šå€¤	: void			: ãªã—											 */
+/* ä½œæˆæ—¥	: 2018/06/22		æ¡äº•  éš†æ²»		æ–°è¦ä½œæˆ					 */
 /* ------------------------------------------------------------------------- */
 frLog::~frLog()
 {
@@ -189,66 +189,66 @@ frLog::~frLog()
 }
 
 /* ------------------------------------------------------------------------- */
-/* ŠÖ”–¼	: frLog::CommandAnaryze											 */
-/* ‹@”\–¼	: ƒƒO§ŒäFƒRƒ}ƒ“ƒh‰ðÍ										 */
-/* ‹@”\ŠT—v	: ƒ^[ƒ~ƒiƒ‹‚©‚ç“ü—Í‚³‚ê‚½ƒRƒ}ƒ“ƒh‚ð‰ðÍ‚µA•K—v‚È’l‚ðÝ’è‚µ‚Ü‚·.*/
-/*			: ƒRƒ}ƒ“ƒh“ü—Íƒ~ƒX‚Ìê‡A–³Œø‚Æ‚Ý‚È‚µAƒoƒbƒtƒ@‚ð‘S‰Šú‰»‚µ‚Ü‚·.*/
-/* ˆø”		: void			: ‚È‚µ											 */
-/* –ß‚è’l	: void			: ‚È‚µ											 */
-/* ì¬“ú	: 2018/06/22		–‘ˆä  —²Ž¡		V‹Kì¬					 */
+/* é–¢æ•°å	: frLog::CommandAnaryze											 */
+/* æ©Ÿèƒ½å	: ãƒ­ã‚°åˆ¶å¾¡ï¼šã‚³ãƒžãƒ³ãƒ‰è§£æž										 */
+/* æ©Ÿèƒ½æ¦‚è¦	: ã‚¿ãƒ¼ãƒŸãƒŠãƒ«ã‹ã‚‰å…¥åŠ›ã•ã‚ŒãŸã‚³ãƒžãƒ³ãƒ‰ã‚’è§£æžã—ã€å¿…è¦ãªå€¤ã‚’è¨­å®šã—ã¾ã™.*/
+/*			: ã‚³ãƒžãƒ³ãƒ‰å…¥åŠ›ãƒŸã‚¹ã®å ´åˆã€ç„¡åŠ¹ã¨ã¿ãªã—ã€ãƒãƒƒãƒ•ã‚¡ã‚’å…¨åˆæœŸåŒ–ã—ã¾ã™.*/
+/* å¼•æ•°		: void			: ãªã—											 */
+/* æˆ»ã‚Šå€¤	: void			: ãªã—											 */
+/* ä½œæˆæ—¥	: 2018/06/22		æ¡äº•  éš†æ²»		æ–°è¦ä½œæˆ					 */
 /* ------------------------------------------------------------------------- */
 void frLog::CommandAnaryze( void )
 {
-	ULNG  ulLogMode = _logmode;					/* ƒƒOƒ‚[ƒh				 */
-	ULNG  ulLength  = 0;						/* •¶Žš—ñ’·					 */
-	SINT  iRet      = 0;						/* strcmp–ß‚è’l				 */
-	SINT  iNow      = 0;						/* ŒŸõˆÊ’u					 */
-	SINT  iFlg = LOG_FLG_OFF;					/* ƒtƒ‰ƒO					 */
-	const LOGLINK link[] = {					/* ƒRƒ}ƒ“ƒhE‚h‚c‘Î”ä•\		 */
-		{ LOG_CMD_MOTOR   , LOG_ID_MOTOR   },	/* ƒ‚[ƒ^[ŠÖ˜A				 */
-		{ LOG_CMD_TAIL    , LOG_ID_TAIL    },	/* ‚µ‚Á‚ÛŠÖ˜A				 */
-		{ LOG_CMD_SONIC   , LOG_ID_SONIC   },	/* ’´‰¹”gŠÖ˜A				 */
-		{ LOG_CMD_BATTERY , LOG_ID_BATTERY },	/* ƒoƒbƒeƒŠ[ŠÖ˜A			 */
-		{ LOG_CMD_COLOR   , LOG_ID_COLOR   },	/* ƒJƒ‰[ƒZƒ“ƒT[ŠÖ˜A		 */
-		{ LOG_CMD_GYRO    , LOG_ID_GYRO    },	/* ƒWƒƒƒCƒƒZƒ“ƒT[ŠÖ˜A		 */
-		{ LOG_CMD_TRACE   , LOG_ID_TRACE   }	/* ƒgƒŒ[ƒXƒƒOŠÖ˜A			 */
+	ULNG  ulLogMode = _logmode;					/* ãƒ­ã‚°ãƒ¢ãƒ¼ãƒ‰				 */
+	ULNG  ulLength  = 0;						/* æ–‡å­—åˆ—é•·					 */
+	SINT  iRet      = 0;						/* strcmpæˆ»ã‚Šå€¤				 */
+	SINT  iNow      = 0;						/* æ¤œç´¢ä½ç½®					 */
+	SINT  iFlg = LOG_FLG_OFF;					/* ãƒ•ãƒ©ã‚°					 */
+	const LOGLINK link[] = {					/* ã‚³ãƒžãƒ³ãƒ‰ãƒ»ï¼©ï¼¤å¯¾æ¯”è¡¨		 */
+		{ LOG_CMD_MOTOR   , LOG_ID_MOTOR   },	/* ãƒ¢ãƒ¼ã‚¿ãƒ¼é–¢é€£				 */
+		{ LOG_CMD_TAIL    , LOG_ID_TAIL    },	/* ã—ã£ã½é–¢é€£				 */
+		{ LOG_CMD_SONIC   , LOG_ID_SONIC   },	/* è¶…éŸ³æ³¢é–¢é€£				 */
+		{ LOG_CMD_BATTERY , LOG_ID_BATTERY },	/* ãƒãƒƒãƒ†ãƒªãƒ¼é–¢é€£			 */
+		{ LOG_CMD_COLOR   , LOG_ID_COLOR   },	/* ã‚«ãƒ©ãƒ¼ã‚»ãƒ³ã‚µãƒ¼é–¢é€£		 */
+		{ LOG_CMD_GYRO    , LOG_ID_GYRO    },	/* ã‚¸ãƒ£ã‚¤ãƒ­ã‚»ãƒ³ã‚µãƒ¼é–¢é€£		 */
+		{ LOG_CMD_TRACE   , LOG_ID_TRACE   }	/* ãƒˆãƒ¬ãƒ¼ã‚¹ãƒ­ã‚°é–¢é€£			 */
 	};
 	
-	/* ƒRƒ}ƒ“ƒhŽæ“¾ -------------------------------------------------------- */
-	/* log onƒ‚[ƒh				 */
+	/* ã‚³ãƒžãƒ³ãƒ‰å–å¾— -------------------------------------------------------- */
+	/* log onãƒ¢ãƒ¼ãƒ‰				 */
 	iRet = strncmp( &_buf[0], LOG_CMD_LOGON, strlen( LOG_CMD_LOGON ));
 	if( iRet == 0 ) {
 		iNow += strlen(LOG_CMD_LOGON );
 		iFlg = LOG_FLG_ON;
 	} else {
-		/* log OFFƒ‚[ƒh			 */
+		/* log OFFãƒ¢ãƒ¼ãƒ‰			 */
 		iRet = strncmp(&_buf[0], LOG_CMD_LOGOFF, strlen(LOG_CMD_LOGOFF ));
 		if (iRet == 0) {
 			iNow += strlen(LOG_CMD_LOGOFF );
 			iFlg = LOG_FLG_OFF;
 		} else {
-			/* ƒRƒ}ƒ“ƒhƒ~ƒX‚Ìê‡‚Í‰½‚à‚µ‚È‚¢ */
+			/* ã‚³ãƒžãƒ³ãƒ‰ãƒŸã‚¹ã®å ´åˆã¯ä½•ã‚‚ã—ãªã„ */
 			goto end;
 		}
 	}
 	
-	/* •¶Žš—ñI’[‚Ü‚Åƒ‹[ƒv ------------------------------------------------ */
+	/* æ–‡å­—åˆ—çµ‚ç«¯ã¾ã§ãƒ«ãƒ¼ãƒ— ------------------------------------------------ */
 	while( iNow < strlen( _buf )) {
-		/* -‚ªo‚é‚Ü‚Åƒ‹[ƒv */
+		/* -ãŒå‡ºã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ— */
 		if( _buf[iNow] == LOG_KEY_SPACE ) {
 			iNow ++;
 			continue;
 		} else if( _buf[iNow] != LOG_KEY_HYPHEN ) {
-			/* -‚©‚çŠJŽn‚³‚ê‚È‚¢ê‡AƒRƒ}ƒ“ƒhƒ~ƒX‚ÆŽ¯•Ê‚µ‚ÄI—¹ */
+			/* -ã‹ã‚‰é–‹å§‹ã•ã‚Œãªã„å ´åˆã€ã‚³ãƒžãƒ³ãƒ‰ãƒŸã‚¹ã¨è­˜åˆ¥ã—ã¦çµ‚äº† */
 			goto end;
 		}
-		/* -”­Œ©A•¶Žš—ñ‚É‘Î‰ž‚µ‚½ƒRƒ}ƒ“ƒh‚ðˆ— */
+		/* -ç™ºè¦‹ã€æ–‡å­—åˆ—ã«å¯¾å¿œã—ãŸã‚³ãƒžãƒ³ãƒ‰ã‚’å‡¦ç† */
 		iNow ++;
 		if( iNow >= sizeof( _buf )) {
 			goto end;
 		}
 		
-		/* ƒƒOŽí•Ê‚ð‰ðÍEÝ’è -------------------------------------------- */
+		/* ãƒ­ã‚°ç¨®åˆ¥ã‚’è§£æžãƒ»è¨­å®š -------------------------------------------- */
 		for( int iIndex = 0; iIndex < ( sizeof( link ) / sizeof( link[0] )); iIndex ++ ) {
 			iRet = strncmp( &_buf[iNow], link[iIndex].strings, strlen( link[iIndex].strings ));
 			if( iRet == 0 ) {
@@ -259,7 +259,7 @@ void frLog::CommandAnaryze( void )
 		}
 	}
 	
-	/* ƒoƒbƒtƒ@‚ð‰Šú‰»‚µ‚ÄI—¹ */
+	/* ãƒãƒƒãƒ•ã‚¡ã‚’åˆæœŸåŒ–ã—ã¦çµ‚äº† */
 	_logmode = ulLogMode;
 end:
 	memset( &_buf[0], 0, sizeof( _buf ));
@@ -268,13 +268,13 @@ end:
 }
 
 /* ------------------------------------------------------------------------- */
-/* ŠÖ”–¼	: frLog::FlgSet													 */
-/* ‹@”\–¼	: ƒƒO§ŒäFo—Íƒtƒ‰ƒOÝ’è										 */
-/* ‹@”\ŠT—v	: ŠeŽíƒRƒ}ƒ“ƒh‚Ìo—Í‚n‚m^‚n‚e‚eƒtƒ‰ƒO§Œä‚ðs‚¢‚Ü‚·B			 */
-/* ˆø”		: const SINT	: flg	: [I N]“ü—ÍƒR[ƒh(1•¶Žš)				 */
-/* ˆø”		: char			: code	: [I N]“ü—ÍƒR[ƒh(1•¶Žš)				 */
-/* –ß‚è’l	: void			: ‚È‚µ											 */
-/* ì¬“ú	: 2018/06/22		–‘ˆä  —²Ž¡		V‹Kì¬					 */
+/* é–¢æ•°å	: frLog::FlgSet													 */
+/* æ©Ÿèƒ½å	: ãƒ­ã‚°åˆ¶å¾¡ï¼šå‡ºåŠ›ãƒ•ãƒ©ã‚°è¨­å®š										 */
+/* æ©Ÿèƒ½æ¦‚è¦	: å„ç¨®ã‚³ãƒžãƒ³ãƒ‰ã®å‡ºåŠ›ï¼¯ï¼®ï¼ï¼¯ï¼¦ï¼¦ãƒ•ãƒ©ã‚°åˆ¶å¾¡ã‚’è¡Œã„ã¾ã™ã€‚			 */
+/* å¼•æ•°		: const SINT	: flg	: [I N]å…¥åŠ›ã‚³ãƒ¼ãƒ‰(1æ–‡å­—)				 */
+/* å¼•æ•°		: char			: code	: [I N]å…¥åŠ›ã‚³ãƒ¼ãƒ‰(1æ–‡å­—)				 */
+/* æˆ»ã‚Šå€¤	: void			: ãªã—											 */
+/* ä½œæˆæ—¥	: 2018/06/22		æ¡äº•  éš†æ²»		æ–°è¦ä½œæˆ					 */
 /* ------------------------------------------------------------------------- */
 void frLog::FlgSet( const SINT flg, ULNG* log, SINT id )
 {
