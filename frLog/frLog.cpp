@@ -11,6 +11,7 @@
 /* ------------------------------------------------------------------------- */
 /* 000000	新規作成								2018/06/22	桝井  隆治	 */
 /* 000001	シングルトン対応						2018/06/25	桝井  隆治	 */
+/* 000002	Bluetooth対応							2018/07/02	桝井  隆治	 */
 /* ------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------- */
@@ -98,7 +99,7 @@ void frLog::LOG( SINT id, const SCHR* message,... )
 	
 #ifdef __BLUETOOTH_DEBUG__
 	/* Bluetoothインスタンス取得 */
-	frBluetooth& = bt = GetInstance();
+	frBluetooth& bt= frBluetooth::GetInstance();
 	for( iMax = ( strlen( str ) - 1 ); iIndex < iMax; iIndex ++ ) {
 		bt.Send( str[iIndex] );
 	}
