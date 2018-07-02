@@ -14,9 +14,15 @@
 /* ------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------- */
+/* コンパイルスイッチ														 */
+/* ------------------------------------------------------------------------- */
+#define __BLUETOOTH_DEBUG__
+
+/* ------------------------------------------------------------------------- */
 /* includeファイル															 */
 /* ------------------------------------------------------------------------- */
 #include "frLog.h"								/* ログヘッダ				 */
+#include "frBluetooth.h"						/* Bluetoothヘッダ			 */
 #include <stdio.h>								/* 基本入出力				 */
 #include <string.h>								/* 文字列操作系				 */
 #include <stdlib.h>								/* 初期化系					 */
@@ -64,6 +70,7 @@ frLog& frLog::GetInstance(void)
 /* 関数名	: frLog::LOG													 */
 /* 機能名	: ログ制御：ログ出力											 */
 /* 機能概要	: 設定に応じて、ログ出力を行います。							 */
+/* 			  コンパイルスイッチに応じてBluetooth / モニタへ出力を分けてます */
 /* 引数		: ULNG	:id 	:[I N] 識別ＩＤ 								 */
 /* 戻り値	: void			: なし											 */
 /* 作成日	: 2018/06/22		桝井  隆治		新規作成					 */
@@ -71,6 +78,8 @@ frLog& frLog::GetInstance(void)
 void frLog::LOG( SINT id, const SCHR* message,... )
 {
 	char    str[LOG_MAX_BUF];					/* ログバッファ				 */
+	SINT    iIndex = 0;							/* index					 */
+	SINT    iMax   = 0;							/* バッファ最大長			 */
 	va_list args;								/* 可変長ポインタ			 */
 	
 	/* 指定カ所のログが出力モードになっていない場合は何もしない */
@@ -87,8 +96,16 @@ void frLog::LOG( SINT id, const SCHR* message,... )
 	vsprintf_s( str, message, args );
 	va_end( args );
 	
-	/* ■■■この部分を修正 */
+#ifdef __BLUETOOTH_DEBUG__
+	/* Bluetoothインスタンス取得 */
+	frBluetooth& = bt = GetInstance();
+	for( iMax = ( strlen( str ) - 1 ); iIndex < iMax; iIndex ++ ) {
+		bt.Send( str[iIndex] );
+	}
+#else  /* __BLUETOOTH_DEBUG__ */
 	printf("%s\n", str);
+#endif  /* __BLUETOOTH_DEBUG__ */
+	
 	return;
 }
 
