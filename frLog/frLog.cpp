@@ -14,6 +14,7 @@
 /* 000002	Bluetooth対応							2018/07/02	桝井  隆治	 */
 /* 000003	可変長引数結合をvsprintfへ変更			2018/07/03	桝井  隆治	 */
 /* 000004	Bluetooth未使用時は出力をprintfにする	2018/07/03	桝井  隆治	 */
+/* 000005	Bluetooth文字列一括送信に対応			2018/07/09	桝井  隆治	 */
 /* ------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------- */
@@ -80,7 +81,7 @@ frLog& frLog::GetInstance(void)
 /* ------------------------------------------------------------------------- */
 void frLog::LOG( SINT id, const SCHR* message,... )
 {
-	char    str[LOG_MAX_BUF];					/* ログバッファ				 */
+	char    str[LOG_MAX_BUF + 1];				/* ログバッファ				 */
 	SINT    iIndex = 0;							/* index					 */
 	SINT    iMax   = 0;							/* バッファ最大長			 */
 	va_list args;								/* 可変長ポインタ			 */
@@ -100,12 +101,16 @@ void frLog::LOG( SINT id, const SCHR* message,... )
 	va_end( args );
 	
 #ifdef __BLUETOOTH_DEBUG__
-	/* Bluetoothインスタンス取得 */
+	/* Bluetoothインスタンスを通じてログ送信 */
 	frBluetooth& bt= frBluetooth::GetInstance();
+	bt.StringSend( &str[0] );
+/*
 	for( iMax = ( strlen( str ) - 1 ); iIndex < iMax; iIndex ++ ) {
 		bt.Send( str[iIndex] );
 	}
+*/
 #else  /* __BLUETOOTH_DEBUG__ */
+	/* 画面出力 */
 	printf("%s\n", str);
 #endif  /* __BLUETOOTH_DEBUG__ */
 	
