@@ -24,11 +24,14 @@
 class frBluetooth {
 public:											/*	パブリック-------------	 */
 	
-	void Send(SCHR);							/*	EV3からPC送信			 */
+	SINT  Send(SCHR);							/*	EV3からPC送信			 */
 	SCHR  Reception(void);						/*	PCからEV3受信			 */
-	void Cutting(void);							/*	Bluetooth切断			 */
+	SINT Cutting(void);							/*	Bluetooth切断			 */
+	SINT StringSend(SCHR*);						/*	EV3からPCに文字列送信	 */
+	SINT Connection(void);						/*	EV3とPCのBluetooth接続	 */
 	
 	static frBluetooth& GetInstance(void);		/*	クラス生成用			 */
+	
 	
  
 private:										/*	プライベート-----------	 */
