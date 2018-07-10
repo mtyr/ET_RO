@@ -44,7 +44,7 @@ frBluetooth& frBluetooth::GetInstance(void)
 SINT frBluetooth::Send(SCHR  string)
 {
 	if( bt != NULL ){
-	fprintf(bt, &string);
+		fprintf(bt, &string);
 		return FUNC_OK;
 	}
 	
@@ -63,9 +63,8 @@ SINT frBluetooth::Send(SCHR  string)
 SCHR  frBluetooth::Reception(void)
 {
 	if( bt != NULL ){
-	SCHR string = fgetc(bt);
-	return string;
-
+		return fgetc(bt);
+	
 	}else{
 		return '\0';
 	}
@@ -85,7 +84,6 @@ SINT frBluetooth::Cutting(void)
 		fclose(bt);
 		bt=NULL;
 	}
-
 	return FUNC_OK;
 }
 
@@ -154,7 +152,7 @@ frBluetooth::frBluetooth()
 	
 	/*	Bluetoothの接続失敗の時EV3のLCDに失敗を表示------------------------	 */
 	if( bt == NULL ){
-	ev3_lcd_draw_string	("bluetooth_connection_error\0",0,0);
+		ev3_lcd_draw_string	("bluetooth_connection_error\0",0,0);
 	}
 }
 
