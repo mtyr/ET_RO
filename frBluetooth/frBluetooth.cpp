@@ -81,10 +81,10 @@ SCHR  frBluetooth::Reception(void)
 /* ------------------------------------------------------------------------- */
 SINT frBluetooth::Cutting(void)
 {
-		if( bt!=NULL ){
-			fclose(bt);
-			bt=NULL;
-		}
+	if( bt!=NULL ){
+		fclose(bt);
+		bt=NULL;
+	}
 
 	return FUNC_OK;
 }
@@ -100,11 +100,20 @@ SINT frBluetooth::Cutting(void)
 /* ------------------------------------------------------------------------- */
 SINT frBluetooth::StringSend(SCHR* string)
 {
-	if(bt != NULL){
-	fprintf(bt, string);
-		return FUNC_OK;
+	SINT iRet = FUNC_ERR;
+	
+	/* 引数チェック */
+	if( string == NULL ) {
+		return iRet;
 	}
-	return FUNC_ERR;
+	
+	/* Bluetoothがオープンしていれば送信 */
+	if( bt != NULL ) {
+		fprintf( bt, string );
+		iRet = FUNC_OK;
+	}
+	
+	return iRet;
 }
 
 /* ------------------------------------------------------------------------- */
@@ -143,6 +152,10 @@ frBluetooth::frBluetooth()
 	/*	Buetooth接続-------------------------------------------------------	 */
 	bt = ev3_serial_open_file(EV3_SERIAL_BT);
 	
+	/*	Bluetoothの接続失敗の時EV3のLCDに失敗を表示------------------------	 */
+	if( bt == NULL ){
+	ev3_lcd_draw_string	("bluetooth_connection_error\0",0,0);
+	}
 }
 
 /* ------------------------------------------------------------------------- */
