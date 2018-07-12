@@ -30,6 +30,8 @@ typedef int				SINT;					/*	intå^					 */
 typedef unsigned int	UINT;					/*	unsigned intå^			 */
 typedef	float			FLOT;					/*	floatå^					 */
 typedef	double			DBLE;					/*	doubleå^				 */
+typedef bool            BOOL;                   /*  boolå^                   */
+typedef int8_t          I08T;                   /*  int8_tå^                 */
 
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */
