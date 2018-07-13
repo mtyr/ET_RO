@@ -10,6 +10,8 @@
 /*	000000	V‹Kì¬								2018/06/05	¼‰Y˜Ğ–î	 */
 /*	-----------------------------------------------------------------------	 */
 
+#include "cstdint"
+
 #define FUNC_OK			(                 1 )	/*  ŠÖ”³íI—¹			 */
 #define FUNC_ERR		(                -1 )	/*  ŠÖ”ˆÙíI—¹			 */
 #define SYS_ERR			(                -2 )	/*  ƒVƒXƒeƒ€•s‹ï‡ƒGƒ‰[	 */
@@ -32,6 +34,8 @@ typedef	float			FLOT;					/*	floatŒ^					 */
 typedef	double			DBLE;					/*	doubleŒ^				 */
 typedef bool            BOOL;                   /*  boolŒ^                   */
 typedef int8_t          I08T;                   /*  int8_tŒ^                 */
+typedef int16_t         I16T;                   /*  int16_tŒ^                */
+typedef int32_t         I32T;                   /*  int32_tŒ^                */
 
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */
