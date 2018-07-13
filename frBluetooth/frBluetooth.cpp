@@ -8,6 +8,7 @@
 /*	000000	新規作成									2018/06/29	小西 巧  */
 /*	000001	シングルトンのみ対応						2018/07/01	小西 巧	 */
 /*	000002	レビュー点修正								2018/07/10	小西 巧	 */
+/*	000003	コメント修正								2018/07/13	小西 巧	 */
 /*	-----------------------------------------------------------------------	 */
 
 /*	-----------------------------------------------------------------------	 */
@@ -36,102 +37,126 @@ frBluetooth& frBluetooth::GetInstance(void)
 /* ------------------------------------------------------------------------- */
 /* 関数名	:frBluetooth::Send												 */
 /* 機能名	:Bluetooth通信：送信											 */
-/* 機能概要	:EV3から文字を1文字デバイスに送信								 */
-/* 引数		: char			: string		:送信文字（１文字）				 */
-/* 戻り値	:int			:FUNC_OK		:正常終了						 */
-/*			:int			:FUNC_ERR		:異常終了						 */
+/* 機能概要	:EV3から1バイト送信												 */
+/* 引数		:char			:string				:送信文字（１バイト）		 */
+/* 戻り値	:				:FUNC_OK			:正常終了					 */
+/*			:				:BLT_DIS_CONNECTED	:未接続						 */
 /* 作成日	: 2018/07/01	小西 巧			新規作成						 */
 /* ------------------------------------------------------------------------- */
 SINT frBluetooth::Send(SCHR  string)
 {
+	
 	if( bt != NULL ){
 		fprintf(bt, &string);
 		return FUNC_OK;
 	}
 	
-	return FUNC_ERR;
+	return BLT_DIS_CONNECTED;
 }
 
 /* ------------------------------------------------------------------------- */
-/* 関数名	:frBluetooth::Reception											 */
+/* 関数名	:frBluetooth::Receive											 */
 /* 機能名	: Bluetooth通信：受信											 */
-/* 機能概要	:デバイスから文字を1文字受信									 */
+/* 機能概要	:デバイスから1バイト受信										 */
 /* 引数		:void			:なし											 */
-/* 戻り値	:char			:string			:受信文字(1文字)				 */
-/*			:				:\0				:異常終了						 */
+/* 戻り値	:char			:					:受信データ(1バイト)		 */
+/*			:				:BLT_DIS_CONNECTED	:未接続						 */
+/*			:				:EOF				:読み込みエラー				 */
 /* 作成日	: 2018/07/01	小西 巧			新規作成						 */
 /* ------------------------------------------------------------------------- */
-SCHR  frBluetooth::Reception(void)
+SCHR  frBluetooth::Receive(void)
 {
 	if( bt != NULL ){
 		return fgetc(bt);
-	
-	}else{
-		return '\0';
 	}
+	return BLT_DIS_CONNECTED;
 }
 
 /* ------------------------------------------------------------------------- */
-/* 関数名	:frBluetooth::Cutting											 */
+/* 関数名	:frBluetooth::DisConnect										 */
 /* 機能名	: Bluetooth通信：切断											 */
-/* 機能概要	:デバイスとEV3の接続を切る										 */
+/* 機能概要	:デバイスとEV3のBluetooth接続を切る								 */
 /* 引数		:void			:なし											 */
-/* 戻り値	:int			:FUNC_OK		:正常終了						 */
+/* 戻り値	:				:BLT_DIS_CONNECTED	:未接続						 */
+/*			:				:EOF				:クローズ失敗				 */
+/*			:				:FUNC_OK			:正常終了					 */
 /* 作成日	: 2018/07/01	小西 巧			新規作成						 */
 /* ------------------------------------------------------------------------- */
-SINT frBluetooth::Cutting(void)
+SINT frBluetooth::DisConnect(void)
 {
-	if( bt!=NULL ){
-		fclose(bt);
-		bt=NULL;
+	SINT i_ret = EOF;							/*	戻り値の判断			 */
+	
+	
+	if( bt != NULL ){
+		
+		/*	戻り値判断	*/
+		i_ret = fclose(bt);
+		
+		if( EOF == i_ret ){
+			return i_ret;
+		}
+
+		bt = NULL;
+		return FUNC_OK;
 	}
-	return FUNC_OK;
+
+	return BLT_DIS_CONNECTED;
 }
 
 /* ------------------------------------------------------------------------- */
 /* 関数名	:frBluetooth::StringSend										 */
 /* 機能名	: Bluetooth通信：文字列送信										 */
-/* 機能概要	:EV3からPCに文字列を送信する									 */
-/* 引数		:char*			:string			:送信する文字列					 */
-/* 戻り値	:int			:FUNC_OK		:正常終了						 */
-/*			:int			:FUNC_ERR		:異常終了						 */
+/* 機能概要	:EV3からデバイスに文字列を送信する								 */
+/* 引数		:char*			:string				:送信する文字列				 */
+/* 戻り値	:				:FUNC_OK			:正常終了					 */
+/*			:				:BLT_DIS_CONNECTED	:未接続						 */
+/*			:				:BLT_ARG_ERROR		:引数エラー					 */
 /* 作成日	: 2018/07/09	小西 巧			新規作成						 */
 /* ------------------------------------------------------------------------- */
 SINT frBluetooth::StringSend(SCHR* string)
 {
-	SINT iRet = FUNC_ERR;
+	SINT i_ret = BLT_DIS_CONNECTED;				/*	戻り値格納	*/
 	
 	/* 引数チェック */
 	if( string == NULL ) {
-		return iRet;
+		i_ret=BLT_ARG_ERROR;
+		return i_ret;
 	}
 	
 	/* Bluetoothがオープンしていれば送信 */
 	if( bt != NULL ) {
 		fprintf( bt, string );
-		iRet = FUNC_OK;
+		i_ret = FUNC_OK;
 	}
 	
-	return iRet;
+	return i_ret;
 }
 
 /* ------------------------------------------------------------------------- */
-/* 関数名	:frBluetooth::Connection										 */
+/* 関数名	:frBluetooth::Connect											 */
 /* 機能名	: Bluetooth通信：接続											 */
-/* 機能概要	:EV3とPCを接続													 */
-/* 引数		:なし			:				:								 */
-/* 戻り値	:int			:FUNC_OK		:正常終了						 */
-/*			:int			:FUNC_ERR		:異常終了						 */
-/* 作成日	: 2018/07/09	小西 巧			新規作成						 */
+/* 機能概要	:EV3とPCをBluetooth接続する										 */
+/* 引数		:なし			:					:							 */
+/* 戻り値	:				:FUNC_OK			:正常終了					 */
+/*			:				:BLT_DIS_CONNECTED	:未接続						 */
+/*			:				:BLT_CONNECTED		:接続済み					 */
+/* 作成日	: 2018/07/09	小西 巧				新規作成					 */
 /* ------------------------------------------------------------------------- */
-SINT frBluetooth::Connection(void)
+SINT frBluetooth::Connect(void)
 {
-	if(bt==NULL){
+
+	if(bt == NULL){
 		bt = ev3_serial_open_file(EV3_SERIAL_BT);
-		return FUNC_OK;
+		
+		if( bt != NULL ){
+			return FUNC_OK;
+			
+		}else{
+			return BLT_DIS_CONNECTED;
+		}
 	}
 
-	return FUNC_ERR;
+	return BLT_CONNECTED;
 }
 
 /* ------------------------------------------------------------------------- */
