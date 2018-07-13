@@ -1,7 +1,7 @@
 ‰Šúİ’è
 	stLine_Threshold_Value_Set
 	stGyro_Set
-	stMotor_Set
+	stMotor_Initialization
 	
 ‘–s•â•
 	raLine_Threshold_Value
