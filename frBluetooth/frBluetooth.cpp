@@ -139,24 +139,22 @@ SINT frBluetooth::StringSend(SCHR* string)
 /* 引数		:なし			:					:							 */
 /* 戻り値	:				:FUNC_OK			:正常終了					 */
 /*			:				:BLT_DIS_CONNECTED	:未接続						 */
-/*			:				:BLT_CONNECTED		:接続済み					 */
 /* 作成日	: 2018/07/09	小西 巧				新規作成					 */
 /* ------------------------------------------------------------------------- */
 SINT frBluetooth::Connect(void)
 {
 
 	if(bt == NULL){
+		
 		bt = ev3_serial_open_file(EV3_SERIAL_BT);
 		
-		if( bt != NULL ){
-			return FUNC_OK;
-			
-		}else{
+		if( bt == NULL ){
 			return BLT_DIS_CONNECTED;
+			
 		}
 	}
+	return FUNC_OK;
 
-	return BLT_CONNECTED;
 }
 
 /* ------------------------------------------------------------------------- */
