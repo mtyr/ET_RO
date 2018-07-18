@@ -11,9 +11,8 @@
 	crDriving_Order
 走行
 	rnInverted_Control
-	rnRunning_Calculation
+	rnCalculation
 	rnLine_Trace
-	rnStraight_Dash
 デバイス制御
 	dcMotor_Output
 	dcTail_Motor_Control
