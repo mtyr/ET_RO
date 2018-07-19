@@ -44,12 +44,32 @@ raMotor_Setting_Value::~raMotor_Setting_Value(){
 /*	çÏê¨ì˙			:2018/06/26		 âFìsã{Å@ê≥èÕ				 êVãKçÏê¨	 */
 /*                  :2018/07/13      óLñ{Å@ò–ê^                  èCê≥        */
 /*	-----------------------------------------------------------------------	 */
-SINT raMotor_Setting_Value::MotorValueSet(I08T*Max, SINT*L, SINT*R, SINT*T){
-	class stMotor_Initialization stM;
-	stM.MotorMeasurement(Max,L,R,T);
+SINT raMotor_Setting_Value::MotorValueSet(SINT*L, SINT*R, SINT*T){
+	class stMotor_Initialization st;
+	st.MotorMeasurement(L,R,T);
 	return FUNC_OK;
 }
-
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */
 /*	-----------------------------------------------------------------------	 */
+
+stMotor_Initialization::stMotor_Initialization()
+{
+
+}
+
+stMotor_Initialization::~stMotor_Initialization()
+{
+
+}
+
+SINT stMotor_Initialization::MotorMeasurement(SINT *L, SINT *R, SINT *T)
+{
+	SINT Li = 4;
+	SINT Ri = 4;
+	SINT Ti = 4;
+	*L = Li;
+	*R = Ri;
+	*T = Ti;
+	return 0;
+}

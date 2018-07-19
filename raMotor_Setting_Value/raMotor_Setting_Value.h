@@ -24,8 +24,14 @@ class raMotor_Setting_Value{
 public:
 	raMotor_Setting_Value();
 	~raMotor_Setting_Value();
-	SINT MotorValueSet(I08T*,SINT*,SINT*,SINT*); /* モーターの設定値を決める */
+	SINT MotorValueSet(SINT*,SINT*,SINT*); /* モーターの設定値を決める */
 };
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */
 /*	-----------------------------------------------------------------------	 */
+class stMotor_Initialization{
+public:
+	stMotor_Initialization();
+	~stMotor_Initialization();
+	SINT MotorMeasurement(SINT*, SINT*, SINT*);
+};
