@@ -9,12 +9,13 @@
 /* ------------------------------------------------------------------------- */
 /* 000000	新規作成								2018/06/22	松浦　侑矢   */
 /* ------------------------------------------------------------------------- */
-
+//
 /* ------------------------------------------------------------------------- */
 /* includeファイル															 */
 /* ------------------------------------------------------------------------- */
 #include "common.h"								/* 共通ヘッダー				 */
 #include <stdio.h>								/* 基本入出力				 */
+#include "stLine_Threshold_Value_Set.h"
 /* ------------------------------------------------------------------------- */
 /* 定数定義																	 */
 /* ------------------------------------------------------------------------- */
@@ -34,10 +35,23 @@ public:											/*	パブリック-------------	 */
 	
 	SINT raLineSet(void);						/*	現在カラー値を返信		 */		
 	SINT raLineUP(SINT);						/*	現在カラー値の更新		 */
-
+	static raLine_Threshold_Value&
+		GetInstance(void);						/* 実体作成メソッド			 */
 private:										/*	プライベート-----------	 */
-
 	
+	SINT i_brack;											 /* 黒値		 */
+	SINT i_white;											 /* 白値		 */
+	SINT i_grey;											 /* 灰値		 */
+	SINT i_current_color;									 /* 現在カラー値 */
+
+	raLine_Threshold_Value();						/* コンストラクタ		 */
+	~raLine_Threshold_Value();						/* デストラクタ			 */
+
+	/* シングルトンに必要な奴 */
+	raLine_Threshold_Value(const raLine_Threshold_Value &x) { };
+	raLine_Threshold_Value&operator=
+		(const raLine_Threshold_Value &) { return *this; };
+	stLine_Threshold_Value_Set stLine;		 /* ラインしきい値取得クラス	 */
 	
 };
 
