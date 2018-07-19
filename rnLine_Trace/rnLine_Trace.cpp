@@ -46,7 +46,7 @@ rnLine_Trace::rnLine_Trace(){
 SINT rnLine_Trace::LineTracing() {
 
 
-	SINT i_color;     /* しきい値セットメソッドからの戻り値格納用 */
+	SINT i_color;                /* しきい値セットメソッドからの戻り値格納用 */
 	SINT i_direction;            /* ColorDirectionメソッドからの戻り値格納用 */
 
 	/* 倒立制御クラスの生成 */
@@ -85,7 +85,7 @@ SINT rnLine_Trace::LineTracing() {
 
 	}
 
-	return FUNC_OK;                              /* 灰色が来たことを報告 */
+	return FUNC_OK;                                  /* 灰色が来たことを報告 */
 }
 
 
