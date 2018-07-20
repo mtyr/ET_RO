@@ -54,7 +54,6 @@ crDriving_Order::~crDriving_Order()
 /* 作成日	: 2018/07/03	宇都宮  正章			新規作成				 */
 /* ------------------------------------------------------------------------- */
 void crDriving_Order::RunWayDecision(){
-	SINT i_Error_Check = 0;
 	class rnLine_Trace LineTrace;
 	LineTrace.LineTracing();
 	//void Difficulty();
@@ -72,11 +71,11 @@ void crDriving_Order::RunWayDecision(){
 /* 戻り値	:void			:なし											 */
 /* 作成日	: 2018/07/03	宇都宮  正章			新規作成				 */
 /* ------------------------------------------------------------------------- */
-void crDriving_Order::Difficulty(){
+/*void crDriving_Order::Difficulty(){
 	//難所クラスに名前書く
 	//class frDifficulty d;
 	//d.dif();
-}
+}*/
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */
 /*	-----------------------------------------------------------------------	 */
