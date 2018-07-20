@@ -20,9 +20,7 @@
 /*	include	ファイル														 */
 /*	-----------------------------------------------------------------------	 */
 
-
 #include "dcTail_Motor_Output.h"
-#include "app.h"
 
 static const motor_port_t
     T_motor      = EV3_PORT_B;
