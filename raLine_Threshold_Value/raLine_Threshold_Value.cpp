@@ -25,7 +25,7 @@
 /* 機能概要	: 現在カラー値を返す											 */
 /* 引数		: void					:なし									 */
 /* 戻り値	: SINT: FUNC_ERR		:関数異常終了							 */
-/* 作成日	: 2018/07/10	松浦　侑矢		新規作成						 */
+/* 作成日	: 2018/07/10	松浦 侑矢		新規作成						 */
 /* ------------------------------------------------------------------------- */
 SINT raLine_Threshold_Value::raLineSet(void)
 {
@@ -53,7 +53,7 @@ SINT raLine_Threshold_Value::raLineSet(void)
 /* 機能概要	: 現在カラー値の更新											 */
 /* 引数		: SINT: i_current_color		:現在カラー値更新前					 */
 /* 戻り値	: SINT: i_current_color		:現在カラー値更新後					 */
-/* 作成日	: 2018/07/10 	松浦　侑矢		新規作成						 */
+/* 作成日	: 2018/07/10 	松浦 侑矢		新規作成						 */
 /* ------------------------------------------------------------------------- */
 SINT raLine_Threshold_Value::raLineUP(SINT i_current_color){
 
@@ -65,11 +65,11 @@ SINT raLine_Threshold_Value::raLineUP(SINT i_current_color){
 //UPでライントレースに値を渡す。
 
 /* ------------------------------------------------------------------------- */
-/* 関数名	: raLine_Threshold_Value::GetInstance								 */
+/* 関数名	: raLine_Threshold_Value::GetInstance							 */
 /* 機能名	: カラー取得:クラス実体の作成、アドレス渡し						 */
 /* 機能概要	: 呼ばれた関数にクラスのアドレスを返却します					 */
 /* 引数		: void			: なし											 */
-/* 戻り値	: raLine_Threshold_Value&			: obj							 */
+/* 戻り値	: raLine_Threshold_Value&			: obj						 */
 /* 作成日	: 2018/07/2		髙岡 諒太		新規作成						 */
 /* ------------------------------------------------------------------------- */
 raLine_Threshold_Value& raLine_Threshold_Value::GetInstance(void)
