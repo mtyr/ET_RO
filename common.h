@@ -2,40 +2,40 @@
 #define __COMMON__
 /*	-----------------------------------------------------------------------	 */
 /*	common.h																 */
-/*	ƒƒ{ƒbƒgŠw•”ƒR[ƒfƒBƒ“ƒO‹K–ñ											 */
-/*	Œ^–¼‚ÌtypedeféŒ¾‚ÌW‚Ü‚è												 */
+/*	ãƒ­ãƒœãƒƒãƒˆå­¦éƒ¨ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°è¦ç´„											 */
+/*	å‹åã®typedefå®£è¨€ã®é›†ã¾ã‚Š												 */
 /*	-----------------------------------------------------------------------	 */
-/*	”Ô†	XV—š—ğ								“ú•t		–¼		 */
+/*	ç•ªå·	æ›´æ–°å±¥æ­´								æ—¥ä»˜		æ°å		 */
 /*	-----------------------------------------------------------------------	 */
-/*	000000	V‹Kì¬								2018/06/05	¼‰Y˜Ğ–î	 */
+/*	000000	æ–°è¦ä½œæˆ								2018/06/05	æ¾æµ¦ä¾‘çŸ¢	 */
 /*	-----------------------------------------------------------------------	 */
 
 #include "cstdint"
 
-#define FUNC_OK			(                 1 )	/*  ŠÖ”³íI—¹			 */
-#define FUNC_ERR		(                -1 )	/*  ŠÖ”ˆÙíI—¹			 */
-#define SYS_ERR			(                -2 )	/*  ƒVƒXƒeƒ€•s‹ï‡ƒGƒ‰[	 */
-#define PARAM_ERR		(                -3 )	/*  ˆø”ƒGƒ‰[				 */
-#define HW_ERR			(                -4 )	/*  ƒn[ƒhƒEƒFƒAƒGƒ‰[		 */
-#define RETRY_ERR		(                -5 )	/*  Äæ“¾ƒGƒ‰[			 */
+#define FUNC_OK			(                 1 )	/*  é–¢æ•°æ­£å¸¸çµ‚äº†			 */
+#define FUNC_ERR		(                -1 )	/*  é–¢æ•°ç•°å¸¸çµ‚äº†			 */
+#define SYS_ERR			(                -2 )	/*  ã‚·ã‚¹ãƒ†ãƒ ä¸å…·åˆã‚¨ãƒ©ãƒ¼	 */
+#define PARAM_ERR		(                -3 )	/*  å¼•æ•°ã‚¨ãƒ©ãƒ¼				 */
+#define HW_ERR			(                -4 )	/*  ãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢ã‚¨ãƒ©ãƒ¼		 */
+#define RETRY_ERR		(                -5 )	/*  å†å–å¾—ã‚¨ãƒ©ãƒ¼			 */
 
 /*	-----------------------------------------------------------------------	 */
-/*	typedeféŒ¾																 */
+/*	typedefå®£è¨€																 */
 /*	-----------------------------------------------------------------------	 */
-typedef char			SCHR;					/*	charŒ^					 */
-typedef unsigned char	UCHR;					/*	unsigned charŒ^			 */
-typedef short			SSHT;					/*	shortŒ^					 */
-typedef unsigned short	USHT;					/*	unsigned shortŒ^		 */
-typedef long			SLNG;					/*	longŒ^					 */
-typedef unsigned long	ULNG;					/*	unsigned longŒ^			 */
-typedef int				SINT;					/*	intŒ^					 */
-typedef unsigned int	UINT;					/*	unsigned intŒ^			 */
-typedef	float			FLOT;					/*	floatŒ^					 */
-typedef	double			DBLE;					/*	doubleŒ^				 */
-typedef bool            BOOL;                   /*  boolŒ^                   */
-typedef int8_t          I08T;                   /*  int8_tŒ^                 */
-typedef int16_t         I16T;                   /*  int16_tŒ^                */
-typedef int32_t         I32T;                   /*  int32_tŒ^                */
+typedef char			SCHR;					/*	charå‹					 */
+typedef unsigned char	UCHR;					/*	unsigned charå‹			 */
+typedef short			SSHT;					/*	shortå‹					 */
+typedef unsigned short	USHT;					/*	unsigned shortå‹		 */
+typedef long			SLNG;					/*	longå‹					 */
+typedef unsigned long	ULNG;					/*	unsigned longå‹			 */
+typedef int				SINT;					/*	intå‹					 */
+typedef unsigned int	UINT;					/*	unsigned intå‹			 */
+typedef	float			FLOT;					/*	floatå‹					 */
+typedef	double			DBLE;					/*	doubleå‹				 */
+typedef bool            BOOL;                   /*  boolå‹                   */
+typedef int8_t          I08T;                   /*  int8_tå‹                 */
+typedef int16_t         I16T;                   /*  int16_tå‹                */
+typedef int32_t         I32T;                   /*  int32_tå‹                */
 
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */
