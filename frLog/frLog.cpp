@@ -180,7 +180,9 @@ void frLog::SetLog( SCHR code )
 frLog::frLog()
 {
 	memset(&_buf[0], 0, sizeof(_buf));
-	_logmode = 0x00000000;
+	_logmode = ( LOG_ID_MOTOR     | LOG_ID_TAIL  | LOG_ID_SONIC | 
+			 	 LOG_ID_BATTERY   | LOG_ID_COLOR | LOG_ID_GYRO  | 
+				 LOG_ID_LINETRACE | LOG_ID_TRACE | LOG_ID_ERR );
 }
 
 /* ------------------------------------------------------------------------- */
@@ -218,6 +220,7 @@ void frLog::CommandAnaryze( void )
 		{ LOG_CMD_BATTERY , LOG_ID_BATTERY },	/* バッテリー関連			 */
 		{ LOG_CMD_COLOR   , LOG_ID_COLOR   },	/* カラーセンサー関連		 */
 		{ LOG_CMD_GYRO    , LOG_ID_GYRO    },	/* ジャイロセンサー関連		 */
+		{ LOG_CMD_LINETRACE, LOG_ID_LINETRACE},	/* ライントレース関連		 */
 		{ LOG_CMD_TRACE   , LOG_ID_TRACE   }	/* トレースログ関連			 */
 	};
 	

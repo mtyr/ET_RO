@@ -27,7 +27,8 @@
 #define LOG_ID_SONIC		( 0x00000004 )		/* 超音波関連				 */
 #define LOG_ID_BATTERY		( 0x00000008 )		/* バッテリー関連			 */
 #define LOG_ID_COLOR		( 0x00000010 )		/* カラーセンサー関連		 */
-#define LOG_ID_GYRO			( 0x00000010 )		/* ジャイロセンサー関連		 */
+#define LOG_ID_GYRO			( 0x00000020 )		/* ジャイロセンサー関連		 */
+#define LOG_ID_LINETRACE	( 0x00000040 )		/* ライントレース関連		 */
 #define LOG_ID_TRACE		( 0x20000000 )		/* トレース関連				 */
 #define LOG_ID_ERR			( 0x40000000 )		/* エラーログ				 */
 #define LOG_ID_TERMINATE	( 0x80000000 )		/* 終端						 */
@@ -40,6 +41,7 @@
 #define LOG_CMD_MOTOR		"motor"				/* モーター識別コード		 */
 #define LOG_CMD_TAIL		"tail"				/* しっぽ識別コード			 */
 #define LOG_CMD_GYRO		"gyro"				/* ジャイロ識別コード		 */
+#define LOG_CMD_LINETRACE	"linetrace"			/* ライントレースコード		 */
 #define LOG_CMD_BATTERY		"battery"			/* バッテリー識別コード		 */
 #define LOG_CMD_COLOR		"color"				/* カラーセンサー識別コード	 */
 #define LOG_CMD_SONIC		"sonic"				/* 超音波センサー識別コード	 */
