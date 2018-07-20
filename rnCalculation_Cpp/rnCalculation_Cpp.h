@@ -1,20 +1,20 @@
 /* ------------------------------------------------------------------------- */
 /*	rnCalculation_Cpp.h                                                      */
-/*	<EV3ƒ‰ƒCƒ“ƒgƒŒ[ƒX>ƒ\ƒtƒgƒEƒFƒAŠJ”­                                      */
-/*  ‘–s—pŒvZŠÇ—ƒNƒ‰ƒX                                                     */
-/*	“|—§§ŒäƒNƒ‰ƒX‚©‚ç‚Ìw¦‚Å‘–s—pŒvZ‚ğŠÇ—‚·‚é                           */
+/*	<EV3ãƒ©ã‚¤ãƒ³ãƒˆãƒ¬ãƒ¼ã‚¹>ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢é–‹ç™º                                      */
+/*  èµ°è¡Œç”¨è¨ˆç®—ç®¡ç†ã‚¯ãƒ©ã‚¹                                                     */
+/*	å€’ç«‹åˆ¶å¾¡ã‚¯ãƒ©ã‚¹ã‹ã‚‰ã®æŒ‡ç¤ºã§èµ°è¡Œç”¨è¨ˆç®—ã‚’ç®¡ç†ã™ã‚‹                           */
 /*																			 */
 /*	-----------------------------------------------------------------------  */
-/*	”Ô†		XV—š—ğ							“ú•t		–¼		 */
+/*	ç•ªå·		æ›´æ–°å±¥æ­´							æ—¥ä»˜		æ°å		 */
 /*	-----------------------------------------------------------------------  */
-/*	000000		V‹Kì¬							2018/07/11	“cç³  üÆ	 */
+/*	000000		æ–°è¦ä½œæˆ							2018/07/11	ç”°é‚‰  å‘¨å“‰	 */
 /* ------------------------------------------------------------------------- */
 
 #ifndef EV3_UNIT_CALCULATION_CPP_H_
 #define EV3_UNIT_CALCULATION_CPP_H_
 
-#include "cstdint"
-#include "common.h"								/* ƒR[ƒfƒBƒ“ƒO‹K–ñ          */
+#include "ev3api.h"
+#include "common.h"								/* ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°è¦ç´„          */
 
 class rnCalculation {
 public:
@@ -23,17 +23,17 @@ public:
 	void Initialize(SINT offset);
     void Update(SINT angle, SINT rwEnc, SINT lwEnc, SINT battery);
     void SetCommand(SINT forward, SINT turn);
-    I08T GetPwmRight();
-	I08T GetPwmLeft();
+    int8_t GetPwmRight();
+	int8_t GetPwmLeft();
 
 private:
-	SINT CancelBacklash(I08T pwm, SINT enc);
+	SINT CancelBacklash(int8_t pwm, SINT enc);
 
     SINT i_forward;
     SINT i_turn;
     SINT i_offset;
-	I08T i_right_pwm;
-	I08T i_left_pwm;
+	int8_t i_right_pwm;
+	int8_t i_left_pwm;
 };
 
 #endif  // EV3_UNIT_CALCULATION_CPP_H_
