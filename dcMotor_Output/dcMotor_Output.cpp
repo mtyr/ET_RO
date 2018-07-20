@@ -21,9 +21,7 @@
 /*	include	ファイル														 */
 /*	-----------------------------------------------------------------------	 */
 
-
 #include "dcMotor_Output.h"
-#include "app.h"
 
 static const motor_port_t
     M_motor      = EV3_PORT_D,
