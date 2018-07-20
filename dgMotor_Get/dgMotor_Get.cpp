@@ -28,6 +28,8 @@ dgMotor_Get::dgMotor_Get()
 	
 	/* モータセンサーポート設定 */
 	ev3_motor_config( EV3_PORT_B,LARGE_MOTOR);
+	/* モータセンサーポート設定 */
+	ev3_motor_config( EV3_PORT_C,LARGE_MOTOR);
 }
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgMotor_Get::MotorUpdate										 */
@@ -49,8 +51,11 @@ void dgMotor_Get::MotorUpdate() {
 /* 戻り値	: SINT			: i_motor_info									 */
 /* 作成日	: 2018/07/13		髙岡 諒太		新規作成					 */
 /* ------------------------------------------------------------------------- */
-SINT dgMotor_Get::MotorGet(){
-	return i_motor_info;						/* 色情報を戻す				 */
+uint16_t dgMotor_Get::RMotorGet(){
+	return i_rmotor_info;						/* 色情報を戻す				 */
+}
+uint16_t dgMotor_Get::LMotorLGet(){
+	return i_lmotor_info;						/* 色情報を戻す				 */
 }
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgMotor_Get::GetInstance										 */
