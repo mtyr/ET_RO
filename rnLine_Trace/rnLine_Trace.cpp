@@ -18,10 +18,11 @@
 /* ------------------------------------------------------------------------- */
 /* include ファイル															 */
 /* ------------------------------------------------------------------------- */
-#include "..\common\common.h"
+#include "common.h"
 #include "rnLine_Trace.h"
-#include "..\raLine_Threshold_Value\raLine_Threshold_Value.h"
-#include "..\rnInverted_Control\rnInverted_Control.h"
+#include "raLine_Threshold_Value.h"
+#include "rnInverted_Control.h"
+#include "frLog.h"
 
 /* ------------------------------------------------------------------------- */
 /* 関数名	:rnLine_Trace													 */
@@ -46,7 +47,8 @@ rnLine_Trace::rnLine_Trace(){
 /* ------------------------------------------------------------------------- */
 SINT rnLine_Trace::LineTracing() {
 
-
+	/* ログクラスのGetInstance */
+	frLog &log = frLog::GetInstance();
 
 	/* 倒立制御クラスの生成 */
 	class rnInverted_Control myrnInverted_Control;
@@ -78,12 +80,14 @@ SINT rnLine_Trace::LineTracing() {
 	/* 倒立制御ClassのSetCommandMethodを呼ぶ */
 	/* PWM値を設定する */
 	myrnInverted_Control.SetCommand(rnInverted_Control::LOW, i_direction);
+		
+		
 
 	/* 倒立走行を行う */
 	myrnInverted_Control.Run();
 
 	}
-
+	log.LOG( LOG_ID_LINETRACE,"FUNC_OK\n");					/* Logメソッド	 */
 	return FUNC_OK;									/* 灰色が来たことを報告	 */
 }
 
@@ -99,6 +103,9 @@ SINT rnLine_Trace::LineTracing() {
 /* ------------------------------------------------------------------------- */
 SINT rnLine_Trace::ColorDirection(SINT i_color) {
 
+	/* ログクラスのGetInstance */
+	frLog &log = frLog::GetInstance();
+	
 	/* 現在のラインの色チェック */
 	if (TS_BRACK == i_color) {								/* ライン黒色	 */
 			return rnInverted_Control::LOW;
@@ -113,6 +120,7 @@ SINT rnLine_Trace::ColorDirection(SINT i_color) {
 		}
 		else
 		{
+			log.LOG( LOG_ID_LINETRACE,"FUNC_ERR_Argument\n");/* Logメソッド	 */
 			return FUNC_ERR;								/* 関数異常終了	 */
 		}
 }
