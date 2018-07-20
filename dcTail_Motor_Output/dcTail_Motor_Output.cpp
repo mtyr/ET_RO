@@ -9,7 +9,7 @@
 /* 関数名	:dcTail_Motor_Output 				　　　　　　				 */
 /* 機能名	:尻尾モーターコントロール　　　　　 						     */
 /* 機能概要	:尻尾モーター出力   											 */
-/* 引数		:void			     											 */
+/* 引数		:SINT 回転角度			     								     */
 /* 戻り値	:なし					                                         */
 /* 作成日	: 2018/07/13	廖  振勛			新規作成				     */
 /* 更新   	: 2018/07/14	廖  振勛			関数名修正				     */
@@ -19,7 +19,7 @@
 static const motor_port_t
     T_motor      = EV3_PORT_B;
 
-void dcTail_Motor_Output::TailMotorOutput(int degree) {   //モーター出力
+void dcTail_Motor_Output::TailMotorOutput(SINT degree) {   //モーター出力
 
 	ev3_motor_rotate(T_motor, degree,50, true);
 
