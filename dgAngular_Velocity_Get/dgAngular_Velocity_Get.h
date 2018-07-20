@@ -19,9 +19,9 @@ class dgAngular_Velocity_Get{
 public:
 	/* publicメソッド */
 	static dgAngular_Velocity_Get& GetInstance(void);/* 実体作成メソッド	 */
-	I16T GyroGet();								/* 色情報引き渡しメソッド	 */
+	uint16_t GyroGet();								/* 色情報引き渡しメソッド	 */
 	void GyroUpdate(void);						/* 角速度更新メソッド		 */
-	void OffSet(void);							/* オフセットメソッド		 */
+	SINT OffSet(void);							/* オフセットメソッド		 */
 private:
 	/* privateメソッド------------------------------------------------------ */
 	dgAngular_Velocity_Get();						/* コンストラクタ		 */
@@ -32,7 +32,7 @@ private:
 
 
 	/* private変数---------------------------------------------------------- */
-	I16T i_gyro_info;							/* 取得した角速度情報	 */
+	uint16_t i_gyro_info;							/* 取得した角速度情報	 */
 };
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */
