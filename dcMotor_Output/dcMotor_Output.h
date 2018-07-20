@@ -2,12 +2,13 @@
 #include "Motor.h"
 #include "ev3api.h"
 #include "app.h"
+#include "common.h"
 
 
 class dcMotor_Output{
 	
 	public:
-	void MotorOutput(int8_t getPwmLeft,int8_t getPwmRight);
+	void MotorOutput(SINT getPwmLeft,SINT getPwmRight);
 	
 	private:
 
