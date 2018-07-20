@@ -27,7 +27,7 @@
 */
 /* ------------------------------------------------------------------------- */
 
-#include "common.h"
+#include "..\common\common.h"
 #include "rnCalculation.h"
 #include "balancer_private.h"
 
