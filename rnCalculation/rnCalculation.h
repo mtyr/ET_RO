@@ -1,17 +1,17 @@
 /* ------------------------------------------------------------------------- */
 /*	rnCalculation.h                                                          */
-/*	<EV3ライントレース>ソフトウェア開発                                      */
-/*	走行用計算実行クラス                                                     */
-/*  モーター出力値を計算する                                                 */
+/*	<EV3繝ｩ繧､繝ｳ繝医Ξ繝ｼ繧ｹ>繧ｽ繝輔ヨ繧ｦ繧ｧ繧｢髢狗匱                                      */
+/*	襍ｰ陦檎畑險育ｮ怜ｮ溯｡後け繝ｩ繧ｹ                                                     */
+/*  繝｢繝ｼ繧ｿ繝ｼ蜃ｺ�?l繧定ｨ育ｮ励☆繧�                                                 */
 /*																			 */
 /*	-----------------------------------------------------------------------  */
-/*	番号		更新履歴							日付		氏名		 */
+/*	�?�		譖ｴ譁ｰ螻･豁ｴ							譌･莉�		豌丞錐		 */
 /*	-----------------------------------------------------------------------  */
-/*	000000		新規作成							2018/07/11	田邉  周哉	 */
+/*	000000		譁ｰ隕渚?							2018/07/11	逕ｰ驍�  蜻ｨ蜩�	 */
 /* ------------------------------------------------------------------------- */
-rnCalculation
-#ifndef _ETROBO_CALCULATION_H_INCLUDED
-#define _ETROBO_CALCULATION_H_INCLUDED
+
+#ifndef RNCALCULATION_H_INCLUDED
+#define RNCALCULATION_H_INCLUDED
 
 #ifdef __cplusplus
 extern "C" {
@@ -31,20 +31,19 @@ extern "C" {
 #endif
 
 
-#include "common.h"
 
-#define CMD_MAX                        100.0F                    /* 前進/旋回命令絶対最大値 */
-#define DEG2RAD                        0.01745329238F            /* 角度単位変換係数(=pi/180) */
-//#define EXEC_PERIOD                    0.00450000000F            /* バランス制御実行周期(秒) *//* sample_c4の処理時間考慮 */
-#define EXEC_PERIOD                  0.00400000000F            /* バランス制御実行周期(秒) *//* 周期タスクでタイミングをとる場合はこちらに変更してください */
+#define CMD_MAX                        100.0F                    /* 蜑埼�ｲ/譌級??遶ｭ??陷･l */
+#define DEG2RAD                        0.01745329238F            /* 隗貞ｺｦ蜊��??�ｷ菫よ焚(=pi/180) */
+//#define EXEC_PERIOD                    0.00450000000F            /* 繝舌Λ繝ｳ繧ｹ蛻ｶ蠕｡螳溯｡悟捉譛�(遘�) *//* sample_c4�?��謳ｦ譴�?l諷ｮ */
+#define EXEC_PERIOD                  0.00400000000F            /* 繝舌Λ繝ｳ繧ｹ蛻ｶ蠕｡螳溯｡悟捉譛�(遘�) *//* 蜻ｨ譛溘ち繧ｹ繧ｯ�?^繧､繝溘Φ繧ｰ繧窒?鬮�?�?�ｱ縺｡繧奄??X縺翌?�ｭ縺�縺輔＞ */
 
 /* Model entry point functions */
 extern void Calculation_Initialize(void);
 
 /* Customized model step function */
-extern void Calculation_Control(FLOT args_cmd_forward, FLOT args_cmd_turn,
-	FLOT args_gyro, FLOT args_gyro_offset, FLOT args_theta_m_l,
-	FLOT args_theta_m_r, FLOT args_battery, signed char *ret_pwm_l, signed char
+extern void Calculation_Control(float args_cmd_forward, float args_cmd_turn,
+	float args_gyro, float args_gyro_offset, float args_theta_m_l,
+	float args_theta_m_r, float args_battery, signed char *ret_pwm_l, signed char
   *ret_pwm_r);
 
 /*-
@@ -98,7 +97,7 @@ extern void Calculation_Control(FLOT args_cmd_forward, FLOT args_cmd_turn,
 }
 #endif
 
-#endif /* ! _ETROBO_CALCULATION_H_INCLUDED */
+#endif /* ! RNCALCULATION_H_INCLUDED */
 
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */
