@@ -27,7 +27,7 @@
 /* includeファイル															 */
 /* ------------------------------------------------------------------------- */
 #include "frLog.h"								/* ログヘッダ				 */
-#include "frBluetooth.h"						/* Bluetoothヘッダ			 */
+#include "..\frBluetooth\frBluetooth.h"						/* Bluetoothヘッダ			 */
 #include <stdio.h>								/* 基本入出力				 */
 #include <string.h>								/* 文字列操作系				 */
 #include <stdlib.h>								/* 初期化系					 */

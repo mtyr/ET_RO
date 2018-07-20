@@ -16,8 +16,7 @@
 
 #include "Motor.h"
 #include "ev3api.h"
-#include "app.h"
-#include "common.h"
+#include "..\common\common.h"
 
 
 class dcTail_Motor_Output{

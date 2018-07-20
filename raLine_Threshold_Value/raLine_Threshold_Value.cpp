@@ -14,7 +14,7 @@
 /*	includeファイル															 */
 /*	-----------------------------------------------------------------------	 */
 #include "raLine_Threshold_Value.h"
-#include "stLine_Threshold_Value_Set.h"
+#include "..\stLine_Threshold_Value_Set\stLine_Threshold_Value_Set.h"
 
 /* ------------------------------------------------------------------------- */
 /* ■■■ public ■■■														 */

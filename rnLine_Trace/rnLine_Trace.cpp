@@ -18,10 +18,10 @@
 /* ------------------------------------------------------------------------- */
 /* include ファイル															 */
 /* ------------------------------------------------------------------------- */
-#include "common.h"
+#include "..\common\common.h"
 #include "rnLine_Trace.h"
-#include "raLine_Threshold_Value.h"
-#include "rnInverted_Control.h"
+#include "..\raLine_Threshold_Value\raLine_Threshold_Value.h"
+#include "..\rnInverted_Control\rnInverted_Control.h"
 
 /* ------------------------------------------------------------------------- */
 /* 関数名	:rnLine_Trace													 */

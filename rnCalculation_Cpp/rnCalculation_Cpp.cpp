@@ -10,7 +10,7 @@
 /*  000000      新規作成                            2018/07/11  田邉  周哉   */
 /* ------------------------------------------------------------------------- */
 
-#include "rnCalculation.h"
+#include "..\rnCalculation\rnCalculation.h"
 #include "rnCalculation_Cpp.h"
 
 

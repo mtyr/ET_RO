@@ -14,10 +14,10 @@
 /*	----------------------------------------------------------------------	 */
 #include <string.h>
 #include"crStart_Preparation.h"
-#include"stGyro_Set.h"
-#include"stLine_Threshold_Value_Set.h"
-#include"stMotor_Initialization.h"
-#include "crDriving_Order.h"
+#include"..\stGyro_Set\stGyro_Set.h"
+#include"..\stLine_Threshold_Value_Set\stLine_Threshold_Value_Set.h"
+#include"..\stMotor_Initialization\stMotor_Initialization.h"
+#include "..\crDriving_Order\crDriving_Order.h"
 
 /* ------------------------------------------------------------------------- */
 /* ■■■ public ■■■														 */

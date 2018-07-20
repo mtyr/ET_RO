@@ -14,7 +14,7 @@
 #define EV3_UNIT_CALCULATION_CPP_H_
 
 #include "cstdint"
-#include "common.h"								/* コーディング規約          */
+#include "..\common\common.h"								/* コーディング規約          */
 
 class rnCalculation {
 public:

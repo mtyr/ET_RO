@@ -13,7 +13,7 @@
 /*	include	ファイル														 */
 /*	-----------------------------------------------------------------------	 */
 #include"stGyro_Set.h"
-#include"dgAngular_Velocity_Get.h"
+#include"..\dgAngular_Velocity_Get\dgAngular_Velocity_Get.h"
 
 /*	-----------------------------------------------------------------------	 */
 /*	コンストラクタ															 */

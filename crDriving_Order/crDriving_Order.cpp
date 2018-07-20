@@ -13,8 +13,8 @@
 /*	includeファイル														 	 */
 /*	----------------------------------------------------------------------	 */
 #include "crDriving_Order.h"
-#include "rnLine_Trace.h"
-#include "frDifficulty.h"
+#include "..\rnLine_Trace\rnLine_Trace.h"
+//#include "frDifficulty.h"
 /* ------------------------------------------------------------------------- */
 /* ■■■ public ■■■														 */
 /* ------------------------------------------------------------------------- */
@@ -57,7 +57,7 @@ void crDriving_Order::RunWayDecision(){
 	SINT i_Error_Check = 0;
 	class rnLine_Trace LineTrace;
 	LineTrace.LineTracing();
-	void Difficulty();
+	//void Difficulty();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -74,8 +74,8 @@ void crDriving_Order::RunWayDecision(){
 /* ------------------------------------------------------------------------- */
 void crDriving_Order::Difficulty(){
 	//難所クラスに名前書く
-	class frDifficulty d;
-	d.dif();
+	//class frDifficulty d;
+	//d.dif();
 }
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */
