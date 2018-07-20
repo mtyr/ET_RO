@@ -20,7 +20,7 @@ class dgColor_Get{
 public:
 	/* publicメソッド */
 	static dgColor_Get& GetInstance(void);		/* 実体作成メソッド			 */
-	SINT ColorGet();							/* 角位置情報引き渡しメソッド*/
+	uint8_t ColorGet();							/* 角位置情報引き渡しメソッド*/
 	void ColorUpdate(void);						/* 角位置情報更新			 */
 private:
 	/* privateメソッド------------------------------------------------------ */
