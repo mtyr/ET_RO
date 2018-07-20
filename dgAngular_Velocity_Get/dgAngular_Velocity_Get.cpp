@@ -48,7 +48,7 @@ void dgAngular_Velocity_Get::GyroUpdate() {
 /* 戻り値	: SINT			: i_gyro_info									 */
 /* 作成日	: 2018/07/13	髙岡 諒太		新規作成						 */
 /* ------------------------------------------------------------------------- */
-SINT dgAngular_Velocity_Get::GyroGet(){
+I16T dgAngular_Velocity_Get::GyroGet(){
 	return i_gyro_info;							/* 角速度情報を戻す			 */
 }
 /* ------------------------------------------------------------------------- */
