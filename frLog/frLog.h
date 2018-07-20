@@ -9,6 +9,7 @@
 /* ------------------------------------------------------------------------- */
 /* 000000	新規作成								2018/06/22	桝井  隆治	 */
 /* 000001	シングルトン対応						2018/06/25	桝井  隆治	 */
+/* 000002	コンパイル時のWarning除去				2018/07/20	桝井  隆治	 */
 /* ------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------- */
@@ -51,7 +52,7 @@ class frLog{
 
 public:
 	void SetLog(SCHR code);
-	void LOG(SINT id, const SCHR* log, ...);
+	void LOG(ULNG id, const SCHR* log, ...);
 
 	static frLog& GetInstance(void);
 
@@ -62,7 +63,7 @@ private:
 	frLog&operator=(const frLog &) { return *this; };
 
 	void CommandAnaryze( void );
-	void FlgSet( const SINT flg, ULNG* log, SINT id );
+	void FlgSet( const ULNG flg, ULNG* log, SINT id );
 
 	ULNG _logmode;
 	SCHR _buf[LOG_MAX_BUF];

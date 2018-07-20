@@ -15,6 +15,7 @@
 /* 000003	可変長引数結合をvsprintfへ変更			2018/07/03	桝井  隆治	 */
 /* 000004	Bluetooth未使用時は出力をprintfにする	2018/07/03	桝井  隆治	 */
 /* 000005	Bluetooth文字列一括送信に対応			2018/07/09	桝井  隆治	 */
+/* 000006	コンパイル時のWarning除去				2018/07/20	桝井  隆治	 */
 /* ------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------- */
@@ -79,11 +80,11 @@ frLog& frLog::GetInstance(void)
 /* 戻り値	: void			: なし											 */
 /* 作成日	: 2018/06/22		桝井  隆治		新規作成					 */
 /* ------------------------------------------------------------------------- */
-void frLog::LOG( SINT id, const SCHR* message,... )
+void frLog::LOG( ULNG id, const SCHR* message,... )
 {
 	char    str[LOG_MAX_BUF + 1];				/* ログバッファ				 */
-	SINT    iIndex = 0;							/* index					 */
-	SINT    iMax   = 0;							/* バッファ最大長			 */
+/*	SINT    iIndex = 0;						  *//* index					 */
+/*	SINT    iMax   = 0;						  *//* バッファ最大長			 */
 	va_list args;								/* 可変長ポインタ			 */
 	
 	/* 指定カ所のログが出力モードになっていない場合は何もしない */
@@ -145,7 +146,7 @@ void frLog::SetLog( SCHR code )
 	if (code == LOG_KEY_BACKSPACE) {
 		ulLength = strlen(_buf);
 		if (ulLength > 0) {
-			_buf[ulLength - 1] = NULL;
+			_buf[ulLength - 1] = 0;
 		}
 		return;
 	}
@@ -207,9 +208,8 @@ frLog::~frLog()
 void frLog::CommandAnaryze( void )
 {
 	ULNG  ulLogMode = _logmode;					/* ログモード				 */
-	ULNG  ulLength  = 0;						/* 文字列長					 */
 	SINT  iRet      = 0;						/* strcmp戻り値				 */
-	SINT  iNow      = 0;						/* 検索位置					 */
+	UINT  uiNow     = 0;						/* 検索位置					 */
 	SINT  iFlg = LOG_FLG_OFF;					/* フラグ					 */
 	const LOGLINK link[] = {					/* コマンド・ＩＤ対比表		 */
 		{ LOG_CMD_MOTOR   , LOG_ID_MOTOR   },	/* モーター関連				 */
@@ -223,15 +223,17 @@ void frLog::CommandAnaryze( void )
 	
 	/* コマンド取得 -------------------------------------------------------- */
 	/* log onモード				 */
-	iRet = strncmp( &_buf[0], LOG_CMD_LOGON, strlen( LOG_CMD_LOGON ));
+	iRet = strncmp(( const SCHR *)&_buf[0],
+				   ( const SCHR *)LOG_CMD_LOGON, strlen( LOG_CMD_LOGON ));
 	if( iRet == 0 ) {
-		iNow += strlen(LOG_CMD_LOGON );
+		uiNow += strlen( LOG_CMD_LOGON );
 		iFlg = LOG_FLG_ON;
 	} else {
 		/* log OFFモード			 */
-		iRet = strncmp(&_buf[0], LOG_CMD_LOGOFF, strlen(LOG_CMD_LOGOFF ));
+		iRet = strncmp(( const SCHR *)&_buf[0],
+					   ( const SCHR *)LOG_CMD_LOGOFF, strlen(LOG_CMD_LOGOFF ));
 		if (iRet == 0) {
-			iNow += strlen(LOG_CMD_LOGOFF );
+			uiNow += strlen(LOG_CMD_LOGOFF );
 			iFlg = LOG_FLG_OFF;
 		} else {
 			/* コマンドミスの場合は何もしない */
@@ -240,27 +242,28 @@ void frLog::CommandAnaryze( void )
 	}
 	
 	/* 文字列終端までループ ------------------------------------------------ */
-	while( iNow < strlen( _buf )) {
+	while( uiNow < strlen( _buf )) {
 		/* -が出るまでループ */
-		if( _buf[iNow] == LOG_KEY_SPACE ) {
-			iNow ++;
+		if( _buf[uiNow] == LOG_KEY_SPACE ) {
+			uiNow ++;
 			continue;
-		} else if( _buf[iNow] != LOG_KEY_HYPHEN ) {
+		} else if( _buf[uiNow] != LOG_KEY_HYPHEN ) {
 			/* -から開始されない場合、コマンドミスと識別して終了 */
 			goto end;
 		}
 		/* -発見、文字列に対応したコマンドを処理 */
-		iNow ++;
-		if( iNow >= sizeof( _buf )) {
+		uiNow ++;
+		if( uiNow >= sizeof( _buf )) {
 			goto end;
 		}
 		
 		/* ログ種別を解析・設定 -------------------------------------------- */
-		for( int iIndex = 0; iIndex < ( sizeof( link ) / sizeof( link[0] )); iIndex ++ ) {
-			iRet = strncmp( &_buf[iNow], link[iIndex].strings, strlen( link[iIndex].strings ));
+		for( UINT uiIndex = 0; uiIndex < ( sizeof( link ) / sizeof( link[0] )); uiIndex ++ ) {
+			iRet = strncmp(( const SCHR *)&_buf[uiNow],
+							 link[uiIndex].strings, strlen( link[uiIndex].strings ));
 			if( iRet == 0 ) {
-				FlgSet( link[iIndex].id, &ulLogMode, iFlg );
-				iNow = iNow + strlen(link[iIndex].strings);
+				FlgSet( link[uiIndex].id, &ulLogMode, iFlg );
+				uiNow = uiNow + strlen(link[uiIndex].strings);
 				break;
 			}
 		}
@@ -278,12 +281,12 @@ end:
 /* 関数名	: frLog::FlgSet													 */
 /* 機能名	: ログ制御：出力フラグ設定										 */
 /* 機能概要	: 各種コマンドの出力ＯＮ／ＯＦＦフラグ制御を行います。			 */
-/* 引数		: const SINT	: flg	: [I N]入力コード(1文字)				 */
+/* 引数		: const ULNG	: flg	: [I N]入力コード(1文字)				 */
 /* 引数		: char			: code	: [I N]入力コード(1文字)				 */
 /* 戻り値	: void			: なし											 */
 /* 作成日	: 2018/06/22		桝井  隆治		新規作成					 */
 /* ------------------------------------------------------------------------- */
-void frLog::FlgSet( const SINT flg, ULNG* log, SINT id )
+void frLog::FlgSet( const ULNG flg, ULNG* log, SINT id )
 {
 	if( id == LOG_FLG_ON ) {
 		*log |= flg;
