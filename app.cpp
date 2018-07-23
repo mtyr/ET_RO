@@ -1,6 +1,7 @@
 // tag::tracer_def[]
 #include "app.h"
 #include "common\common.h"
+#include "crDriving_Order\crDriving_Order.h"
 #include <string.h>
 //using namespace ev3api;
 
@@ -23,14 +24,16 @@ void main_task(intptr_t unused) {
 /*	変数初期化-------------------------------------------------------------	 */
 	
 /*	クラス宣言-------------------------------------------------------------	 */
-	
+	class crDriving_Order DrivingOrder;
 	
     /* Bluetooth通信タスクの起動 */
 	//sta_cyc(BT_CYC);
 	
 /*	EV3LCD表示-------------------------------------------------------------	 */
+
 	//ev3_lcd_draw_string	("bluetooth1\0",0,0);
 
+	DrivingOrder.RunWayDecision();
 /*	-----------------------------------------------------------------------	 */
 /*	メインループ															 */
 /*	-----------------------------------------------------------------------	 */
