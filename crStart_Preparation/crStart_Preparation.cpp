@@ -88,7 +88,7 @@ LineTraceVal.stLine_Get();
 
 /*	モーター初期化---------------------------------------------------------	 */
 ev3_lcd_draw_string	("motor_init\0",0,0);
-MotorInit.MotorMeasurement(i_moter_l,i_moter_r,i_moter_t);
+MotorInit.MotorMeasurement(&i_moter_l,&i_moter_r,&i_moter_t);
 
 
 /*	スタート待ち-----------------------------------------------------------	 */
