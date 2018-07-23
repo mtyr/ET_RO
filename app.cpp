@@ -2,6 +2,7 @@
 #include "app.h"
 #include "common\common.h"
 #include "crDriving_Order\crDriving_Order.h"
+#include "frBluetooth\frBluetooth.h"
 #include <string.h>
 //using namespace ev3api;
 
@@ -25,13 +26,9 @@ void main_task(intptr_t unused) {
 	
 /*	クラス宣言-------------------------------------------------------------	 */
 	class crDriving_Order DrivingOrder;
-	
-    /* Bluetooth通信タスクの起動 */
-	//sta_cyc(BT_CYC);
-	
-/*	EV3LCD表示-------------------------------------------------------------	 */
 
-	//ev3_lcd_draw_string	("bluetooth1\0",0,0);
+
+
 
 	DrivingOrder.RunWayDecision();
 /*	-----------------------------------------------------------------------	 */
@@ -40,6 +37,35 @@ void main_task(intptr_t unused) {
 	while(1){ }
 	
   ext_tsk();
+}
+
+
+/*	-----------------------------------------------------------------------	 */
+/*	Bluetoothタイマー割込み													 */
+/*	-----------------------------------------------------------------------	 */
+void bt_cyc(intptr_t unused)
+{
+/*	変数宣言---------------------------------------------------------------	 */
+static	SCHR cNouBuf;							/*	受信文字の格納			 */
+
+static	SCHR cBuf;								/*	受信時の比較用配列		 */
+	
+/*	クラス宣言-------------------------------------------------------------	 */
+	static frBluetooth &bluetooth = frBluetooth::GetInstance();
+	static frLog &log = frLog::GetInstance();
+
+/*	EV3のLCD表示-----------------	*/
+//ev3_lcd_draw_string	("bluetooth\0",0,0);
+	
+/*	Bluetooth文字受信------------------------------------------------------	 */
+	cNouBuf=bluetooth.Receive();
+	
+	/*	前文字の比較	*/
+	if( cNouBuf != cBuf ){
+	
+        log.SetLog(cNouBuf);
+		cBuf=cNouBuf;
+	}
 }
 
 // end::main_task[]
