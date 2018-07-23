@@ -83,7 +83,7 @@ ev3_sensor_config	( EV3_PORT_1 ,TOUCH_SENSOR);
 
 /*	カラーセンサーしきい値設定---------------------------------------------	 */
 ev3_lcd_draw_string	("ラインしきい値設定中\0",0,0);
-LineTraceVal.stLine_Get();
+LineTraceVal.stLineUP();
 
 
 /*	モーター初期化---------------------------------------------------------	 */
