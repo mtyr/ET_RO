@@ -12,9 +12,9 @@
 /*	-----------------------------------------------------------------------	 */
 /*	includeファイル															 */
 /*	-----------------------------------------------------------------------	 */
-#include "dgColor_Get.h"
+#include "..\dgColor_Get\dgColor_Get.h"
 #include "stLine_Threshold_Value_Set.h"
-#include "raLine_Threshold_Value.h"
+#include "..\raLine_Threshold_Value\raLine_Threshold_Value.h"
 #include "ev3api.h"
 /*	-----------------------------------------------------------------------	 */
 /*	変数宣言と初期化														 */
