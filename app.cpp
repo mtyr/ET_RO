@@ -1,9 +1,9 @@
 // tag::tracer_def[]
 #include "app.h"
 #include "common\common.h"
-#include "crDriving_Order\crDriving_Order.h"
-#include "frBluetooth\frBluetooth.h"
+#include "crStart_Preparation\crStart_Preparation.h"
 #include "frLog\frLog.h"
+#include "frBluetooth\frBluetooth.h"
 #include <string.h>
 //using namespace ev3api;
 
@@ -11,8 +11,6 @@
 #define CALIB_FONT (EV3_FONT_SMALL)
 #define CALIB_FONT_WIDTH (6/*TODO: magic number*/)
 #define CALIB_FONT_HEIGHT (8/*TODO: magic number*/)
-
-
 
 // end::tracer_def[]
 // tag::main_task[]
@@ -26,12 +24,12 @@ void main_task(intptr_t unused) {
 /*	変数初期化-------------------------------------------------------------	 */
 	
 /*	クラス宣言-------------------------------------------------------------	 */
-	class crDriving_Order DrivingOrder;
+	class crStart_Preparation StartPreparation;
 
 
 
 
-	DrivingOrder.RunWayDecision();
+	StartPreparation.StartPreparation();
 /*	-----------------------------------------------------------------------	 */
 /*	メインループ															 */
 /*	-----------------------------------------------------------------------	 */
