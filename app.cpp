@@ -3,6 +3,7 @@
 #include "common\common.h"
 #include "crDriving_Order\crDriving_Order.h"
 #include "frBluetooth\frBluetooth.h"
+#include "frLog\frLog.h"
 #include <string.h>
 //using namespace ev3api;
 
