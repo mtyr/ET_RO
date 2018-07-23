@@ -31,7 +31,7 @@ raLine_Threshold_Value::raLine_Threshold_Value()
 /* ------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------- */
-/* 関数名	: raLine_Threshold_Value::Set									 */
+/* 関数名	: raLine_Threshold_Value::raLineSet								 */
 /* 機能名	: 現在カラー値返答												 */
 /* 機能概要	: 現在カラー値を返す											 */
 /* 引数		: void					:なし									 */
@@ -56,7 +56,7 @@ SINT raLine_Threshold_Value::raLineSet(void)
 }
 
 /* ------------------------------------------------------------------------- */
-/* 関数名	: raLine_Threshold_Value::UP									 */
+/* 関数名	: raLine_Threshold_Value::raLineUP								 */
 /* 機能名	:																 */
 /* 機能概要	:																 */
 /* 引数		: void					:なし									 */

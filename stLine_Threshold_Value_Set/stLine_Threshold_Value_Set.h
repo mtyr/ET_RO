@@ -23,12 +23,11 @@ class stLine_Threshold_Value_Set{
 
 public:											/*	パブリック-------------	 */
 
-	
-	
 	SINT stLineUP(void);								/*	しきい値を返信	 */
-	void stLineGet(SINT);								/*	しきい値設定	 */
+	
 private:										/*	プライベート-----------	 */
-	SINT stLineGRAY(void);
+	
+	SINT stLineGRAY(void);									/* 灰値計算		 */
 	SINT i_black;											 /* 黒値		 */
 	SINT i_white;											 /* 白値		 */
 	SINT i_gray;											 /* 灰値		 */
