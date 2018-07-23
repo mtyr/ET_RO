@@ -61,6 +61,9 @@ void crStart_Preparation::StartPreparation(void)
 {
 
 /*	変数宣言---------------------------------------------------------------	 */
+	SINT i_moter_l = 0;							/*	左モータ遊び値			 */
+	SINT i_moter_r = 0;							/*	右モーター遊び値		 */
+	SINT i_moter_t = 0;							/*	尻尾モーター遊び値		 */
 
 /*	初期化-----------------------------------------------------------------	 */
 
@@ -85,7 +88,7 @@ LineTraceVal.stLine_Get();
 
 /*	モーター初期化---------------------------------------------------------	 */
 ev3_lcd_draw_string	("motor_init\0",0,0);
-MotorInit.MotorMeasurement();
+MotorInit.MotorMeasurement(i_moter_l,i_moter_r,i_moter_t);
 
 
 /*	スタート待ち-----------------------------------------------------------	 */
