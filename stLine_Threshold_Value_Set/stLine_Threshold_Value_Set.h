@@ -24,6 +24,7 @@ class stLine_Threshold_Value_Set{
 public:											/*	パブリック-------------	 */
 
 	SINT stLineUP(void);								/*	しきい値を返信	 */
+	void stLineGet(SINT);								/*	しきい値設定	 */
 private:										/*	プライベート-----------	 */
 	SINT stLineGRAY(void);
 	SINT i_black;											 /* 黒値		 */
