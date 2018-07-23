@@ -22,12 +22,11 @@ raLine_Threshold_Value.o\
 raMotor_Setting_Value.o\
 rnCalculation_Cpp.o\
 rnCalculation_Cpp.o\
-rnInverted_Control.o\
 rnLine_Trace.o\
 stGyro_Set.o\
 stLine_Threshold_Value_Set.o\
-stMotor_Initialization.o
-
+stMotor_Initialization.o\
+rnInverted_Control.o
 
 SRCLANG := c++
 
@@ -54,11 +53,11 @@ APPL_DIR += $(mkfile_path)frLog\
 			$(mkfile_path)raMotor_Setting_Value\
 			$(mkfile_path)rnCalculation\
 			$(mkfile_path)rnCalculation_Cpp\
-			$(mkfile_path)rnInverted_Control\
 			$(mkfile_path)rnLine_Trace\
 			$(mkfile_path)stGyro_Set\
 			$(mkfile_path)stLine_Threshold_Value_Set\
-			$(mkfile_path)stMotor_Initialization
+			$(mkfile_path)stMotor_Initialization\
+			$(mkfile_path)rnInverted_Control
 
 INCLUDES += \
 	-I$(mkfile_path)frLog\
@@ -76,10 +75,10 @@ INCLUDES += \
 	-I$(mkfile_path)raMotor_Setting_Value\
 	-I$(mkfile_path)rnCalculation\
 	-I$(mkfile_path)rnCalculation_Cpp\
-	-I$(mkfile_path)rnInverted_Control\
 	-I$(mkfile_path)rnLine_Trace\
 	-I$(mkfile_path)stGyro_Set\
 	-I$(mkfile_path)stLine_Threshold_Value_Set\
-	-I$(mkfile_path)stMotor_Initialization
+	-I$(mkfile_path)stMotor_Initialization\
+	-I$(mkfile_path)rnInverted_Control
 
 COPTS += -fno-use-cxa-atexit

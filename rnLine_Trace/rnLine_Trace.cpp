@@ -18,11 +18,11 @@
 /* ------------------------------------------------------------------------- */
 /* include ファイル															 */
 /* ------------------------------------------------------------------------- */
-#include "common.h"
+#include "..\common\common.h"
 #include "rnLine_Trace.h"
-#include "raLine_Threshold_Value.h"
-#include "rnInverted_Control.h"
-#include "frLog.h"
+#include "..\raLine_Threshold_Value\raLine_Threshold_Value.h"
+#include "..\rnInverted_Control\rnInverted_Control.h"
+#include "..\frLog\frLog.h"
 
 /* ------------------------------------------------------------------------- */
 /* 関数名	:rnLine_Trace													 */
@@ -64,6 +64,8 @@ SINT rnLine_Trace::LineTracing() {
 		i_initialized = TRUE;
 	}
 
+
+	i_color = TS_BRACK;	/* ループに入る為に初期設定でTS_BRACK(黒色)を設定	 */
 	/* ラインの色が灰色になるまでループ */
 	while (TS_GRAY != i_color)
 	{
@@ -80,6 +82,7 @@ SINT rnLine_Trace::LineTracing() {
 	myrnInverted_Control.SetCommand(rnInverted_Control::LOW, i_direction);
 		
 		
+
 	/* 倒立走行を行う */
 	myrnInverted_Control.Run();
 
@@ -94,10 +97,9 @@ SINT rnLine_Trace::LineTracing() {
 /* 機能名	:色に合った走行向きを決める										 */
 /* 機能概要	:ラインの色を判断して走行向きを戻り値として返す					 */
 /* 引数		:SINT	:i_color	:現在のラインの色							 */
-/* 戻り値	:SINT:rnInverted_Control::LOW	:黒色が来た時(LOW = 30)			 */
+/* 戻り値	:SINT:rnInverted_Control::LOW	:黒色 or 灰色が来た時(LOW = 30)	 */
 /*       	:	 :-rnInverted_Control::LOW	:白色が来た時(-LOW = -30)		 */
 /* 作成日	:2018/07/02		甲田  啓朗	新規作成							 */
-/* 修正		:2018/07/23		甲田  啓朗	灰色の処理削除						 */
 /* ------------------------------------------------------------------------- */
 SINT rnLine_Trace::ColorDirection(SINT i_color) {
 
@@ -111,6 +113,10 @@ SINT rnLine_Trace::ColorDirection(SINT i_color) {
 		else if (TS_WHITE == i_color)						/* ライン白色	 */
 		{
 			return -rnInverted_Control::LOW;
+		}
+		else if (TS_GRAY == i_color)						/* ライン灰色	 */
+		{
+			return rnInverted_Control::LOW;
 		}
 		else
 		{
