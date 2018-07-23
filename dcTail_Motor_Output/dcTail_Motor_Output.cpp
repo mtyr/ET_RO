@@ -23,7 +23,7 @@
 #include "dcTail_Motor_Output.h"
 
 static const motor_port_t
-    T_motor      = EV3_PORT_B;
+    T_motor      = EV3_PORT_A;
 
 void dcTail_Motor_Output::TailMotorOutput(SINT degree) {   //モーター出力
 
