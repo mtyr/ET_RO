@@ -64,8 +64,6 @@ SINT rnLine_Trace::LineTracing() {
 		i_initialized = TRUE;
 	}
 
-
-	i_color = TS_BRACK;	/* ループに入る為に初期設定でTS_BRACK(黒色)を設定	 */
 	/* ラインの色が灰色になるまでループ */
 	while (TS_GRAY != i_color)
 	{
