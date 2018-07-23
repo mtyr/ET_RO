@@ -31,7 +31,7 @@
 class raLine_Threshold_Value{
 
 public:											/*	パブリック-------------	 */	
-		raLine_Threshold_Value();						/* コンストラクタ		 */
+		raLine_Threshold_Value();					/* コンストラクタ		 */
 	~raLine_Threshold_Value();						/* デストラクタ			 */
 
 	
@@ -51,7 +51,6 @@ private:										/*	プライベート-----------	 */
 	raLine_Threshold_Value(const raLine_Threshold_Value &x) { };
 	raLine_Threshold_Value&operator=
 		(const raLine_Threshold_Value &) { return *this; };
-	
 };
 
 /* ------------------------------------------------------------------------- */

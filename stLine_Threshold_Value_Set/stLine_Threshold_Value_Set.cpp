@@ -16,20 +16,12 @@
 #include "stLine_Threshold_Value_Set.h"
 #include "raLine_Threshold_Value.h"
 #include "ev3api.h"
-/*	-----------------------------------------------------------------------	 */
-/*	変数宣言と初期化														 */
-/*	-----------------------------------------------------------------------	 */
-SINT i_color = 0;										 /* しきい値確保変数 */
-/*	-----------------------------------------------------------------------	 */
-/*　カラー情報取得クラス宣言												 */
-/*	-----------------------------------------------------------------------	 */
-dgColor_Get &dgColor=dgColor_Get::GetInstance(); /* カラー情報取得クラス生成 */
-class raLine_Threshold_Value raLine;
+
 /* ------------------------------------------------------------------------- */
 /* ■■■ public ■■■														 */
 /* ------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------- */
-/* 関数名	: stLine_Threshold_Value_Set::UP								 */
+/* 関数名	: stLine_Threshold_Value_Set::stLineUP								 */
 /* 機能名	: カラー情報返答												 */
 /* 機能概要	: カラー情報を返す												 */
 /* 引数		: void					:なし									 */
@@ -37,6 +29,11 @@ class raLine_Threshold_Value raLine;
 /* 作成日	: 2018/07/10	松浦 侑矢		新規作成						 */
 /* ------------------------------------------------------------------------- */
 SINT stLine_Threshold_Value_Set::stLineUP(void){
+	/* カラー情報取得クラス生成 											 */
+	dgColor_Get &dgColor=dgColor_Get::GetInstance(); 
+	/* しきい値情報取得クラス生成 											 */
+	class raLine_Threshold_Value raLine;
+	
 	static const sensor_port_t
     	touch_sensor = EV3_PORT_1;
 	
@@ -70,7 +67,7 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 		}
 	}
 
-	i_gray = stLine_Threshold_Value_Set::stLineGRAY();
+	i_gray = stLineGRAY();
 	ev3_lcd_draw_string("しきい値設定完了しました。\0", 0, 0);
 
 	raLine.raLineUP(i_black,i_white,i_gray);
@@ -83,7 +80,7 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 /* ■■■ private ■■■													 */
 /* ------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------- */
-/* 関数名	: stLine_Threshold_Value_Set::GRAY								 */
+/* 関数名	: stLine_Threshold_Value_Set::stLineGRAY								 */
 /* 機能名	: カラー情報返答												 */
 /* 機能概要	: カラー情報を返す												 */
 /* 引数		: void					:なし									 */
