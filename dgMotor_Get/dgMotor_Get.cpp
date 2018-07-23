@@ -12,6 +12,7 @@
 /*	include	ファイル														 */
 /*	-----------------------------------------------------------------------	 */
 #include "dgMotor_Get.h"
+#include <Motor.h>
 #include <stdio.h>								/* 入出力ライブラリ			 */
 #include <stdlib.h>								/* 標準ライブラリー			 */
 #include <string.h>								/* 文字列操作系				 */
@@ -31,6 +32,10 @@ dgMotor_Get::dgMotor_Get()
 	/* モータセンサーポート設定 */
 	ev3_motor_config( EV3_PORT_C,LARGE_MOTOR);
 }
+void dgMotor_Get::dgMortor_OffSet(){
+	ev3_motor_reset_counts(EV3_PORT_B);
+	ev3_motor_reset_counts(EV3_PORT_C);
+}
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgMotor_Get::MotorUpdate										 */
 /* 機能名	: 角位置取得:角位置情報更新										 */
@@ -41,9 +46,9 @@ dgMotor_Get::dgMotor_Get()
 /* ------------------------------------------------------------------------- */
 void dgMotor_Get::MotorUpdate() {
 	/* 右motor情報取得 */
-	i_rmotor_info=ev3_motor_get_counts( EV3_PORT_A);
+	i_rmotor_info=ev3_motor_get_counts( EV3_PORT_B);
 	/* 左motor情報取得 */
-	i_lmotor_info=ev3_motor_get_counts( EV3_PORT_B);
+	i_lmotor_info=ev3_motor_get_counts( EV3_PORT_C);
 }
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgMotor_Get::MotorGet											 */

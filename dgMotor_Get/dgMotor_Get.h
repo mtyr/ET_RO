@@ -22,6 +22,7 @@ public:
 	uint16_t RMotorGet();						/* 色情報引き渡しメソッド	 */
 	uint16_t LMotorGet();						/* 色情報引き渡しメソッド	 */
 	void MotorUpdate(void);						/* 角位置更新メソッド		 */
+	void dgMortor_OffSet();
 private:
 	/* privateメソッド------------------------------------------------------ */
 	dgMotor_Get();								/* コンストラクタ			 */
