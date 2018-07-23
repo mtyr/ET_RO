@@ -31,6 +31,9 @@
 class raLine_Threshold_Value{
 
 public:											/*	パブリック-------------	 */	
+		raLine_Threshold_Value();						/* コンストラクタ		 */
+	~raLine_Threshold_Value();						/* デストラクタ			 */
+
 	
 	SINT raLineSet(void);						/*	現在カラー値を返信		 */		
 	SINT raLineGet(SINT);						/*	現在カラー値の更新		 */
@@ -43,9 +46,6 @@ private:										/*	プライベート-----------	 */
 	SINT i_white;											 /* 白値		 */
 	SINT i_gray;											 /* 灰値		 */
 	SINT i_current_color;									 /* 現在カラー値 */
-
-	raLine_Threshold_Value();						/* コンストラクタ		 */
-	~raLine_Threshold_Value();						/* デストラクタ			 */
 
 	/* シングルトンに必要な奴 */
 	raLine_Threshold_Value(const raLine_Threshold_Value &x) { };
