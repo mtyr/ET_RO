@@ -40,8 +40,10 @@ dgMotor_Get::dgMotor_Get()
 /* 作成日	: 2018/07/13		髙岡 諒太		新規作成					 */
 /* ------------------------------------------------------------------------- */
 void dgMotor_Get::MotorUpdate() {
-	/* 角位置情報取得 */
-	i_motor_info=ev3_motor_get_counts( EV3_PORT_B);
+	/* 右motor情報取得 */
+	i_rmotor_info=ev3_motor_get_counts( EV3_PORT_A);
+	/* 左motor情報取得 */
+	i_lmotor_info=ev3_motor_get_counts( EV3_PORT_B);
 }
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgMotor_Get::MotorGet											 */
