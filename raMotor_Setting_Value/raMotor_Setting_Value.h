@@ -30,9 +30,3 @@ public:
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */
 /*	-----------------------------------------------------------------------	 */
-class stMotor_Initialization{
-public:
-	stMotor_Initialization();
-	~stMotor_Initialization();
-	SINT MotorMeasurement(SINT*, SINT*, SINT*);
-};

@@ -13,6 +13,7 @@
 /*	include	ファイル														 */
 /*	-----------------------------------------------------------------------	 */
 #include"raMotor_Setting_Value.h"
+#include "stMotor_Initialization.h"
 //必要ヘッダは各自で入れること
 /*	-----------------------------------------------------------------------	 */
 /*	コンストラクタ															 */
@@ -54,24 +55,3 @@ SINT raMotor_Setting_Value::MotorValueSet(SINT*L, SINT*R, SINT*T){
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */
 /*	-----------------------------------------------------------------------	 */
-
-stMotor_Initialization::stMotor_Initialization()
-{
-
-}
-
-stMotor_Initialization::~stMotor_Initialization()
-{
-
-}
-
-SINT stMotor_Initialization::MotorMeasurement(SINT *L, SINT *R, SINT *T)
-{
-	SINT Li = 4;
-	SINT Ri = 4;
-	SINT Ti = 4;
-	*L = Li;
-	*R = Ri;
-	*T = Ti;
-	return 0;
-}
