@@ -4,14 +4,19 @@
 /*	倒立制御を担当															 */
 /*																			 */
 /*	-----------------------------------------------------------------------	 */
-/*	番号		更新履歴							日付		氏名		 */
+/*	番号		更新履歴						日付			氏名		 */
 /*	-----------------------------------------------------------------------	 */
-/*	000000		新規作成							2018/07/02	田邉  周哉	 */
+/*	005000		新規作成						2018/07/02		田邉  周哉	 */
+/*	005001		修正							2018/07/23		田邉  周哉	 */
+/*	005002		コメント追記					2018/07/24		田邉  周哉	 */
 /*	-----------------------------------------------------------------------	 */
 
 #ifndef RNINVERTED_CONTROL_H_
 #define RNINVERTED_CONTROL_H_
 
+/*	-----------------------------------------------------------------------	 */
+/* includeファイル															 */
+/*	-----------------------------------------------------------------------	 */
 #include "ev3api.h"
 #include "common.h"								/* コーディング規約			 */
 #include "rnCalculation_Cpp.h"					/* 走行用計算・管理			 */
@@ -20,20 +25,27 @@
 #include "dgMotor_get.h"						/* デバイス取得（モーター）	 */
 #include "dcMotor_Output.h"						/* モーター出力				 */
 
+/*	-----------------------------------------------------------------------	 */
+/* class宣言																 */
+/*	-----------------------------------------------------------------------	 */
 class rnInverted_Control {
-public:
-	static const SINT LOW;
-	static const SINT NORMAL;
-	static const SINT HIGH;
 	
-	rnInverted_Control();
-	SINT Initialize();
-	SINT Run();
-	SINT SetCommand(SINT forward, SINT turn);
-
+public:
+	/* publicメソッド ------------------------------------------------------ */
+	rnInverted_Control();						/* コンストラクタ			 */
+	SINT Initialize();							/* 初期化					 */
+	SINT Run();									/* 走行						 */
+	SINT SetCommand(SINT forward, SINT turn);	/* 数値格納 				 */
+	/* 定数宣言 */
+	static const SINT LOW;						/* 低速						 */
+	static const SINT NORMAL;					/* 中速						 */
+	static const SINT HIGH;						/* 高速						 */
+	
 private:
+	/* privateメソッド ----------------------------------------------------- */
 	SINT i_forward;								/* 前進値					 */
 	SINT i_turn;								/* 旋回値					 */
+	/* class定義 */
 	class dcMotor_Output motor_output;			/* モーター出力クラス		 */
 	class rnCalculation rncalculation;			/* 走行用計算クラス			 */
 };
