@@ -24,15 +24,15 @@
 #include "dcMotor_Output.h"
 
 static const motor_port_t
-    M_motor      = EV3_PORT_D,
-    L_motor      = EV3_PORT_A;
+    R_motor      = EV3_PORT_B,
+    L_motor      = EV3_PORT_C;
 
 void dcMotor_Output::MotorOutput(SINT getPwmLeft,SINT getPwmRight) {   //モーター出力
 
 	/* Lモーターを回す */
 	ev3_motor_set_power(L_motor,getPwmLeft);
 	/* Mモーターを回す */
-    ev3_motor_set_power(M_motor,getPwmRight);
+    ev3_motor_set_power(R_motor,getPwmRight);
 }
 
 
