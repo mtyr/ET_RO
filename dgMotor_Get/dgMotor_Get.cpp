@@ -56,9 +56,10 @@ void dgMotor_Get::MotorUpdate() {
 uint16_t dgMotor_Get::RMotorGet(){
 	return i_rmotor_info;						/* 色情報を戻す				 */
 }
-uint16_t dgMotor_Get::LMotorLGet(){
+uint16_t dgMotor_Get::LMotorGet(){
 	return i_lmotor_info;						/* 色情報を戻す				 */
 }
+
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgMotor_Get::GetInstance										 */
 /* 機能名	: 角位置取得:クラス実体の作成、アドレス渡し						 */
