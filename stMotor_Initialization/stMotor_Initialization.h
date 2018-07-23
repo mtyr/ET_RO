@@ -23,7 +23,6 @@ public:
 	~stMotor_Initialization();                               /* デストラクタ */
 	SINT MotorMeasurement(SINT*,SINT*,SINT*);        /* モーターの計測 */
 private:
-	SINT MaxMotorMeasurement(I08T*);             /* モーターの最大出力値計測 */
 	SINT LGearPlayRange(SINT*);                          /* 左ギアの遊び範囲 */
 	SINT RGearPlayRange(SINT*);                          /* 右ギアの遊び範囲 */
 	SINT TailGearPlayRange(SINT*);                     /* 尻尾ギアの遊び範囲 */
