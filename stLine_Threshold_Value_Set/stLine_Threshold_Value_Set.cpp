@@ -12,9 +12,9 @@
 /*	-----------------------------------------------------------------------	 */
 /*	includeファイル															 */
 /*	-----------------------------------------------------------------------	 */
-#include "..\dgColor_Get\dgColor_Get.h"
+#include "dgColor_Get.h"
 #include "stLine_Threshold_Value_Set.h"
-#include "..\raLine_Threshold_Value\raLine_Threshold_Value.h"
+#include "raLine_Threshold_Value.h"
 #include "ev3api.h"
 /*	-----------------------------------------------------------------------	 */
 /*	変数宣言と初期化														 */
@@ -37,7 +37,9 @@ class raLine_Threshold_Value raLine;
 /* 作成日	: 2018/07/10	松浦 侑矢		新規作成						 */
 /* ------------------------------------------------------------------------- */
 SINT stLine_Threshold_Value_Set::stLineUP(void){
-
+	static const sensor_port_t
+    	touch_sensor = EV3_PORT_1;
+	
 	ev3_lcd_draw_string
 	("黒色のラインに置きタッチセンサーを押してください。\0", 0, 0);
 
