@@ -44,11 +44,16 @@ stMotor_Initialization::~stMotor_Initialization(){}
 SINT stMotor_Initialization::MotorMeasurement(SINT *L,SINT *R,SINT *T)
 {
 	frLog &log = frLog::GetInstance();
-	log.LOG(LOG_ID_MOTOR,"MotorMeasurement\n");
+	log.LOG(LOG_ID_MOTOR,"stMotor_Initialization::MotorMeasurement\n");
 	LGearPlayRange(L);                                     /* 左ギア遊び範囲 */
 	RGearPlayRange(R);                                     /* 右ギア遊び範囲 */
 	TailGearPlayRange(T);                                /* 尻尾ギア遊び範囲 */
+	if(L==4&&R==4&&T==4){
 	return FUNC_OK;
+	}else{
+		log.LOG(LOG_ID_MOTOR,"erorr,stMotor_Initialization::MotorMeasurement\n");
+		return FUNC_ERR;
+	}
 }
 
 /* ------------------------------------------------------------------------- */
@@ -69,7 +74,11 @@ SINT stMotor_Initialization::LGearPlayRange(SINT *LGearvalue)
 {
 	SINT LGearPlayvalue=4;
 	*LGearvalue = LGearPlayvalue;					   /* 左ギアの遊び範囲値 */
+	if(LGearvalue==4){
 	return FUNC_OK;
+	}else{
+		return FUNC_ERR;
+	}
 }
 
 /*	---------------------------------------------------------------------- - */
@@ -86,7 +95,11 @@ SINT stMotor_Initialization::RGearPlayRange(SINT *RGearvalue)
 {
 	RGearPlayvalue = 4;
 	*RGearvalue = RGearPlayvalue;					   /* 右ギアの遊び範囲値 */
+	if(RGearvalue==4){
 	return FUNC_OK;
+	}else{
+		return FUNC_ERR;
+	}
 }
 
 /*	---------------------------------------------------------------------- - */
@@ -103,8 +116,11 @@ SINT stMotor_Initialization::TailGearPlayRange(SINT *TailGearvalue)
 {
 	TailGearPlayvalue = 4;
 	*TailGearvalue = TailGearPlayvalue;				 /* 尻尾ギアの遊び範囲値 */
+	if(TailGearvalue==4){
 	return FUNC_OK;
-}
+	}else{
+		return FUNC_ERR;
+	}
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */
 /*	-----------------------------------------------------------------------	 */
