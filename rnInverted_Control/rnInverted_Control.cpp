@@ -36,8 +36,7 @@ const SINT rnInverted_Control::HIGH = 70;		/* 高速						 */
 /*				:2018/07/12		田邉  周哉		レビュー後修正				 */
 /*				:2018/07/24		田邉  周哉		機能概要文を変更			 */
 /* ------------------------------------------------------------------------- */
-rnInverted_Control::rnInverted_Control()
-{
+rnInverted_Control::rnInverted_Control() {
 	i_forward = LOW;							/* 前進値					 */
 	i_turn = LOW;								/* 旋回値					 */
 }
@@ -56,17 +55,17 @@ rnInverted_Control::rnInverted_Control()
 /* ------------------------------------------------------------------------- */
 SINT rnInverted_Control::Run() {
 	/* シングルトン生成 */
-	dgAngular_Velocity_get &gyro_sensor = dgAngular_Velocity_get::GetInstance();
+	dgAngular_Velocity_Get &gyro_sensor = dgAngular_Velocity_Get::GetInstance();
 	/* ジャイロセンサ角速度[deg/sec]取得 */
 	int16_t s_angle = gyro_sensor.GyroGet();
 	
 	/* シングルトン生成(右モーター) */
-	dgMotor_get &right_wheel = dgMotor_get::GetInstance();
+	dgMotor_Get &right_wheel = dgMotor_Get::GetInstance();
 	/* 右モータ角位置[deg]取得 */
 	int32_t i_right_wheel_enc = right_wheel.RMotorGet();
 	
 	/* シングルトン生成(左モーター) */
-	dgMotor_get &left_wheel = dgMotor_get::GetInstance();
+	dgMotor_Get &left_wheel = dgMotor_Get::GetInstance();
 	/* 左モータ角位置[deg]取得 */
 	int32_t i_left_wheel_enc = left_wheel.LMotorGet();
 
@@ -74,8 +73,8 @@ SINT rnInverted_Control::Run() {
 	rncalculation.SetCommand(i_forward, i_turn);
 
 	/* シングルトン生成(バッテリー) */
-	dgBattery_Balance_Amount_get &battery = 
-								   dgBattery_Balance_Amount_get::GetInstance();
+	dgBattery_Balance_Amount_Get &battery = 
+								   dgBattery_Balance_Amount_Get::GetInstance();
 	/* バッテリー電圧値[mV]を取得 */
 	SINT i_battery = battery.VoltageGet();
 	/* 左右モーター出力値を得る */
@@ -102,13 +101,13 @@ SINT rnInverted_Control::Run() {
 /* ------------------------------------------------------------------------- */
 SINT rnInverted_Control::Initialize() {
 	/* シングルトン生成(ジャイロセンサ) */
-	dgAngular_Velocity_get &gyro_sensor = 
-										 dgAngular_Velocity_get::GetInstance();
+	dgAngular_Velocity_Get &gyro_sensor = 
+										 dgAngular_Velocity_Get::GetInstance();
 	/* ジャイロセンサ角速度[deg/sec]取得 */
 	int16_t i_offset = gyro_sensor.GyroGet();
 	
 	/* シングルトン生成(モーター) */
-	dgMotor_get &motor_reset = dgMotor_get::GetInstance();
+	dgMotor_Get &motor_reset = dgMotor_Get::GetInstance();
 	/* モータエンコーダをリセット */
 	motor_reset.dgMortor_OffSet();
 

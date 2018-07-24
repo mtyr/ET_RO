@@ -20,9 +20,9 @@
 #include "ev3api.h"
 #include "common.h"								/* コーディング規約			 */
 #include "rnCalculation_Cpp.h"					/* 走行用計算・管理			 */
-#include "dgAngular_Velocity_get.h"				/* デバイス取得（ジャイロ）	 */
-#include "dgBattery_Balance_Amount_get.h"		/* デバイス取得（バッテリー）*/
-#include "dgMotor_get.h"						/* デバイス取得（モーター）	 */
+#include "dgAngular_Velocity_Get.h"				/* デバイス取得（ジャイロ）	 */
+#include "dgBattery_Balance_Amount_Get.h"		/* デバイス取得（バッテリー）*/
+#include "dgMotor_Get.h"						/* デバイス取得（モーター）	 */
 #include "dcMotor_Output.h"						/* モーター出力				 */
 
 /*	-----------------------------------------------------------------------	 */
