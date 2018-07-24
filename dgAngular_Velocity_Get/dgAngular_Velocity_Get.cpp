@@ -26,11 +26,6 @@
 /* ------------------------------------------------------------------------- */
 dgAngular_Velocity_Get::dgAngular_Velocity_Get()
 {
-	int  logindex  = 0;
-	char command1[] = { "logon -gyro\n" };
-	for( logindex = 0; logindex < ( sizeof( command1 ) / sizeof(command1[0] )); logindex ++ ) {
-		log.SetLog(command1[logindex]);
-	}
 	/* ジャイロセンサーーポート設定 */
 	ev3_sensor_config 	(EV3_PORT_4 ,GYRO_SENSOR);
 }
