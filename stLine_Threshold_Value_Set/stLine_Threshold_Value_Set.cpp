@@ -65,7 +65,7 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 
 	while (1)
 	{   /* タッチセンサーが押されている間とそうでないときで処理を分ける */
-		if (ev3_touch_sensor_is_pressed(touch_sensor) == true){
+		if (ev3_touch_sensor_is_pressed(touch_sensor) == false){
 			/* しきい値の更新												   */
 			i_white = dgColor.ColorGet();
 			log.LOG(LOG_ID_ERR,"switch_wait%d\r\n",i_white);
