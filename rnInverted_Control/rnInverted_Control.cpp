@@ -3,7 +3,7 @@
 /*  <EV3ライントレース>ソフトウェア開発                                      */
 /*  倒立制御クラス                                                           */
 /*  倒立制御を担当。走行用計算クラスに計算指示を送り                         */
-/*　戻り値をモーター出力に送る                                               */
+/*  戻り値をモーター出力に送る                                               */
 /*                                                                           */
 /*  -----------------------------------------------------------------------  */
 /*  番号        更新履歴                            日付        氏名         */
@@ -51,6 +51,12 @@ rnInverted_Control::rnInverted_Control()
 /*              :2018/07/12     田邉周哉        レビュー後修正               */
 /* ------------------------------------------------------------------------- */
 SINT rnInverted_Control::Run() {
+	/* frLog */
+	ULNG id = 0x20000000;
+	frLog &log = frLog::GetInstance();
+	log.LOG(id, "倒立制御走行開始");
+	
+	
 	dgBattery_Balance_Amount_Get &battery =dgBattery_Balance_Amount_Get::GetInstance();
 	dgMotor_Get	&right_wheel = dgMotor_Get::GetInstance();
 	dgMotor_Get	&left_wheel = dgMotor_Get::GetInstance();
@@ -78,6 +84,10 @@ SINT rnInverted_Control::Run() {
     motor_output.MotorOutput(left, right);
 //  motor_output.MotorOutput(rncalculation.GetPwmLeft(), rncalculation.GetPwmRight());
 
+	
+	/* frLog */
+	log.LOG(id, "倒立制御走行終了");
+	
     return FUNC_OK;
 }
 
@@ -91,6 +101,11 @@ SINT rnInverted_Control::Run() {
 /*              :2018/07/12     田邉周哉        レビュー後修正               */
 /* ------------------------------------------------------------------------- */
 SINT rnInverted_Control::Initialize() {
+	/* frLog */
+	ULNG id = 0x20000000;
+	frLog &log = frLog::GetInstance();
+	log.LOG(id, "倒立制御初期化開始");
+	
 //	dgMotor_Get	&right_wheel = dgMotor_Get::GetInstance();
 //	dgMotor_Get	&left_wheel = dgMotor_Get::GetInstance();
 	dgAngular_Velocity_Get	&gyro_sensor=dgAngular_Velocity_Get::GetInstance();
@@ -100,12 +115,13 @@ SINT rnInverted_Control::Initialize() {
     /* モータエンコーダをリセットする（高岡の関数待ち） */
 		dgMotor_Get &motor_reset = dgMotor_Get::GetInstance();
 		motor_reset.dgMortor_OffSet();
-    //left_wheel.reset();    // left_wheel.Offset の予定
-    //right_wheel.reset();    // right_wheel.Offset の予定
 
     /* 倒立振子制御初期化 */
     rncalculation.Initialize(i_offset);
-
+	
+	/* frLog */
+	log.LOG(id, "倒立制御初期化終了");
+	
     return FUNC_OK;
 }
 
@@ -120,9 +136,17 @@ SINT rnInverted_Control::Initialize() {
 /*              :2018/07/12     田邉周哉        レビュー後修正               */
 /* ------------------------------------------------------------------------- */
 SINT rnInverted_Control::SetCommand(SINT forward, SINT turn) {
-    i_forward = forward;
+    /* frLog */
+	ULNG id = 0x20000000;
+	frLog &log = frLog::GetInstance();
+	log.LOG(id, "倒立制御格納開始");
+	
+	i_forward = forward;
     i_turn = turn;
-
+	
+	/* frLog */
+	log.LOG(id, "倒立制御格納終了");
+	
     return FUNC_OK;
 }
 
