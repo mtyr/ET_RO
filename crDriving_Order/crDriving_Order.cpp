@@ -14,7 +14,9 @@
 /*	----------------------------------------------------------------------	 */
 #include "crDriving_Order.h"
 #include "..\rnLine_Trace\rnLine_Trace.h"
+#include"..\frLog\frLog.h"
 //#include "frDifficulty.h"
+
 /* ------------------------------------------------------------------------- */
 /* ■■■ public ■■■														 */
 /* ------------------------------------------------------------------------- */
@@ -54,8 +56,11 @@ crDriving_Order::~crDriving_Order()
 /* 作成日	: 2018/07/03	宇都宮  正章			新規作成				 */
 /* ------------------------------------------------------------------------- */
 void crDriving_Order::RunWayDecision(){
+	frLog &log = frLog::GetInstance();
+	log.LOG(LOG_ID_ERR,"crDrive_class_in\r\n");
 	class rnLine_Trace LineTrace;
 	LineTrace.LineTracing();
+	log.LOG(LOG_ID_ERR,"frDifficulty_class_in\r\n");
 	//void Difficulty();
 }
 
