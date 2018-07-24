@@ -147,7 +147,7 @@ SINT rnLine_Trace::ColorDirection(SINT i_color) {
 		}
 		else
 		{
-			log.LOG( LOG_ID_LINETRACE,"Argument_error\n");/* Logメソッド	 */
+			log.LOG( LOG_ID_LINETRACE,"ColorLess\n");/* Logメソッド	 */
 			return FUNC_ERR;								/* 関数異常終了	 */
 		}
 }
