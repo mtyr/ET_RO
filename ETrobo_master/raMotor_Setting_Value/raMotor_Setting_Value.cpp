@@ -49,12 +49,8 @@ SINT raMotor_Setting_Value::MotorValueSet(SINT*L, SINT*R, SINT*T){
 	log.LOG(LOG_ID_MOTOR,"raMotor_Setting_Value::MotorValueSet\n");
 	class stMotor_Initialization st;
 	st.MotorMeasurement(L,R,T);
-	if(L==4&&R==4&&T==4){
 	return FUNC_OK;
-	}else{
-		log.LOG(LOG_ID_MOTOR,"error,raMotor_Setting_Value::MotorValueSet\n");
-		return FUNC_ERR;
-	}
+
 }
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */
