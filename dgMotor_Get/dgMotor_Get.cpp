@@ -32,7 +32,8 @@ dgMotor_Get::dgMotor_Get()
 	ev3_motor_config( EV3_PORT_B,LARGE_MOTOR);
 	/* モータセンサーポート設定 */
 	ev3_motor_config( EV3_PORT_C,LARGE_MOTOR);
-		char command1[] = { "logon -color\n" };
+	int  logindex  = 0;
+	char command1[] = { "logon -motor\n" };
 	for( logindex = 0; logindex < ( sizeof( command1 ) / sizeof(command1[0] )); logindex ++ ) {
 		log.SetLog(command1[logindex]);
 	}

@@ -26,7 +26,8 @@
 /* ------------------------------------------------------------------------- */
 dgAngular_Velocity_Get::dgAngular_Velocity_Get()
 {
-	char command1[] = { "logon -color\n" };
+	int  logindex  = 0;
+	char command1[] = { "logon -gyro\n" };
 	for( logindex = 0; logindex < ( sizeof( command1 ) / sizeof(command1[0] )); logindex ++ ) {
 		log.SetLog(command1[logindex]);
 	}

@@ -31,6 +31,7 @@ dgColor_Get::dgColor_Get()
 {
 		/* カラーセンサーポート設定 */
 	ev3_sensor_config 	(EV3_PORT_3,COLOR_SENSOR);
+	int  logindex  = 0;
 	char command1[] = { "logon -color\n" };
 	for( logindex = 0; logindex < ( sizeof( command1 ) / sizeof(command1[0] )); logindex ++ ) {
 		log.SetLog(command1[logindex]);

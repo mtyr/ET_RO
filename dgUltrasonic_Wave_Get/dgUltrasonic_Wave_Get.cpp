@@ -28,7 +28,8 @@ dgUltrasonic_Wave_Get::dgUltrasonic_Wave_Get()
 {
 	/* 超音波センサーポート設定 */
 	ev3_sensor_config 	(EV3_PORT_2,ULTRASONIC_SENSOR);	
-		char command1[] = { "logon -color\n" };
+	int  logindex  = 0;
+	char command1[] = { "logon -sonic\n" };
 	for( logindex = 0; logindex < ( sizeof( command1 ) / sizeof(command1[0] )); logindex ++ ) {
 		log.SetLog(command1[logindex]);
 	}
