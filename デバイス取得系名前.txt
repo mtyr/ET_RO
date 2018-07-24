@@ -1,46 +1,46 @@
-/* ƒJƒ‰[î•ñæ“¾ƒNƒ‰ƒX */
-ƒNƒ‰ƒX–¼
+/* ã‚«ãƒ©ãƒ¼æƒ…å ±å–å¾—ã‚¯ãƒ©ã‚¹ */
+ã‚¯ãƒ©ã‚¹å
 dgColor_Get
-ƒƒ\ƒbƒh–¼
-public ColorGet()		//ƒJƒ‰[î•ñæ“¾ƒƒ\ƒbƒh
-private ColorUpdate()		//ƒJƒ‰[î•ñXVƒƒ\ƒbƒh
-•Ï”–¼
-private i_color_info		//ƒJƒ‰[î•ñ•Û‘¶
+ãƒ¡ã‚½ãƒƒãƒ‰å
+public ColorGet()		//ã‚«ãƒ©ãƒ¼æƒ…å ±å–å¾—ãƒ¡ã‚½ãƒƒãƒ‰
+private ColorUpdate()		//ã‚«ãƒ©ãƒ¼æƒ…å ±æ›´æ–°ãƒ¡ã‚½ãƒƒãƒ‰
+å¤‰æ•°å
+private i_color_info		//ã‚«ãƒ©ãƒ¼æƒ…å ±ä¿å­˜
 
-/* Šp‘¬“xæ“¾ƒNƒ‰ƒX */
-ƒNƒ‰ƒX–¼
+/* è§’é€Ÿåº¦å–å¾—ã‚¯ãƒ©ã‚¹ */
+ã‚¯ãƒ©ã‚¹å
 dgAngular_Velocity_Get
-ƒƒ\ƒbƒh–¼
-public GyroGet()		//Šp‘¬“xæ“¾ƒƒ\ƒbƒh
-private GyroUpdate()		//Šp‘¬“xXVƒƒ\ƒbƒh
-public Offset()			//ƒWƒƒƒCƒƒZƒ“ƒT[ƒIƒtƒZƒbƒgƒƒ\ƒbƒh
-•Ï”–¼	
-private i_gyro_info		//Šp‘¬“xî•ñ•Û‘¶
+ãƒ¡ã‚½ãƒƒãƒ‰å
+public GyroGet()		//è§’é€Ÿåº¦å–å¾—ãƒ¡ã‚½ãƒƒãƒ‰
+private GyroUpdate()		//è§’é€Ÿåº¦æ›´æ–°ãƒ¡ã‚½ãƒƒãƒ‰
+public Offset()			//ã‚¸ãƒ£ã‚¤ãƒ­ã‚»ãƒ³ã‚µãƒ¼ã‚ªãƒ•ã‚»ãƒƒãƒˆãƒ¡ã‚½ãƒƒãƒ‰
+å¤‰æ•°å	
+private i_gyro_info		//è§’é€Ÿåº¦æƒ…å ±ä¿å­˜
 
-/* “dˆ³’læ“¾ */
-ƒNƒ‰ƒX–¼
+/* é›»åœ§å€¤å–å¾— */
+ã‚¯ãƒ©ã‚¹å
 dgBattery_Balance_Amount_Get
-ƒƒ\ƒbƒh–¼
-public VoltageGet		//“dˆ³’læ“¾
-private VoltageUpdate		//“dˆ³’lXV
-•Ï”–¼
-private i_voltage		//“dˆ³’l•Û‘¶
+ãƒ¡ã‚½ãƒƒãƒ‰å
+public VoltageGet		//é›»åœ§å€¤å–å¾—
+private VoltageUpdate		//é›»åœ§å€¤æ›´æ–°
+å¤‰æ•°å
+private i_voltage		//é›»åœ§å€¤ä¿å­˜
 
-/* ƒ‚[ƒ^[æ“¾ */
-ƒNƒ‰ƒX–¼
+/* ãƒ¢ãƒ¼ã‚¿ãƒ¼å–å¾— */
+ã‚¯ãƒ©ã‚¹å
 dgMotor_Get
-ƒƒ\ƒbƒh–¼
-public RotationAngleGet		//‰ñ“]Šp“xæ“¾
-private RotationAngleUpdate	//‰ñ“]Šp“xXV
-•Ï”–¼
-private i_rotation_angle	//‘–s‹——£
-private f_wheel_diameter	//Ô—Ö’¼Œa
+ãƒ¡ã‚½ãƒƒãƒ‰å
+public RotationAngleGet		//å›è»¢è§’åº¦å–å¾—
+private RotationAngleUpdate	//å›è»¢è§’åº¦æ›´æ–°
+å¤‰æ•°å
+private i_rotation_angle	//èµ°è¡Œè·é›¢
+private f_wheel_diameter	//è»Šè¼ªç›´å¾„
 
-/*’´‰¹”gæ“¾*/
-ƒNƒ‰ƒX–¼
+/*è¶…éŸ³æ³¢å–å¾—*/
+ã‚¯ãƒ©ã‚¹å
 dgUltrasonic_Wave_Get
-ƒƒ\ƒbƒh–¼
-public UltrasonicWaveGet	//’´‰¹”gæ“¾
-private UltrasonicWaveUpdate	//’´‰¹”gXV
-•Ï”–¼
-private i_ultra_sonic_info	//’´‰¹”gî•ñ
+ãƒ¡ã‚½ãƒƒãƒ‰å
+public UltrasonicWaveGet	//è¶…éŸ³æ³¢å–å¾—
+private UltrasonicWaveUpdate	//è¶…éŸ³æ³¢æ›´æ–°
+å¤‰æ•°å
+private i_ultra_sonic_info	//è¶…éŸ³æ³¢æƒ…å ±
