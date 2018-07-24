@@ -48,6 +48,7 @@ void dgBattery_Balance_Amount_Get::batteryUpdate() {
 /* 作成日	: 2018/07/2		髙岡 諒太		新規作成						 */
 /* ------------------------------------------------------------------------- */
 SINT dgBattery_Balance_Amount_Get::batteryGet(){
+	frLog &log = frLog::GetInstance();
 	log.LOG(LOG_ID_BATTERY,"BatteryGetOk\r\n");
 	return i_battery;							/* 電圧情報を戻す			 */
 }

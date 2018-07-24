@@ -60,10 +60,12 @@ void dgMotor_Get::MotorUpdate() {
 /* 作成日	: 2018/07/13		髙岡 諒太		新規作成					 */
 /* ------------------------------------------------------------------------- */
 uint16_t dgMotor_Get::RMotorGet(){
+	frLog &log = frLog::GetInstance();
 	log.LOG(LOG_ID_MOTOR,"MotorGetOk\r\n");
 	return i_rmotor_info;						/* 色情報を戻す				 */
 }
 uint16_t dgMotor_Get::LMotorGet(){
+	frLog &log = frLog::GetInstance();
 	log.LOG(LOG_ID_MOTOR,"MotorGetOk\r\n");
 	return i_lmotor_info;						/* 色情報を戻す				 */
 }

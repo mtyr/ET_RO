@@ -51,6 +51,7 @@ void dgUltrasonic_Wave_Get::DistanceUpdate() {
 /* 作成日	: 2018/07/2		髙岡 諒太		新規作成						 */
 /* ------------------------------------------------------------------------- */
 int16_t dgUltrasonic_Wave_Get::DistanceGet(){
+	frLog &log = frLog::GetInstance();
 	log.LOG(LOG_ID_SONIC,"sonicGetOk\r\n");
 	return i_distance_info;					/* 距離情報を戻す				 */
 }

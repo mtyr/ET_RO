@@ -50,6 +50,7 @@ void dgAngular_Velocity_Get::GyroUpdate() {
 /* 作成日	: 2018/07/13	髙岡 諒太		新規作成						 */
 /* ------------------------------------------------------------------------- */
 uint16_t dgAngular_Velocity_Get::GyroGet(){
+	frLog &log = frLog::GetInstance();
 	log.LOG(LOG_ID_GYRO,"GyroGetOk\r\n");
 	return i_gyro_info;							/* 角速度情報を戻す			 */
 }
