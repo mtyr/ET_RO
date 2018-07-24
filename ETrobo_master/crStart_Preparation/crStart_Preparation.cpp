@@ -99,7 +99,7 @@ MotorInit.MotorMeasurement(&i_moter_l,&i_moter_r,&i_moter_t);
 /*	尻尾モーターの下す	*/
 	TailMotor.TailMotorOutput(60);
 /*	スタート待ち-----------------------------------------------------------	 */
-//ev3_lcd_draw_string	("touch\0",0,0);
+ev3_lcd_draw_string	("touch\0",0,0);
 	log.LOG(LOG_ID_ERR,"touch\r\n");
 	
 while(1){
@@ -110,7 +110,7 @@ while(1){
 	}
 }
 
-//ev3_lcd_draw_string	("release\0",0,0);
+ev3_lcd_draw_string	("release\0",0,0);
 	log.LOG(LOG_ID_ERR,"release\r\n");
 while(1){
 	if(ev3_touch_sensor_is_pressed	(EV3_PORT_1) == false)
@@ -123,7 +123,7 @@ while(1){
 
 /*	ジャイロセンサーセット-------------------------------------------------	 */
 ev3_lcd_draw_string	("gyro_set\0",0,0);
-	log.LOG(LOG_ID_ERR,"gyro_set\n");
+log.LOG(LOG_ID_ERR,"gyro_set\n");
 GyroSet.OffSetStart();
 
 /*	ドライビングオーダー開始---------------------------------------------------	*/
