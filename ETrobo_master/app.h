@@ -14,9 +14,9 @@ extern "C" {
 #ifndef TOPPERS_MACRO_ONLY
 
 extern void main_task(intptr_t exinf);
-
-/*	Bluetooth受信割込み	*/
-extern void bt_cyc(intptr_t exinf);
+	
+/*	デバイスハンドラ	*/
+extern void dc_cyc(intptr_t unused);
 
 #endif /* TOPPERS_MACRO_ONLY */
 
