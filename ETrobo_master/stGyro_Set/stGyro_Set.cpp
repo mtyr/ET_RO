@@ -55,11 +55,11 @@ SINT stGyro_Set::OffSetStart(){
 
 
 	while (i_loop == 0){
-		i_gyro_set = GyroGet.GyroGet();
+		i_gyro_set = GyroGet.OffSet();
 		if (i_gyro_set != FUNC_ERR){
 			/* エラー時のみループを続ける */
 			i_loop = 1;
-			log.LOG(LOG_ID_ERR,"GyroGetclassERR\n");
+			log.LOG(LOG_ID_ERR,"GyroGetclassOK\n");
 		}
 		log.LOG(LOG_ID_GYRO,"stGyro_class_out\n");
 	}
