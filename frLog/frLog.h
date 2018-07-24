@@ -10,12 +10,13 @@
 /* 000000	新規作成								2018/06/22	桝井  隆治	 */
 /* 000001	シングルトン対応						2018/06/25	桝井  隆治	 */
 /* 000002	コンパイル時のWarning除去				2018/07/20	桝井  隆治	 */
+/* 000003	コマンド名から同じ文字の重複をカット	2018/07/24	桝井  隆治	 */
 /* ------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------- */
 /* includeファイル															 */
 /* ------------------------------------------------------------------------- */
-#include "..\common\common.h"
+#include "common.h"
 
 /* ------------------------------------------------------------------------- */
 /* 定数定義																	 */
@@ -27,8 +28,7 @@
 #define LOG_ID_SONIC		( 0x00000004 )		/* 超音波関連				 */
 #define LOG_ID_BATTERY		( 0x00000008 )		/* バッテリー関連			 */
 #define LOG_ID_COLOR		( 0x00000010 )		/* カラーセンサー関連		 */
-#define LOG_ID_GYRO			( 0x00000020 )		/* ジャイロセンサー関連		 */
-#define LOG_ID_LINETRACE	( 0x00000040 )		/* ライントレース関連		 */
+#define LOG_ID_GYRO			( 0x00000010 )		/* ジャイロセンサー関連		 */
 #define LOG_ID_TRACE		( 0x20000000 )		/* トレース関連				 */
 #define LOG_ID_ERR			( 0x40000000 )		/* エラーログ				 */
 #define LOG_ID_TERMINATE	( 0x80000000 )		/* 終端						 */
@@ -37,12 +37,11 @@
 
 /* ログコマンド一覧 -------------------------------------------------------- */
 #define LOG_CMD_LOGON		"logon"				/* ログＯＮコマンド			 */
-#define LOG_CMD_LOGOFF		"logoff"			/* 一部ログＯＦＦコマンド	 */
+#define LOG_CMD_LOGOFF		"logof"				/* 一部ログＯＦＦコマンド	 */
 #define LOG_CMD_MOTOR		"motor"				/* モーター識別コード		 */
 #define LOG_CMD_TAIL		"tail"				/* しっぽ識別コード			 */
 #define LOG_CMD_GYRO		"gyro"				/* ジャイロ識別コード		 */
-#define LOG_CMD_LINETRACE	"linetrace"			/* ライントレースコード		 */
-#define LOG_CMD_BATTERY		"battery"			/* バッテリー識別コード		 */
+#define LOG_CMD_BATTERY		"bat"				/* バッテリー識別コード		 */
 #define LOG_CMD_COLOR		"color"				/* カラーセンサー識別コード	 */
 #define LOG_CMD_SONIC		"sonic"				/* 超音波センサー識別コード	 */
 #define LOG_CMD_TRACE		"trace"				/* トレースログモード		 */
