@@ -51,12 +51,12 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 		if (ev3_touch_sensor_is_pressed(touch_sensor) == true){
 			/* しきい値の更新												   */
 			i_black = dgColor.ColorGet();
-			log.LOG(LOG_ID_ERR,"switch_wait%d\r\n",i_black);
+			log.LOG(LOG_ID_ERR,"black=%d\r\n",i_black);
 			break;
 		}
 		else{
 			i_black = dgColor.ColorGet();
-			log.LOG(LOG_ID_ERR,"switch_wait%d\r\n",i_black);
+			log.LOG(LOG_ID_ERR,"black=%d\r\n",i_black);
 		}
 	}
 	
@@ -68,12 +68,12 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 		if (ev3_touch_sensor_is_pressed(touch_sensor) == false){
 			/* しきい値の更新												   */
 			i_white = dgColor.ColorGet();
-			log.LOG(LOG_ID_ERR,"switch_wait%d\r\n",i_white);
+			log.LOG(LOG_ID_ERR,"white=%d\r\n",i_white);
 			break;
 		}
 		else{
 			i_white = dgColor.ColorGet();
-			log.LOG(LOG_ID_ERR,"switch_wait%d\r\n",i_white);
+			log.LOG(LOG_ID_ERR,"white=%d\r\n",i_white);
 		}
 	}
 
