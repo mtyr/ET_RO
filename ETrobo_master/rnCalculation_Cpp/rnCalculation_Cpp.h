@@ -19,9 +19,8 @@
 class rnCalculation {
 public:
 	rnCalculation();
-
 	void Initialize(SINT offset);
-    void Update(SINT angle, SINT rwEnc, SINT lwEnc, SINT battery);
+    void Update(SINT s_angle, SINT right_wheel_encoder, SINT left_wheel_encoder, SINT battery);
     void SetCommand(SINT forward, SINT turn);
     int8_t GetPwmRight();
 	int8_t GetPwmLeft();
