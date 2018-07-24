@@ -63,6 +63,7 @@ uint16_t dgAngular_Velocity_Get::GyroGet(){
 /* 作成日	: 2018/07/13	髙岡 諒太		新規作成						 */
 /* ------------------------------------------------------------------------- */
 SINT dgAngular_Velocity_Get::OffSet(){
+	frLog &log = frLog::GetInstance();
 	ev3_gyro_sensor_reset(EV3_PORT_4);		/* 角位置をゼロに			 */
 	log.LOG(LOG_ID_GYRO,"OffSetOk\r\n");
 	return FUNC_OK;
