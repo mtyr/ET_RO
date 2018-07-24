@@ -37,7 +37,7 @@ void dcMotor_Output::MotorOutput(SINT getPwmLeft,SINT getPwmRight) {   //モー�
 	log.LOG(LOG_ID_ERR,"L_motor_Out\r\n");
 	/* Rモーターを回す */
     ev3_motor_set_power(R_motor,getPwmRight);
-	log.LOG(LOG_ID_ERR,"M_motor_Out\r\n");
+	log.LOG(LOG_ID_ERR,"R_motor_Out\r\n");
 }
 
 
