@@ -42,7 +42,7 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 	static const sensor_port_t
     	touch_sensor = EV3_PORT_1;
 	
-	log.LOG(LOG_ID_ERR,"log\r\n");
+	log.LOG(LOG_ID_ERR,"log_stLine\r\n");
 	ev3_lcd_draw_string
 	("black_touch_sensor\0", 0, 0);
 
@@ -54,7 +54,7 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 			break;
 		}
 		else{
-			log.LOG(LOG_ID_ERR,"switch_wait\r\n");
+			log.LOG(LOG_ID_ERR,"switch_wait1\r\n");
 		}
 	}
 	
@@ -69,7 +69,7 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 			break;
 		}
 		else{
-			log.LOG(LOG_ID_ERR,"switch_wait\r\n");
+			log.LOG(LOG_ID_ERR,"switch_wait2\r\n");
 		}
 	}
 
@@ -80,7 +80,6 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 
 	return FUNC_OK;
 }
-
 
 /* ------------------------------------------------------------------------- */
 /* ■■■ private ■■■													 */
