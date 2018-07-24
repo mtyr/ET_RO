@@ -46,7 +46,7 @@ SINT stGyro_Set::OffSetStart(){
 	SINT i_gyro_set = 0;
 	SINT i_loop = 0;
 	frLog &log = frLog::GetInstance();
-	log.LOG(LOG_ID_GYRO,"stGyro_class_in\r\n");
+	log.LOG(LOG_ID_GYRO,"stGyro_class_in\n");
 
 	
 	/* ジャイロセンサーの値を受け取る */
@@ -59,9 +59,9 @@ SINT stGyro_Set::OffSetStart(){
 		if (i_gyro_set != FUNC_ERR){
 			/* エラー時のみループを続ける */
 			i_loop = 1;
-			log.LOG(LOG_ID_ERR,"GyroGetclassERR\r\n");
+			log.LOG(LOG_ID_ERR,"GyroGetclassERR\n");
 		}
-		log.LOG(LOG_ID_GYRO,"stGyro_class_out\r\n");
+		log.LOG(LOG_ID_GYRO,"stGyro_class_out\n");
 	}
 	return FUNC_OK;
 }
