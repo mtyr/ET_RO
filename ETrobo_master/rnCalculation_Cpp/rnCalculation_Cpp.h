@@ -14,13 +14,14 @@
 #define EV3_UNIT_CALCULATION_CPP_H_
 
 #include "ev3api.h"
-#include "..\common\common.h"								/* コーディング規約          */
+#include "..\common\common.h"					/* コーディング規約          */
 
 class rnCalculation {
 public:
 	rnCalculation();
 	void Initialize(SINT offset);
-    void Update(SINT s_angle, SINT right_wheel_encoder, SINT left_wheel_encoder, SINT battery);
+    void Update(SINT s_angle, SINT right_wheel_encoder, 
+    									SINT left_wheel_encoder, SINT battery);
     void SetCommand(SINT forward, SINT turn);
     int8_t GetPwmRight();
 	int8_t GetPwmLeft();

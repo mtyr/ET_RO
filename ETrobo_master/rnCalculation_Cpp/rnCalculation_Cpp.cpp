@@ -12,6 +12,7 @@
 
 #include "..\rnCalculation\rnCalculation.h"
 #include "rnCalculation_Cpp.h"
+#include "..\frLog\frLog.h"						/* ログクラス				 */
 
 
 /* ------------------------------------------------------------------------- */
@@ -31,7 +32,7 @@ rnCalculation::rnCalculation()                  /* メンバイニシャライ�
 /*  機能概要    :走行用計算に使用する変数を初期化する                        */
 /*  引数        :SINT           offset          ジャイロセンサ値             */
 /*  戻り値      :無し                                                        */
-/*  作成日      :2018/07/11     田邉周哉        新規作成        　　　       */
+/*  作成日      :2018/07/11     田邉周哉        新規作成                     */
 /* ------------------------------------------------------------------------- */
 void rnCalculation::Initialize(SINT offset) {
     /* ジャイロセンサ値初期化 */
@@ -49,10 +50,12 @@ void rnCalculation::Initialize(SINT offset) {
 /*              :SINT           left_wheel_encoder     左車輪エンコーダ値    */
 /*              :SINT           battery                バッテリー電圧値      */
 /*  戻り値      :無し                                                        */
-/*  作成日      :2018/07/11     田邉周哉        新規作成        　　　       */
+/*  作成日      :2018/07/11     田邉周哉        新規作成                     */
 /* ------------------------------------------------------------------------- */
 void rnCalculation::Update(SINT angle, SINT right_wheel_encoder, 
-                                       SINT left_wheel_encoder, SINT battery) {
+SINT left_wheel_encoder, SINT battery) {
+	frLog &log = frLog::GetInstance();
+	log.LOG(LOG_ID_MOTOR,"計算開始\n");
     /* 倒立走行するための左右モータ出力値を得る */
     Calculation_Control(
         static_cast<FLOT>(i_forward),
@@ -64,6 +67,7 @@ void rnCalculation::Update(SINT angle, SINT right_wheel_encoder,
         static_cast<FLOT>(battery),
         &i_left_pwm,
         &i_right_pwm);
+	log.LOG(LOG_ID_MOTOR,"右現実値:%d\n左現実値:%d\n計算終了\n",i_right_pwm,i_left_pwm);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -73,7 +77,7 @@ void rnCalculation::Update(SINT angle, SINT right_wheel_encoder,
 /*  引数        :SINT           forward         前進値                       */
 /*              :SINT           turn            旋回値                       */
 /*  戻り値      :無し                                                        */
-/*  作成日      :2018/07/11     田邉周哉        新規作成        　　　       */
+/*  作成日      :2018/07/11     田邉周哉        新規作成                     */
 /* ------------------------------------------------------------------------- */
 void rnCalculation::SetCommand(SINT forward, SINT turn) {
     i_forward = forward;
@@ -86,7 +90,7 @@ void rnCalculation::SetCommand(SINT forward, SINT turn) {
 /*  機能概要    :右モーターのPWM値を取得する                                 */
 /*  引数        :無し                                                        */
 /*  戻り値      :int8_t                         右モーター出力値             */
-/*  作成日      :2018/07/11     田邉周哉        新規作成        　　　       */
+/*  作成日      :2018/07/11     田邉周哉        新規作成                     */
 /* ------------------------------------------------------------------------- */
 int8_t rnCalculation::GetPwmRight() {
     return i_right_pwm;
@@ -98,7 +102,7 @@ int8_t rnCalculation::GetPwmRight() {
 /*  機能概要    :左モーターのPWM値を取得する                                 */
 /*  引数        :無し                                                        */
 /*  戻り値      :int8_t                         左モーター出力値             */
-/*  作成日      :2018/07/11     田邉周哉        新規作成        　　　       */
+/*  作成日      :2018/07/11     田邉周哉        新規作成                     */
 /* ------------------------------------------------------------------------- */
 int8_t rnCalculation::GetPwmLeft() {
     return i_left_pwm;
@@ -112,7 +116,7 @@ int8_t rnCalculation::GetPwmLeft() {
 /*  引数        :int8_t         pwm             PWM値（前回の出力値）        */
 /*               SINT           encoder         モーター取得値               */
 /*  戻り値      :int8_t                         遊びを追加した修正値         */
-/*  作成日      :2018/07/11     田邉周哉        新規作成        　　　       */
+/*  作成日      :2018/07/11     田邉周哉        新規作成                     */
 /* ------------------------------------------------------------------------- */
 SINT rnCalculation::CancelBacklash(int8_t pwm, SINT encoder) {
     const SINT BacklashHalf = 4;  // バックラッシュの半分[deg]
