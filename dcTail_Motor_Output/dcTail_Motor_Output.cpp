@@ -1,4 +1,3 @@
-
 /* ------------------------------------------------------------------------- */
 /* ■■■ public ■■■														     */
 /* ------------------------------------------------------------------------- */
@@ -21,16 +20,21 @@
 /*	-----------------------------------------------------------------------	 */
 
 #include "dcTail_Motor_Output.h"
+#include "..\frLog\frLog.h"
 
 static const motor_port_t
     T_motor      = EV3_PORT_A;
 
 void dcTail_Motor_Output::TailMotorOutput(SINT degree) {   //モーター出力
-
+	
+	frLog &log = frLog::GetInstance();
+	log.LOG(LOG_ID_ERR,"dcTail_Motor_Output_start\r\n");
+	
+	/* Tモーターを回す */
 	ev3_motor_rotate(T_motor, degree,50, true);
-
+	log.LOG(LOG_ID_ERR,"T_motor_Out\r\n");
+	
 }
 
 
 /* ------------------------------------------------------------------------- */
-
