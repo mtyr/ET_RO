@@ -19,6 +19,7 @@
 #include"..\stMotor_Initialization\stMotor_Initialization.h"
 #include "..\crDriving_Order\crDriving_Order.h"
 #include "..\frLog\frLog.h"
+#include "..\dcTail_Motor_Output\dcTail_Motor_Output.h"
 
 /* ------------------------------------------------------------------------- */
 /* ■■■ public ■■■														 */
@@ -73,19 +74,20 @@ void crStart_Preparation::StartPreparation(void)
  stLine_Threshold_Value_Set 	LineTraceVal;	/*	ラインしきい値			 */
  crDriving_Order 			 	DriviOder;		/*	ドライビング開始		 */
  stMotor_Initialization 	 	MotorInit;		/*	モーター初期化			 */
-frLog &log = frLog::GetInstance();
+frLog &log = frLog::GetInstance();				/*	ログ機能の追加			 */
+dcTail_Motor_Output TailMotor;					/*	尻尾モーター			 */
 
 /*	スタート準備開始-------------------------------------------------------	 */
 
 
 /*	タッチセンサー設定-----------------------------------------------------	 */
-//ev3_lcd_draw_string	("switch_settings\0",0,0);
+ev3_lcd_draw_string	("switch_settings\0",0,0);
 	log.LOG(LOG_ID_ERR,"switch_settings\r\n");
 ev3_sensor_config	( EV3_PORT_1 ,TOUCH_SENSOR);
 
 /*	カラーセンサーしきい値設定---------------------------------------------	 */
-//ev3_lcd_draw_string	("aaav\0",0,0);
-	log.LOG(LOG_ID_ERR,"aaav\r\n");
+ev3_lcd_draw_string	("color_settings\0",0,0);
+	log.LOG(LOG_ID_ERR,"color_settings\r\n");
 LineTraceVal.stLineUP();
 
 
@@ -94,7 +96,8 @@ LineTraceVal.stLineUP();
 	log.LOG(LOG_ID_ERR,"motor_init\r\n");
 MotorInit.MotorMeasurement(&i_moter_l,&i_moter_r,&i_moter_t);
 
-
+/*	尻尾モーターの下す	*/
+	TailMotor.TailMotorOutput(60);
 /*	スタート待ち-----------------------------------------------------------	 */
 //ev3_lcd_draw_string	("touch\0",0,0);
 	log.LOG(LOG_ID_ERR,"touch\r\n");
@@ -117,12 +120,15 @@ while(1){
 }
 
 
+
 /*	ジャイロセンサーセット-------------------------------------------------	 */
 ev3_lcd_draw_string	("gyro_set\0",0,0);
+	log.LOG(LOG_ID_ERR,"gyro_set\n");
 GyroSet.OffSetStart();
 
 /*	ドライビングオーダー開始---------------------------------------------------	*/
 ev3_lcd_draw_string	("Driving_start\0",0,0);
+	log.LOG(LOG_ID_ERR,"Driving_start\n");
 DriviOder.RunWayDecision();
 
 }
