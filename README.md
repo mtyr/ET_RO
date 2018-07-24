@@ -1,6 +1,1 @@
-# ET_RO！
-
-## foo!!
-
-- hoge
-- fuga
+# ET_RO
