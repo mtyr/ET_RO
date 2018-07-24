@@ -17,9 +17,8 @@
 #include "..\rnCalculation_Cpp\rnCalculation_Cpp.h"                  /* 走行用計算・管理          */
 #include "..\dgAngular_Velocity_get\dgAngular_Velocity_get.h"             /* デバイス取得（ジャイロ）  */
 #include "..\dgBattery_Balance_Amount_get\dgBattery_Balance_Amount_get.h"       /* デバイス取得（バッテリー）*/
-#include "..\dgMotor_get\dgMotor_get.h"                        /* デバイス取得（モーター）　*/
+#include "..\dgMotor_get\dgMotor_get.h"                        /* デバイス取得（モーター）  */
 #include "..\dcMotor_Output\dcMotor_Output.h"                     /* モーター出力              */
-#include "..\frLog\frLog.h"
 
 class rnInverted_Control {
 public:

@@ -12,6 +12,10 @@
 /*  000001      レビュー後修正                      2018/07/12  田邉　周哉   */
 /* ------------------------------------------------------------------------- */
 
+/* ------------------------------------------------------------------------- */
+/* includeファイル															 */
+/* ------------------------------------------------------------------------- */
+#include "..\frLog\frLog.h"
 #include "rnInverted_Control.h"
 /* ------------------------------------------------------------------------- */
 /* 定数宣言                                                                  */
@@ -52,9 +56,8 @@ rnInverted_Control::rnInverted_Control()
 /* ------------------------------------------------------------------------- */
 SINT rnInverted_Control::Run() {
 	/* frLog */
-	ULNG id = 0x20000000;
 	frLog &log = frLog::GetInstance();
-	log.LOG(id, "倒立制御走行開始");
+	log.LOG(LOG_ID_LINETRACE, "倒立制御走行開始");
 	
 	
 	dgBattery_Balance_Amount_Get &battery =dgBattery_Balance_Amount_Get::GetInstance();
@@ -86,7 +89,7 @@ SINT rnInverted_Control::Run() {
 
 	
 	/* frLog */
-	log.LOG(id, "倒立制御走行終了");
+	log.LOG(LOG_ID_LINETRACE, "倒立制御走行終了");
 	
     return FUNC_OK;
 }
@@ -102,9 +105,8 @@ SINT rnInverted_Control::Run() {
 /* ------------------------------------------------------------------------- */
 SINT rnInverted_Control::Initialize() {
 	/* frLog */
-	ULNG id = 0x20000000;
 	frLog &log = frLog::GetInstance();
-	log.LOG(id, "倒立制御初期化開始");
+	log.LOG(LOG_ID_LINETRACE, "倒立制御初期化開始");
 	
 //	dgMotor_Get	&right_wheel = dgMotor_Get::GetInstance();
 //	dgMotor_Get	&left_wheel = dgMotor_Get::GetInstance();
@@ -120,7 +122,7 @@ SINT rnInverted_Control::Initialize() {
     rncalculation.Initialize(i_offset);
 	
 	/* frLog */
-	log.LOG(id, "倒立制御初期化終了");
+	log.LOG(LOG_ID_LINETRACE, "倒立制御初期化終了");
 	
     return FUNC_OK;
 }
@@ -137,15 +139,14 @@ SINT rnInverted_Control::Initialize() {
 /* ------------------------------------------------------------------------- */
 SINT rnInverted_Control::SetCommand(SINT forward, SINT turn) {
     /* frLog */
-	ULNG id = 0x20000000;
 	frLog &log = frLog::GetInstance();
-	log.LOG(id, "倒立制御格納開始");
+	log.LOG(LOG_ID_LINETRACE, "倒立制御格納開始");
 	
 	i_forward = forward;
     i_turn = turn;
 	
 	/* frLog */
-	log.LOG(id, "倒立制御格納終了");
+	log.LOG(LOG_ID_LINETRACE, "倒立制御格納終了");
 	
     return FUNC_OK;
 }
