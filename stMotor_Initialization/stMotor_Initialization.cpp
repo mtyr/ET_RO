@@ -14,21 +14,16 @@
 /*	-----------------------------------------------------------------------	 */
 #include "..\common\common.h"
 #include "stMotor_Initialization.h"
+#include "frLog.h"
 /*	-----------------------------------------------------------------------	 */
 /*	コンストラクタ															 */
 /*	-----------------------------------------------------------------------	 */
-stMotor_Initialization::stMotor_Initialization()
-{
-
-}
+stMotor_Initialization::stMotor_Initialization(){}
 
 /*	-----------------------------------------------------------------------	 */
 /*	デストラクタ															 */
 /*	-----------------------------------------------------------------------	 */
-stMotor_Initialization::~stMotor_Initialization()
-{
-	
-}
+stMotor_Initialization::~stMotor_Initialization(){}
 
 /* ------------------------------------------------------------------------- */
 /* ■■■ public ■■■														 */
@@ -48,6 +43,8 @@ stMotor_Initialization::~stMotor_Initialization()
 /*	-----------------------------------------------------------------------	 */
 SINT stMotor_Initialization::MotorMeasurement(SINT *L,SINT *R,SINT *T)
 {
+	frLog &log = frLog::GetInstance();
+	log.LOG(LOG_ID_MOTOR,"MotorMeasurement\n");
 	LGearPlayRange(L);                                     /* 左ギア遊び範囲 */
 	RGearPlayRange(R);                                     /* 右ギア遊び範囲 */
 	TailGearPlayRange(T);                                /* 尻尾ギア遊び範囲 */
