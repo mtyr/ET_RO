@@ -2,38 +2,42 @@
 /* ■■■ public ■■■														     */
 /* ------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------- */
-/* 関数名	:dcTail_Motor_Output 				　　　　　　				 */
-/* 機能名	:尻尾モーターコントロール　　　　　 						     */
-/* 機能概要	:尻尾モーター出力   											 */
-/* 引数		:SINT degree 回転角度			     						     */
+/* 関数名	:dcMotor_Output 				　　　　　　					 */
+/* 機能名	:モーター走行　　　　　 										 */
+/* 機能概要	:モーター出力   												 */
+/* 引数		:SINT getPwmLeft		左回転数	     						 */
+/*　　　　　:SINT getPwmRight		右回転数	     						 */
 /* 戻り値	:なし					                                         */
 /*	-----------------------------------------------------------------------	 */
 /*	番号	更新履歴								日付		氏名		 */
 /*	-----------------------------------------------------------------------	 */
-/*	000000	新規作成								2018/07/13	廖  振勛	 */
-/*	000001	関数名修正								2018/07/14	廖  振勛	 */
-/*	000002	コード修正								2018/07/18	廖  振勛	 */
+/*	000000	新規作成								2018/07/03	廖  振勛	 */
+/*	000001	関数名修正								2018/07/04	廖  振勛	 */
+/*	000002	コード修正								2018/07/09	廖  振勛	 */
 /*	000003	コード修正								2018/07/20	廖  振勛	 */
 /*	-----------------------------------------------------------------------	 */
 /*	-----------------------------------------------------------------------	 */
 /*	include	ファイル														 */
 /*	-----------------------------------------------------------------------	 */
 
-#include "dcTail_Motor_Output.h"
+#include "dcMotor_Output.h"
 #include "..\frLog\frLog.h"
 
 static const motor_port_t
-    T_motor      = EV3_PORT_A;
+    R_motor      = EV3_PORT_B,
+    L_motor      = EV3_PORT_C;
 
-void dcTail_Motor_Output::TailMotorOutput(SINT degree) {   //モーター出力
-	
+void dcMotor_Output::MotorOutput(SINT getPwmLeft,SINT getPwmRight) {   //モーター出力
+
 	frLog &log = frLog::GetInstance();
-	log.LOG(LOG_ID_ERR,"dcTail_Motor_Output_start\r\n");
-	
-	/* Tモーターを回す */
-	ev3_motor_rotate(T_motor, degree,50, true);
-	log.LOG(LOG_ID_ERR,"T_motor_Out\r\n");
-	
+	log.LOG(LOG_ID_ERR,"dcMotor_Output_start\r\n");
+
+	/* Lモーターを回す */
+	ev3_motor_set_power(L_motor,getPwmLeft);
+	log.LOG(LOG_ID_ERR,"L_motor_Out\r\n");
+	/* Rモーターを回す */
+    ev3_motor_set_power(R_motor,getPwmRight);
+	log.LOG(LOG_ID_ERR,"M_motor_Out\r\n");
 }
 
 

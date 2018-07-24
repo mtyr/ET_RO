@@ -22,7 +22,7 @@
 /* ■■■ public ■■■														 */
 /* ------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------- */
-/* 関数名	: stLine_Threshold_Value_Set::stLineUP								 */
+/* 関数名	: stLine_Threshold_Value_Set::stLineUP							 */
 /* 機能名	: カラー情報返答												 */
 /* 機能概要	: カラー情報を返す												 */
 /* 引数		: void					:なし									 */
@@ -42,44 +42,44 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 	static const sensor_port_t
     	touch_sensor = EV3_PORT_1;
 	
+	log.LOG(LOG_ID_ERR,"log_stLine\r\n");
 	ev3_lcd_draw_string
-	("黒色のラインに置きタッチセンサーを押してください。\0", 0, 0);
+	("black_touch_sensor\0", 0, 0);
 
 	while (1)
 	{   /* タッチセンサーが押されている間とそうでないときで処理を分ける */
 		if (ev3_touch_sensor_is_pressed(touch_sensor) == true){
-			/* しきい値の更新												 */
+			/* しきい値の更新												   */
 			i_black = dgColor.ColorGet();
+			break;
 		}
 		else{
-			ev3_lcd_draw_string
-			("黒色のラインに置きタッチセンサーを押してください。\0", 0, 0);
+			log.LOG(LOG_ID_ERR,"switch_wait1\r\n");
 		}
 	}
 	
 	ev3_lcd_draw_string
-	("白色のラインに置きタッチセンサーを押してください。\0", 0, 0);
+	("white_touch_sensor\0", 0, 0);
 
 	while (1)
 	{   /* タッチセンサーが押されている間とそうでないときで処理を分ける */
 		if (ev3_touch_sensor_is_pressed(touch_sensor) == true){
-			/* しきい値の更新												 */
+			/* しきい値の更新												   */
 			i_white = dgColor.ColorGet();
+			break;
 		}
 		else{
-			ev3_lcd_draw_string
-			("白色のラインに置きタッチセンサーを押してください。\0", 0, 0);
+			log.LOG(LOG_ID_ERR,"switch_wait2\r\n");
 		}
 	}
 
 	i_gray = stLineGRAY();
-	ev3_lcd_draw_string("しきい値設定完了しました。\0", 0, 0);
+	log.LOG(LOG_ID_ERR,"stLine_Set\r\n");
 
 	raLine.raLineUP(i_black,i_white,i_gray);
 
 	return FUNC_OK;
 }
-
 
 /* ------------------------------------------------------------------------- */
 /* ■■■ private ■■■													 */

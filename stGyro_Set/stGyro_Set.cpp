@@ -14,6 +14,7 @@
 /*	-----------------------------------------------------------------------	 */
 #include"stGyro_Set.h"
 #include"..\dgAngular_Velocity_Get\dgAngular_Velocity_Get.h"
+#include"..\frLog\frLog.h"
 
 /*	-----------------------------------------------------------------------	 */
 /*	コンストラクタ															 */
@@ -44,7 +45,10 @@ stGyro_Set::~stGyro_Set(){
 SINT stGyro_Set::OffSetStart(){
 	SINT i_gyro_set = 0;
 	SINT i_loop = 0;
+	frLog &log = frLog::GetInstance();
+	log.LOG(LOG_ID_ERR,"stGyro_class_in\r\n");
 
+	
 	/* ジャイロセンサーの値を受け取る */
 	dgAngular_Velocity_Get & GyroGet 
 		= dgAngular_Velocity_Get::GetInstance();
@@ -55,7 +59,9 @@ SINT stGyro_Set::OffSetStart(){
 		if (i_gyro_set != FUNC_ERR){
 			/* エラー時のみループを続ける */
 			i_loop = 1;
+			log.LOG(LOG_ID_ERR,"GyroGetclassERR\r\n");
 		}
+		log.LOG(LOG_ID_ERR,"stGyro_class_out\r\n");
 	}
 	return FUNC_OK;
 }
