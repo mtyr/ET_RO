@@ -53,8 +53,7 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 			i_black = dgColor.ColorGet();
 			log.LOG(LOG_ID_ERR,"black=%d\r\n",i_black);
 			break;
-		}
-		else{
+		}else{
 			i_black = dgColor.ColorGet();
 			log.LOG(LOG_ID_ERR,"black=%d\r\n",i_black);
 		}
@@ -70,8 +69,7 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 			i_white = dgColor.ColorGet();
 			log.LOG(LOG_ID_ERR,"white=%d\r\n",i_white);
 			break;
-		}
-		else{
+		}else{
 			i_white = dgColor.ColorGet();
 			log.LOG(LOG_ID_ERR,"white=%d\r\n",i_white);
 		}

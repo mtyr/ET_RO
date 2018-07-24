@@ -46,10 +46,10 @@ SINT raLine_Threshold_Value::raLineSet(void)
 	if (i_current_color >= i_black&&i_current_color <= i_gray){
 		return TS_BRACK;
 	} else if (i_current_color == i_gray){
-		return TS_WHITE;
+		return TS_GRAY;
 	}
 	else if (i_current_color <= i_white&&i_current_color >= i_gray){
-		return TS_GRAY;
+		return TS_WHITE;
 	} else {
 		return FUNC_ERR;
 	}
