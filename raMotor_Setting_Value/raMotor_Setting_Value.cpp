@@ -14,22 +14,19 @@
 /*	-----------------------------------------------------------------------	 */
 #include"raMotor_Setting_Value.h"
 #include "stMotor_Initialization.h"
+#include "..\frLog\frLog.h"
 //必要ヘッダは各自で入れること
 /*	-----------------------------------------------------------------------	 */
 /*	コンストラクタ															 */
 /*	-----------------------------------------------------------------------	 */
 
-raMotor_Setting_Value::raMotor_Setting_Value(){
-
-}
+raMotor_Setting_Value::raMotor_Setting_Value(){}
 
 /*	-----------------------------------------------------------------------	 */
 /*	デストラクタ															 */
 /*	-----------------------------------------------------------------------	 */
 
-raMotor_Setting_Value::~raMotor_Setting_Value(){
-
-}
+raMotor_Setting_Value::~raMotor_Setting_Value(){}
 
 
 /* ------------------------------------------------------------------------- */
@@ -48,6 +45,8 @@ raMotor_Setting_Value::~raMotor_Setting_Value(){
 /*  改訂履歴        :2018/07/20      有本  侑真                              */
 /*	-----------------------------------------------------------------------	 */
 SINT raMotor_Setting_Value::MotorValueSet(SINT*L, SINT*R, SINT*T){
+	frLog &log = frLog::GetInstance();
+	log.LOG(LOG_ID_MOTOR,"MotorValueSet\n");
 	class stMotor_Initialization st;
 	st.MotorMeasurement(L,R,T);
 	return FUNC_OK;
