@@ -24,16 +24,17 @@ void main_task(intptr_t unused) {
 /*	変数初期化-------------------------------------------------------------	 */
 	
 /*	クラス宣言-------------------------------------------------------------	 */
-	class crStart_Preparation StartPreparation;
+	crStart_Preparation StPrepara;
 
 
-
-
-	StartPreparation.StartPreparation();
+frLog &log = frLog::GetInstance();
+	
+log.LOG(LOG_ID_ERR,"log_start\r\n");
+	StPrepara.StartPreparation();
 /*	-----------------------------------------------------------------------	 */
 /*	メインループ															 */
 /*	-----------------------------------------------------------------------	 */
-	while(1){ }
+	//while(1){ }
 	
   ext_tsk();
 }

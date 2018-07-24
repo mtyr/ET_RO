@@ -18,6 +18,7 @@
 #include"..\stLine_Threshold_Value_Set\stLine_Threshold_Value_Set.h"
 #include"..\stMotor_Initialization\stMotor_Initialization.h"
 #include "..\crDriving_Order\crDriving_Order.h"
+#include "..\frLog\frLog.h"
 
 /* ------------------------------------------------------------------------- */
 /* ■■■ public ■■■														 */
@@ -72,27 +73,32 @@ void crStart_Preparation::StartPreparation(void)
  stLine_Threshold_Value_Set 	LineTraceVal;	/*	ラインしきい値			 */
  crDriving_Order 			 	DriviOder;		/*	ドライビング開始		 */
  stMotor_Initialization 	 	MotorInit;		/*	モーター初期化			 */
-
+frLog &log = frLog::GetInstance();
 
 /*	スタート準備開始-------------------------------------------------------	 */
-ev3_lcd_draw_string	("StartPreparation_start\0",0,0);
+
 
 /*	タッチセンサー設定-----------------------------------------------------	 */
-ev3_lcd_draw_string	("switch_settings\0",0,0);
+//ev3_lcd_draw_string	("switch_settings\0",0,0);
+	log.LOG(LOG_ID_ERR,"switch_settings\r\n");
 ev3_sensor_config	( EV3_PORT_1 ,TOUCH_SENSOR);
 
 /*	カラーセンサーしきい値設定---------------------------------------------	 */
-ev3_lcd_draw_string	("ラインしきい値設定中\0",0,0);
+//ev3_lcd_draw_string	("aaav\0",0,0);
+	log.LOG(LOG_ID_ERR,"aaav\r\n");
 LineTraceVal.stLineUP();
 
 
 /*	モーター初期化---------------------------------------------------------	 */
-ev3_lcd_draw_string	("motor_init\0",0,0);
+//ev3_lcd_draw_string	("motor_init\0",0,0);
+	log.LOG(LOG_ID_ERR,"motor_init\r\n");
 MotorInit.MotorMeasurement(&i_moter_l,&i_moter_r,&i_moter_t);
 
 
 /*	スタート待ち-----------------------------------------------------------	 */
-ev3_lcd_draw_string	("touch\0",0,0);
+//ev3_lcd_draw_string	("touch\0",0,0);
+	log.LOG(LOG_ID_ERR,"touch\r\n");
+	
 while(1){
 
 	if(ev3_touch_sensor_is_pressed	(EV3_PORT_1) == true)	
@@ -101,7 +107,8 @@ while(1){
 	}
 }
 
-ev3_lcd_draw_string	("release\0",0,0);
+//ev3_lcd_draw_string	("release\0",0,0);
+	log.LOG(LOG_ID_ERR,"release\r\n");
 while(1){
 	if(ev3_touch_sensor_is_pressed	(EV3_PORT_1) == false)
 	{

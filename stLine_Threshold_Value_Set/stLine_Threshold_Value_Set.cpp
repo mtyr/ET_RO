@@ -12,9 +12,10 @@
 /*	-----------------------------------------------------------------------	 */
 /*	includeファイル															 */
 /*	-----------------------------------------------------------------------	 */
-#include "dgColor_Get.h"
+#include "..\dgColor_Get\dgColor_Get.h"
 #include "stLine_Threshold_Value_Set.h"
-#include "raLine_Threshold_Value.h"
+#include "..\raLine_Threshold_Value\raLine_Threshold_Value.h"
+#include "..\frLog\frLog.h"
 #include "ev3api.h"
 
 /* ------------------------------------------------------------------------- */
@@ -29,6 +30,10 @@
 /* 作成日	: 2018/07/10	松浦 侑矢		新規作成						 */
 /* ------------------------------------------------------------------------- */
 SINT stLine_Threshold_Value_Set::stLineUP(void){
+	frLog &log = frLog::GetInstance();
+	
+	log.LOG(LOG_ID_ERR,"stLineUP\r\n");
+	
 	/* カラー情報取得クラス生成 											 */
 	dgColor_Get &dgColor=dgColor_Get::GetInstance(); 
 	/* しきい値情報取得クラス生成 											 */
