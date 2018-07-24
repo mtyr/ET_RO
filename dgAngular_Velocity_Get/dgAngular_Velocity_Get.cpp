@@ -15,7 +15,7 @@
 #include <stdio.h>								/* 入出力ライブラリ			 */
 #include <stdlib.h>								/* 標準ライブラリー			 */
 #include <string.h>								/* 文字列操作系				 */
-#include"..\frLog\frLog.h"							/* logヘッダー */
+#include"..\frLog\frLog.h"						/* logヘッダー               */
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgAngular_Velocity_Get::dgAngular_Velocity_Get				 */
 /* 機能名	: 角速度取得：コンストラクタ									 */
