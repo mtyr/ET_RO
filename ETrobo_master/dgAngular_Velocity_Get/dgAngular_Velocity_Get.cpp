@@ -64,6 +64,7 @@ uint16_t dgAngular_Velocity_Get::GyroGet(){
 /* ------------------------------------------------------------------------- */
 SINT dgAngular_Velocity_Get::OffSet(){
 	ev3_gyro_sensor_reset(EV3_PORT_4);		/* 角位置をゼロに			 */
+	log.LOG(LOG_ID_GYRO,"OffSetOk\r\n");
 	return FUNC_OK;
 }
 /* ------------------------------------------------------------------------- */
