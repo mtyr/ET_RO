@@ -24,6 +24,10 @@ void main_task(intptr_t unused) {
 /*	変数初期化-------------------------------------------------------------	 */
 	
 /*	クラス宣言-------------------------------------------------------------	 */
+	
+	/* bluetoothハンドラの開始	*/
+	sta_cyc(BT_CYC);
+	
 	crStart_Preparation StPrepara;
 
 
@@ -51,12 +55,9 @@ static	SCHR cNouBuf;							/*	受信文字の格納			 */
 static	SCHR cBuf;								/*	受信時の比較用配列		 */
 	
 /*	クラス宣言-------------------------------------------------------------	 */
-	static frBluetooth &bluetooth = frBluetooth::GetInstance();
-	static frLog &log = frLog::GetInstance();
+	 frBluetooth &bluetooth = frBluetooth::GetInstance();
+	 frLog &log = frLog::GetInstance();
 
-/*	EV3のLCD表示-----------------	*/
-//ev3_lcd_draw_string	("bluetooth\0",0,0);
-	
 /*	Bluetooth文字受信------------------------------------------------------	 */
 	cNouBuf=bluetooth.Receive();
 	
