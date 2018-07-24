@@ -1,4 +1,3 @@
-
 /* ------------------------------------------------------------------------- */
 /* ■■■ public ■■■														     */
 /* ------------------------------------------------------------------------- */
@@ -22,6 +21,7 @@
 /*	-----------------------------------------------------------------------	 */
 
 #include "dcMotor_Output.h"
+#include "..\frLog\frLog.h"
 
 static const motor_port_t
     R_motor      = EV3_PORT_B,
@@ -29,12 +29,16 @@ static const motor_port_t
 
 void dcMotor_Output::MotorOutput(SINT getPwmLeft,SINT getPwmRight) {   //モーター出力
 
+	frLog &log = frLog::GetInstance();
+	log.LOG(LOG_ID_ERR,"dcMotor_Output_start\r\n");
+
 	/* Lモーターを回す */
 	ev3_motor_set_power(L_motor,getPwmLeft);
-	/* Mモーターを回す */
+	log.LOG(LOG_ID_ERR,"L_motor_Out\r\n");
+	/* Rモーターを回す */
     ev3_motor_set_power(R_motor,getPwmRight);
+	log.LOG(LOG_ID_ERR,"M_motor_Out\r\n");
 }
 
 
 /* ------------------------------------------------------------------------- */
-
