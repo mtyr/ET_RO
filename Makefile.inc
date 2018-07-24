@@ -21,7 +21,6 @@ frLog.o\
 raLine_Threshold_Value.o\
 raMotor_Setting_Value.o\
 rnCalculation_Cpp.o\
-rnCalculation_Cpp.o\
 rnLine_Trace.o\
 stGyro_Set.o\
 stLine_Threshold_Value_Set.o\
