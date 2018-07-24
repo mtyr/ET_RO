@@ -97,7 +97,7 @@ LineTraceVal.stLineUP();
 MotorInit.MotorMeasurement(&i_moter_l,&i_moter_r,&i_moter_t);
 
 /*	尻尾モーターの下す	*/
-	TailMotor.TailMotorOutput(60);
+	TailMotor.TailMotorOutput(93);
 /*	スタート待ち-----------------------------------------------------------	 */
 ev3_lcd_draw_string	("touch\0",0,0);
 	log.LOG(LOG_ID_ERR,"touch\r\n");
