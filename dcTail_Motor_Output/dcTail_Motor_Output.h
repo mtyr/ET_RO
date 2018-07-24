@@ -14,8 +14,9 @@
 /*	include	ファイル														 */
 /*	-----------------------------------------------------------------------	 */
 
-#include "Motor.h"
+
 #include "ev3api.h"
+#include "Motor.h"
 #include "..\common\common.h"
 
 
