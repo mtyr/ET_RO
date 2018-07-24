@@ -57,10 +57,10 @@ crDriving_Order::~crDriving_Order()
 /* ------------------------------------------------------------------------- */
 void crDriving_Order::RunWayDecision(){
 	frLog &log = frLog::GetInstance();
-	log.LOG(LOG_ID_ERR,"crDrive_class_in\r\n");
+	log.LOG(LOG_ID_TRACE,"crDrive_class_in\r\n");
 	class rnLine_Trace LineTrace;
 	LineTrace.LineTracing();
-	log.LOG(LOG_ID_ERR,"frDifficulty_class_in\r\n");
+	log.LOG(LOG_ID_TRACE,"frDifficulty_class_in\r\n");
 	//void Difficulty();
 }
 
