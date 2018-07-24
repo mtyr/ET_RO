@@ -15,6 +15,7 @@
 #include <stdio.h>								/* 入出力ライブラリ			 */
 #include <stdlib.h>								/* 標準ライブラリー			 */
 #include <string.h>								/* 文字列操作系				 */
+#include"..\frLog\frLog.h"							/* logヘッダー */
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgUltrasonic_Wave_Get::dgUltrasonic_Wave_Get					 */
 /* 機能名	: 距離取得：コンストラクタ										 */
@@ -27,6 +28,10 @@ dgUltrasonic_Wave_Get::dgUltrasonic_Wave_Get()
 {
 	/* 超音波センサーポート設定 */
 	ev3_sensor_config 	(EV3_PORT_2,ULTRASONIC_SENSOR);	
+		char command1[] = { "logon -color\n" };
+	for( logindex = 0; logindex < ( sizeof( command1 ) / sizeof(command1[0] )); logindex ++ ) {
+		log.SetLog(command1[logindex]);
+	}
 }
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgUltrasonic_Wave_Get::SonicUpdate							 */
@@ -49,6 +54,7 @@ void dgUltrasonic_Wave_Get::DistanceUpdate() {
 /* 作成日	: 2018/07/2		髙岡 諒太		新規作成						 */
 /* ------------------------------------------------------------------------- */
 int16_t dgUltrasonic_Wave_Get::DistanceGet(){
+	log.LOG(LOG_ID_SONIC,"sonicGetOk\r\n");
 	return i_distance_info;					/* 距離情報を戻す				 */
 }
 /* ------------------------------------------------------------------------- */

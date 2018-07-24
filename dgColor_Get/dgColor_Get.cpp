@@ -15,6 +15,7 @@
 #include <stdio.h>								/* 入出力ライブラリ			 */
 #include <stdlib.h>								/* 標準ライブラリー			 */
 #include <string.h>								/* 文字列操作系				 */
+#include"..\frLog\frLog.h"							/* logヘッダー */
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgColor_Get::dgColor_Get										 */
 /* 機能名	: カラー取得：コンストラクタ									 */
@@ -23,10 +24,17 @@
 /* 戻り値	: void			: なし											 */
 /* 作成日	: 2018/07/9			髙岡 諒太		新規作成					 */
 /* ------------------------------------------------------------------------- */
+frLog &log = frLog::GetInstance();
+
+
 dgColor_Get::dgColor_Get()
 {
 		/* カラーセンサーポート設定 */
 	ev3_sensor_config 	(EV3_PORT_3,COLOR_SENSOR);
+	char command1[] = { "logon -color\n" };
+	for( logindex = 0; logindex < ( sizeof( command1 ) / sizeof(command1[0] )); logindex ++ ) {
+		log.SetLog(command1[logindex]);
+	}
 }
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgColor_Get::ColorUpdate										 */
@@ -49,6 +57,7 @@ void dgColor_Get::ColorUpdate() {
 /* 作成日	: 2018/07/2		髙岡 諒太		新規作成						 */
 /* ------------------------------------------------------------------------- */
 uint8_t dgColor_Get::ColorGet(){
+	log.LOG(LOG_ID_COLOR,"ColorGetOk\r\n");
 	return i_color_info;						/* 色情報を戻す				 */
 }
 /* ------------------------------------------------------------------------- */

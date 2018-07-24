@@ -15,6 +15,7 @@
 #include <stdio.h>								/* 入出力ライブラリ			 */
 #include <stdlib.h>								/* 標準ライブラリー			 */
 #include <string.h>								/* 文字列操作系				 */
+#include"..\frLog\frLog.h"							/* logヘッダー */
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgBattery_Balance_Amount_Get::dgBattery_Balance_Amount_Get	 */
 /* 機能名	: 電圧値取得：コンストラクタ									 */
@@ -25,6 +26,10 @@
 /* ------------------------------------------------------------------------- */
 dgBattery_Balance_Amount_Get::dgBattery_Balance_Amount_Get()
 {
+	char command1[] = { "logon -color\n" };
+	for( logindex = 0; logindex < ( sizeof( command1 ) / sizeof(command1[0] )); logindex ++ ) {
+		log.SetLog(command1[logindex]);
+	}
 }
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgBattery_Balance_Amount_Get::batteryUpdate					 */
@@ -47,6 +52,7 @@ void dgBattery_Balance_Amount_Get::batteryUpdate() {
 /* 作成日	: 2018/07/2		髙岡 諒太		新規作成						 */
 /* ------------------------------------------------------------------------- */
 SINT dgBattery_Balance_Amount_Get::batteryGet(){
+	log.LOG(LOG_ID_BATTERY,"BatteryGetOk\r\n");
 	return i_battery;							/* 電圧情報を戻す			 */
 }
 /* ------------------------------------------------------------------------- */

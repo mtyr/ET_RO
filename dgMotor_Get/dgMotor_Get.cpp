@@ -16,6 +16,7 @@
 #include <stdio.h>								/* 入出力ライブラリ			 */
 #include <stdlib.h>								/* 標準ライブラリー			 */
 #include <string.h>								/* 文字列操作系				 */
+#include"..\frLog\frLog.h"							/* logヘッダー */
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgdgMotor_Get::dgMotor_Get									 */
 /* 機能名	: 角位置取得：コンストラクタ									 */
@@ -31,6 +32,10 @@ dgMotor_Get::dgMotor_Get()
 	ev3_motor_config( EV3_PORT_B,LARGE_MOTOR);
 	/* モータセンサーポート設定 */
 	ev3_motor_config( EV3_PORT_C,LARGE_MOTOR);
+		char command1[] = { "logon -color\n" };
+	for( logindex = 0; logindex < ( sizeof( command1 ) / sizeof(command1[0] )); logindex ++ ) {
+		log.SetLog(command1[logindex]);
+	}
 }
 void dgMotor_Get::dgMortor_OffSet(){
 	ev3_motor_reset_counts(EV3_PORT_B);
@@ -59,9 +64,11 @@ void dgMotor_Get::MotorUpdate() {
 /* 作成日	: 2018/07/13		髙岡 諒太		新規作成					 */
 /* ------------------------------------------------------------------------- */
 uint16_t dgMotor_Get::RMotorGet(){
+	log.LOG(LOG_ID_MOTOR,"MotorGetOk\r\n");
 	return i_rmotor_info;						/* 色情報を戻す				 */
 }
 uint16_t dgMotor_Get::LMotorGet(){
+	log.LOG(LOG_ID_MOTOR,"MotorGetOk\r\n");
 	return i_lmotor_info;						/* 色情報を戻す				 */
 }
 
