@@ -46,20 +46,22 @@ SINT raLine_Threshold_Value::raLineSet(void)
 	/* 現在カラー値の更新													 */
 	i_current_color = raLineGet(i_current_color);
 	/* 現在カラー値の比較													 */
-	if (i_current_color >= i_black&&i_current_color <= i_gray){
+	if (i_current_color >= i_black&&i_current_color < i_gray){
 		log.LOG(LOG_ID_ERR,"BRACK\r\n");
 		return TS_BRACK;
-	} else if (i_current_color == i_gray){
+	}
+	if (i_current_color == i_gray+10&&i_current_color == i_gray-10){
 		log.LOG(LOG_ID_ERR,"GRAY\r\n");
 		return TS_GRAY;
 	}
-	else if (i_current_color <= i_white&&i_current_color >= i_gray){
+	if (i_current_color <= i_white&&i_current_color > i_gray){
 		log.LOG(LOG_ID_ERR,"WHITE\r\n");
 		return TS_WHITE;
-	} else {
-		log.LOG(LOG_ID_ERR,"ERR\r\n");
-		return FUNC_ERR;
 	}
+	
+	log.LOG(LOG_ID_ERR,"ERR\r\n");
+	return FUNC_ERR;
+	
 }
 
 /* ------------------------------------------------------------------------- */
