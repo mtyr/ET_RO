@@ -14,6 +14,7 @@
 /*	-----------------------------------------------------------------------	 */
 #include "raLine_Threshold_Value.h"
 #include "..\dgColor_Get\dgColor_Get.h"
+#include "..\frLog\frLog.h"
 
 /* ------------------------------------------------------------------------- */
 /* 関数名	: raLine_Threshold_Value::raLine_Threshold_Value				 */
@@ -40,17 +41,23 @@ raLine_Threshold_Value::raLine_Threshold_Value()
 /* ------------------------------------------------------------------------- */
 SINT raLine_Threshold_Value::raLineSet(void)
 {
+	frLog &log = frLog::GetInstance();
+	log.LOG(LOG_ID_ERR,"raLine\r\n");
 	/* 現在カラー値の更新													 */
 	i_current_color = raLineGet(i_current_color);
 	/* 現在カラー値の比較													 */
 	if (i_current_color >= i_black&&i_current_color <= i_gray){
+		log.LOG(LOG_ID_ERR,"BRACK\r\n");
 		return TS_BRACK;
 	} else if (i_current_color == i_gray){
+		log.LOG(LOG_ID_ERR,"GRAY\r\n");
 		return TS_GRAY;
 	}
 	else if (i_current_color <= i_white&&i_current_color >= i_gray){
+		log.LOG(LOG_ID_ERR,"WHITE\r\n");
 		return TS_WHITE;
 	} else {
+		log.LOG(LOG_ID_ERR,"ERR\r\n");
 		return FUNC_ERR;
 	}
 }
