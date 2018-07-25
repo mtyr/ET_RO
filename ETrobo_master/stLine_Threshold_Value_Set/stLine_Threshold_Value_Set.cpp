@@ -58,13 +58,19 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 			log.LOG(LOG_ID_ERR,"black=%d\r\n",i_black);
 		}
 	}
-	
-	ev3_lcd_draw_string
-	("white_touch_sensor\0", 0, 0);
-
 	while (1)
 	{   /* タッチセンサーが押されている間とそうでないときで処理を分ける */
 		if (ev3_touch_sensor_is_pressed(touch_sensor) == false){
+			break;
+		}
+	}
+	
+	ev3_lcd_draw_string
+	("white_touch_sensor\0", 0, 0);
+	
+	while (1)
+	{   /* タッチセンサーが押されている間とそうでないときで処理を分ける */
+		if (ev3_touch_sensor_is_pressed(touch_sensor) == true){
 			/* しきい値の更新												   */
 			i_white = dgColor.ColorGet();
 			log.LOG(LOG_ID_ERR,"white=%d\r\n",i_white);
