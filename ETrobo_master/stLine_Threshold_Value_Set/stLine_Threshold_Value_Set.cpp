@@ -58,16 +58,19 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 			log.LOG(LOG_ID_ERR,"black=%d\r\n",i_black);
 		}
 	}
+	
+	
 	while (1)
 	{   /* タッチセンサーが押されている間とそうでないときで処理を分ける */
 		if (ev3_touch_sensor_is_pressed(touch_sensor) == false){
 			break;
+		}else{
+		log.LOG(LOG_ID_ERR,"black=%d\r\n",i_black);
 		}
 	}
-	
 	ev3_lcd_draw_string
 	("white_touch_sensor\0", 0, 0);
-	
+
 	while (1)
 	{   /* タッチセンサーが押されている間とそうでないときで処理を分ける */
 		if (ev3_touch_sensor_is_pressed(touch_sensor) == true){
@@ -80,8 +83,18 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 			log.LOG(LOG_ID_ERR,"white=%d\r\n",i_white);
 		}
 	}
-
+	while (1)
+	{   /* タッチセンサーが押されている間とそうでないときで処理を分ける */
+		if (ev3_touch_sensor_is_pressed(touch_sensor) == false){
+			break;
+		}else{
+		log.LOG(LOG_ID_ERR,"white=%d\r\n",i_white);
+		}
+	}
 	i_gray = stLineGRAY();
+	log.LOG(LOG_ID_ERR,"black=%d\r\n",i_black);
+	log.LOG(LOG_ID_ERR,"white=%d\r\n",i_white);
+	log.LOG(LOG_ID_ERR,"gray=%d\r\n",i_gray);
 	log.LOG(LOG_ID_ERR,"stLine_Set\r\n");
 
 	raLine.raLineUP(i_black,i_white,i_gray);
