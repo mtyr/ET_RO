@@ -13,7 +13,7 @@
 /*	include	ファイル														 */
 /*	-----------------------------------------------------------------------	 */
 #include"raMotor_Setting_Value.h"
-#include "stMotor_Initialization.h"
+#include "..\stMotor_Initialization\stMotor_Initialization.h"
 #include "..\frLog\frLog.h"
 //必要ヘッダは各自で入れること
 /*	-----------------------------------------------------------------------	 */
