@@ -11,7 +11,7 @@
 /*	-----------------------------------------------------------------------	 */
 /*	include	ファイル														 */
 /*	-----------------------------------------------------------------------	 */
-#include "..\common\common.h"					/* typedef宣言等			 */
+#include "..\common\common.h"								/* typedef宣言等			 */
 #include "ev3api.h"								/* ev3apiライブラリー		 */
 /* クラス宣言--------------------------------------------------------------- */
 class dgAngular_Velocity_Get{
@@ -19,7 +19,7 @@ class dgAngular_Velocity_Get{
 public:
 	/* publicメソッド */
 	static dgAngular_Velocity_Get& GetInstance(void);/* 実体作成メソッド	 */
-	uint16_t GyroGet();								/* 色情報引き渡しメソッド	 */
+	SINT GyroGet();								/* 色情報引き渡しメソッド	 */
 	void GyroUpdate(void);						/* 角速度更新メソッド		 */
 	SINT OffSet(void);							/* オフセットメソッド		 */
 private:
@@ -32,7 +32,7 @@ private:
 
 
 	/* private変数---------------------------------------------------------- */
-	uint16_t i_gyro_info;							/* 取得した角速度情報	 */
+	SINT i_gyro_info;							/* 取得した角速度情報	 */
 };
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */

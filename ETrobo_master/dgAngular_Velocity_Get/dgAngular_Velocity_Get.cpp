@@ -15,7 +15,6 @@
 #include <stdio.h>								/* 入出力ライブラリ			 */
 #include <stdlib.h>								/* 標準ライブラリー			 */
 #include <string.h>								/* 文字列操作系				 */
-#include"..\frLog\frLog.h"							/* logヘッダー */
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgAngular_Velocity_Get::dgAngular_Velocity_Get				 */
 /* 機能名	: 角速度取得：コンストラクタ									 */
@@ -27,7 +26,7 @@
 dgAngular_Velocity_Get::dgAngular_Velocity_Get()
 {
 	/* ジャイロセンサーーポート設定 */
-	ev3_sensor_config 	(EV3_PORT_4 ,GYRO_SENSOR);
+	ev3_sensor_config 	(EV3_PORT_4,GYRO_SENSOR);
 }
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgAngular_Velocity_Get::GyroUpdate							 */
@@ -39,7 +38,7 @@ dgAngular_Velocity_Get::dgAngular_Velocity_Get()
 /* ------------------------------------------------------------------------- */
 void dgAngular_Velocity_Get::GyroUpdate() {
 	/* 角速度情報取得 */
-	i_gyro_info=ev3_gyro_sensor_get_rate( EV3_PORT_4);
+	i_gyro_info=ev3_gyro_sensor_get_rate(EV3_PORT_4);
 }
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgAngular_Velocity_Get::GyroGet								 */
@@ -49,9 +48,7 @@ void dgAngular_Velocity_Get::GyroUpdate() {
 /* 戻り値	: SINT			: i_gyro_info									 */
 /* 作成日	: 2018/07/13	髙岡 諒太		新規作成						 */
 /* ------------------------------------------------------------------------- */
-uint16_t dgAngular_Velocity_Get::GyroGet(){
-	frLog &log = frLog::GetInstance();
-	log.LOG(LOG_ID_GYRO,"GyroGetOk\r\n");
+SINT dgAngular_Velocity_Get::GyroGet(){
 	return i_gyro_info;							/* 角速度情報を戻す			 */
 }
 /* ------------------------------------------------------------------------- */
@@ -63,10 +60,8 @@ uint16_t dgAngular_Velocity_Get::GyroGet(){
 /* 作成日	: 2018/07/13	髙岡 諒太		新規作成						 */
 /* ------------------------------------------------------------------------- */
 SINT dgAngular_Velocity_Get::OffSet(){
-	frLog &log = frLog::GetInstance();
 	ev3_gyro_sensor_reset(EV3_PORT_4);		/* 角位置をゼロに			 */
-	log.LOG(LOG_ID_GYRO,"OffSetOk\r\n");
-	return FUNC_OK;
+	return E_OK;
 }
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgAngular_Velocity_Get::GetInstance							 */
