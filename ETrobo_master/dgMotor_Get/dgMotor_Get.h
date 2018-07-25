@@ -20,8 +20,8 @@ public:
 	/* publicメソッド */
 
 	static dgMotor_Get& GetInstance(void);		/* 実体作成メソッド			 */
-	uint16_t RMotorGet();						/* 色情報引き渡しメソッド	 */
-	uint16_t LMotorGet();						/* 色情報引き渡しメソッド	 */
+	uint16_t RMotorGet();						/* 右角位置情報引き渡しメソッド	 */
+	uint16_t LMotorGet();						/* 左角位置情報引き渡しメソッド	 */
 	void MotorUpdate(void);						/* 角位置更新メソッド		 */
 	void dgMortor_OffSet();
 private:

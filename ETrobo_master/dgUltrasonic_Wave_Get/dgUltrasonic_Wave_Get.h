@@ -19,7 +19,7 @@ class dgUltrasonic_Wave_Get{
 public:
 	/* publicメソッド */
 	static dgUltrasonic_Wave_Get& GetInstance(void);	/* 実体作成メソッド	 */
-	int16_t DistanceGet();							/* 色情報引き渡しメソッド	 */
+	int16_t DistanceGet();							/* 距離情報引き渡しメソッド	 */
 	void DistanceUpdate(void);					/* 距離情報更新メソッド		 */
 private:
 	/* privateメソッド------------------------------------------------------ */

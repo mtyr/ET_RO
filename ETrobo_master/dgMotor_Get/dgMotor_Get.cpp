@@ -62,12 +62,12 @@ void dgMotor_Get::MotorUpdate() {
 uint16_t dgMotor_Get::RMotorGet(){
 	frLog &log = frLog::GetInstance();
 	log.LOG(LOG_ID_MOTOR,"MotorGetOk\r\n");
-	return i_rmotor_info;						/* 色情報を戻す				 */
+	return i_rmotor_info;						/* 右角位置情報を戻す				 */
 }
 uint16_t dgMotor_Get::LMotorGet(){
 	frLog &log = frLog::GetInstance();
 	log.LOG(LOG_ID_MOTOR,"MotorGetOk\r\n");
-	return i_lmotor_info;						/* 色情報を戻す				 */
+	return i_lmotor_info;						/* 左角位置情報を戻す				 */
 }
 
 /* ------------------------------------------------------------------------- */
