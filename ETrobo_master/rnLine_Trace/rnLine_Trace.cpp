@@ -140,7 +140,7 @@ SINT rnLine_Trace::ColorDirection(SINT i_color) {
 	frLog &log = frLog::GetInstance();
 	
 	/* 現在のラインの色チェック */
-	if (TS_BRACK == i_color) {								/* ライン黒色	 */
+	if (TS_BLACK == i_color) {								/* ライン黒色	 */
 			return rnInverted_Control::LOW;
 		}
 		else if (TS_WHITE == i_color)						/* ライン白色	 */
