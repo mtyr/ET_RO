@@ -98,8 +98,8 @@ MotorInit.MotorMeasurement(&i_moter_l,&i_moter_r,&i_moter_t);
 
 /*	尻尾モーターの下す	*/
 	ev3_lcd_draw_string	("tail_moter_down\0",0,0);
-	log.LOG(LOG_ID_ERR,"tail_moter_down\n");
-	TailMotor.TailMotorOutput(93);
+	log.LOG(LOG_ID_ERR,"tail_moter_down\r\n");
+	TailMotor.
 /*	スタート待ち-----------------------------------------------------------	 */
 ev3_lcd_draw_string	("touch\0",0,0);
 	log.LOG(LOG_ID_ERR,"touch\r\n");
@@ -108,6 +108,7 @@ while(1){
 
 	if(ev3_touch_sensor_is_pressed	(EV3_PORT_1) == true)	
 	{
+		TailMotor.TailStart(TAIL_DOWN);
 		break;
 	}
 }
@@ -117,21 +118,22 @@ ev3_lcd_draw_string	("release\0",0,0);
 while(1){
 	if(ev3_touch_sensor_is_pressed	(EV3_PORT_1) == false)
 	{
+		/*	ジャイロセンサーセット-------------------------------------------------	 */
+		ev3_lcd_draw_string	("gyro_set\0",0,0);
+		log.LOG(LOG_ID_ERR,"gyro_set\n");
+		GyroSet.OffSetStart();
+		
+		/*	尻尾もたーを上げる	*/
+		TailMotor.TailStart(TAIL_UP);
 		break;	
 	}
 }
 
 
-
-/*	ジャイロセンサーセット-------------------------------------------------	 */
-ev3_lcd_draw_string	("gyro_set\0",0,0);
-log.LOG(LOG_ID_ERR,"gyro_set\n");
-GyroSet.OffSetStart();
-
 /*	ドライビングオーダー開始---------------------------------------------------	*/
 ev3_lcd_draw_string	("Driving_start\0",0,0);
 	log.LOG(LOG_ID_ERR,"Driving_start\n");
-DriviOder.RunWayDecision();
+	DriviOder.RunWayDecision();
 
 }
 
