@@ -65,59 +65,61 @@ SINT rnLine_Trace::LineTracing() {
 	frLog &log = frLog::GetInstance();
 
 	/* 倒立制御クラスの生成 */
-	class rnInverted_Control myrnInverted_Control;
+	//class rnInverted_Control myrnInverted_Control;
 
 	/* ラインしきい値クラス  GetInstance */
 	static raLine_Threshold_Value &ColorGet 
 					= raLine_Threshold_Value::GetInstance();
 	
-	log.LOG( LOG_ID_LINETRACE,"raLineSet_before1\n");		/* Logメソッド	 */
+	log.LOG( LOG_ID_LINETRACE,"raLineSet_before1\r\n");		/* Logメソッド	 */
 	i_color = ColorGet.raLineSet();				/* i_colorにラインの色を格納 */
-	log.LOG( LOG_ID_LINETRACE,"raLineSet_after1\n");		/* Logメソッド	 */
-
+	log.LOG( LOG_ID_LINETRACE,"raLineSet_after1\r\n");		/* Logメソッド	 */
+	log.LOG( LOG_ID_LINETRACE,"1Give_Color=%d\r\n",i_color);	/* Logメソッド	 */
 	/* 倒立走行に必要なものをリセットするかのチェック */
-	if (i_initialized == FALSE) {
+	//if (i_initialized == FALSE) {
 		/* Logメソッド	 */
-		log.LOG( LOG_ID_LINETRACE,"Inverted_Control.Initialize_before\n");
-		myrnInverted_Control.Initialize();
+		//log.LOG( LOG_ID_LINETRACE,"Inverted_Control.Initialize_before\n");
+		//myrnInverted_Control.Initialize();
 		/* Logメソッド	 */
-		log.LOG( LOG_ID_LINETRACE,"Inverted_Control.Initialize_after\n");
+		//log.LOG( LOG_ID_LINETRACE,"Inverted_Control.Initialize_after\n");
 		
-		i_initialized = TRUE;
-	}
+		//i_initialized = TRUE;
+	//}
 
 	/* ラインの色が灰色になるまでループ */
 	while (TS_GRAY != i_color)
 {
 		
-	log.LOG( LOG_ID_LINETRACE,"raLineSet_before2\n");		/* Logメソッド	 */
+	log.LOG( LOG_ID_LINETRACE,"raLineSet_before2\r\n");		/* Logメソッド	 */
 	/* ラインしきい値Classのしきい値セットMethodを呼ぶ */
 	/* 現在のラインの色を取得 */
 	i_color = ColorGet.raLineSet();
-	log.LOG( LOG_ID_LINETRACE,"raLineSet_after2\n");		/* Logメソッド	 */
+	log.LOG( LOG_ID_LINETRACE,"raLineSet_after2\r\n");		/* Logメソッド	 */
+	log.LOG( LOG_ID_LINETRACE,"2Give_Color=%d\r\n",i_color);	/* Logメソッド	 */
 		
-	log.LOG( LOG_ID_LINETRACE,"ColorDirection_before\n");	/* Logメソッド	 */
+	log.LOG( LOG_ID_LINETRACE,"ColorDirection_before\r\n");	/* Logメソッド	 */
 	/* 走行体の向きを決める */
 	i_direction = ColorDirection(i_color);
-	log.LOG( LOG_ID_LINETRACE,"ColorDirection_after\n");	/* Logメソッド	 */
+	log.LOG( LOG_ID_LINETRACE,"ColorDirection_after\r\n");	/* Logメソッド	 */
+	log.LOG( LOG_ID_LINETRACE,"i_direction=%d\r\n",i_direction);	/* Logメソッド	 */
 	
 	/* Logメソッド	 */
-	log.LOG( LOG_ID_LINETRACE,"Inverted_Control.SetCommand_before\n");
+	//log.LOG( LOG_ID_LINETRACE,"Inverted_Control.SetCommand_before\n");
 	/* 倒立制御ClassのSetCommandMethodを呼ぶ */
 	/* PWM値を設定する */
-	myrnInverted_Control.SetCommand(rnInverted_Control::LOW, i_direction);
+	//myrnInverted_Control.SetCommand(rnInverted_Control::LOW, i_direction);
 	/* Logメソッド	 */
-	log.LOG( LOG_ID_LINETRACE,"Inverted_Control.SetCommand_after\n");
+	//log.LOG( LOG_ID_LINETRACE,"Inverted_Control.SetCommand_after\n");
 
 	/* Logメソッド	 */
-	log.LOG( LOG_ID_LINETRACE,"Inverted_Control.Run_before\n");
+	//log.LOG( LOG_ID_LINETRACE,"Inverted_Control.Run_before\n");
 	/* 倒立走行を行う */
-	myrnInverted_Control.Run();
+	//myrnInverted_Control.Run();
 	/* Logメソッド	 */
-	log.LOG( LOG_ID_LINETRACE,"Inverted_Control.Run_after\n");
+	//log.LOG( LOG_ID_LINETRACE,"Inverted_Control.Run_after\n");
 
 	}
-	log.LOG( LOG_ID_LINETRACE,"rnLine_Trace_OK\n");			/* Logメソッド	 */
+	log.LOG( LOG_ID_LINETRACE,"rnLine_Trace_OK\r\n");			/* Logメソッド	 */
 	return FUNC_OK;									/* 灰色が来たことを報告	 */
 }
 
@@ -147,7 +149,7 @@ SINT rnLine_Trace::ColorDirection(SINT i_color) {
 		}
 		else
 		{
-			log.LOG( LOG_ID_LINETRACE,"ColorLess\n");/* Logメソッド	 */
+			log.LOG( LOG_ID_LINETRACE,"ColorLess\r\n");/* Logメソッド	 */
 			return FUNC_ERR;								/* 関数異常終了	 */
 		}
 }
