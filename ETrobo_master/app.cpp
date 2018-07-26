@@ -81,10 +81,11 @@ static	SCHR cBuf;								/*	受信時の比較用配列		 */
 	
 	/*	比較	*/
 	if( cBuf != EOF ){
+
 		/*	ログの出力	*/
-		///log.LOG(LOG_ID_ERR,"LogSet:");
 		log.LOG(LOG_ID_ERR,&cBuf);
-		log.LOG(LOG_ID_ERR,"\r\n");
+		log.LOG(LOG_ID_ERR,"\0");
+		
 		/*	ログのIDセット	*/
         log.SetLog(cBuf);
 		cBuf=EOF;
