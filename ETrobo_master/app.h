@@ -19,7 +19,7 @@ extern void main_task(intptr_t exinf);
 extern void dc_cyc(intptr_t unused);
 
 /*	BluetoothóMüŠúƒnƒ“ƒhƒ‰	*/
-extern void dt_cyc(intptr_t unused);
+extern void bt_cyc(intptr_t unused);
 
 #endif /* TOPPERS_MACRO_ONLY */
 
