@@ -43,25 +43,61 @@ SINT raLine_Threshold_Value::raLineSet(void)
 {
 	frLog &log = frLog::GetInstance();
 	log.LOG(LOG_ID_ERR,"raLine\r\n");
+	log.LOG(LOG_ID_ERR,"WHITE=%d\r\n",i_white);
+	log.LOG(LOG_ID_ERR,"BLACK=%d\r\n",i_black);
+	log.LOG(LOG_ID_ERR,"GRAY=%d\r\n",i_gray);
 	/* 現在カラー値の更新													 */
 	i_current_color = raLineGet(i_current_color);
+	log.LOG(LOG_ID_ERR,"currnt=%d\r\n",i_current_color);
 	/* 現在カラー値の比較													 */
-	if (i_current_color >= i_black&&i_current_color < i_gray){
-		log.LOG(LOG_ID_ERR,"BRACK\r\n");
-		return TS_BRACK;
+	if(i_current_color < i_gray)
+	{
+		
+		log.LOG(LOG_ID_ERR,"BLACK=%d\r\n",i_black);
+		return TS_BLACK;
 	}
-	if (i_current_color == i_gray+10&&i_current_color == i_gray-10){
-		log.LOG(LOG_ID_ERR,"GRAY\r\n");
-		return TS_GRAY;
+	else if(i_current_color > i_gray )
+	{
+		log.LOG(LOG_ID_ERR,"WHITE=%d\r\n",i_white);
+		
+		return TS_WHITE;
 	}
-	if (i_current_color <= i_white&&i_current_color > i_gray){
+	else
+	{
+		log.LOG(LOG_ID_ERR,"ERR%d\r\n");
+		return FUNC_ERR;
+		
+	}
+	/*i_gray1=i_gray+10;
+	i_gray2=i_gray-10;
+	
+	if (i_current_color <= i_white&&i_gray1 < i_current_color){
 		log.LOG(LOG_ID_ERR,"WHITE\r\n");
 		return TS_WHITE;
 	}
-	
-	log.LOG(LOG_ID_ERR,"ERR\r\n");
-	return FUNC_ERR;
-	
+	else if(i_current_color > i_white)
+	{
+		log.LOG(LOG_ID_ERR,"WHITE\r\n");
+		return TS_WHITE;
+	}
+	else if (i_current_color >= i_black&&i_current_color < i_gray2){
+		log.LOG(LOG_ID_ERR,"BRACK\r\n");
+		return TS_BRACK;
+	}
+	else if(i_current_color < i_black)
+	{
+		log.LOG(LOG_ID_ERR,"BRACK\r\n");
+		return TS_BRACK;
+	}
+	else if (i_gray1 >= i_current_color &&i_gray2 <= i_current_color){
+		log.LOG(LOG_ID_ERR,"GRAY\r\n");
+		return TS_GRAY;
+	}
+	else
+	{
+		return FUNC_ERR;
+	}
+	*/
 }
 
 /* ------------------------------------------------------------------------- */
@@ -72,7 +108,7 @@ SINT raLine_Threshold_Value::raLineSet(void)
 /* 戻り値	: SINT: FUNC_ERR		:関数異常終了							 */
 /* 作成日	: 2018/07/10	松浦 侑矢		新規作成						 */
 /* ------------------------------------------------------------------------- */
-SINT raLine_Threshold_Value::raLineUP(SINT black, SINT gray, SINT white)
+SINT raLine_Threshold_Value::raLineUP(SINT black, SINT white, SINT gray)
 {
 	i_black = black;
 	i_gray  = gray;
@@ -109,7 +145,7 @@ SINT raLine_Threshold_Value::raLineGet(SINT i_current_color){
 /* 機能概要	: 呼ばれた関数にクラスのアドレスを返却します					 */
 /* 引数		: void			: なし											 */
 /* 戻り値	: raLine_Threshold_Value&			: obj						 */
-/* 作成日	: 2018/07/2		髙岡 諒太		新規作成						 */
+/* 作成日	: 2018/07/2		松浦 侑矢 		新規作成						 */
 /* ------------------------------------------------------------------------- */
 raLine_Threshold_Value& raLine_Threshold_Value::GetInstance(void)
 {

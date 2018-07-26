@@ -37,7 +37,9 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 	/* カラー情報取得クラス生成 											 */
 	dgColor_Get &dgColor=dgColor_Get::GetInstance(); 
 	/* しきい値情報取得クラス生成 											 */
-	class raLine_Threshold_Value raLine;
+	class raLine_Threshold_Value &raLine=
+	raLine_Threshold_Value::GetInstance();
+	
 	
 	static const sensor_port_t
     	touch_sensor = EV3_PORT_1;
@@ -58,19 +60,16 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 			log.LOG(LOG_ID_ERR,"black=%d\r\n",i_black);
 		}
 	}
-	
-	
 	while (1)
 	{   /* タッチセンサーが押されている間とそうでないときで処理を分ける */
 		if (ev3_touch_sensor_is_pressed(touch_sensor) == false){
 			break;
-		}else{
-		log.LOG(LOG_ID_ERR,"black=%d\r\n",i_black);
 		}
 	}
+	
 	ev3_lcd_draw_string
 	("white_touch_sensor\0", 0, 0);
-
+	
 	while (1)
 	{   /* タッチセンサーが押されている間とそうでないときで処理を分ける */
 		if (ev3_touch_sensor_is_pressed(touch_sensor) == true){
@@ -83,18 +82,8 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 			log.LOG(LOG_ID_ERR,"white=%d\r\n",i_white);
 		}
 	}
-	while (1)
-	{   /* タッチセンサーが押されている間とそうでないときで処理を分ける */
-		if (ev3_touch_sensor_is_pressed(touch_sensor) == false){
-			break;
-		}else{
-		log.LOG(LOG_ID_ERR,"white=%d\r\n",i_white);
-		}
-	}
+
 	i_gray = stLineGRAY();
-	log.LOG(LOG_ID_ERR,"black=%d\r\n",i_black);
-	log.LOG(LOG_ID_ERR,"white=%d\r\n",i_white);
-	log.LOG(LOG_ID_ERR,"gray=%d\r\n",i_gray);
 	log.LOG(LOG_ID_ERR,"stLine_Set\r\n");
 
 	raLine.raLineUP(i_black,i_white,i_gray);

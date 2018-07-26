@@ -18,6 +18,9 @@ extern void main_task(intptr_t exinf);
 /*	デバイスハンドラ	*/
 extern void dc_cyc(intptr_t unused);
 
+/*	Bluetooth受信周期ハンドラ	*/
+extern void bt_cyc(intptr_t unused);
+
 #endif /* TOPPERS_MACRO_ONLY */
 
 #ifdef __cplusplus
