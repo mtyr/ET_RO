@@ -99,7 +99,6 @@ MotorInit.MotorMeasurement(&i_moter_l,&i_moter_r,&i_moter_t);
 /*	尻尾モーターの下す	*/
 	ev3_lcd_draw_string	("tail_moter_down\0",0,0);
 	log.LOG(LOG_ID_ERR,"tail_moter_down\r\n");
-	TailMotor.
 /*	スタート待ち-----------------------------------------------------------	 */
 ev3_lcd_draw_string	("touch\0",0,0);
 	log.LOG(LOG_ID_ERR,"touch\r\n");
