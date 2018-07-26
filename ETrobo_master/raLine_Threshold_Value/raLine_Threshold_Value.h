@@ -20,7 +20,7 @@
 /* ------------------------------------------------------------------------- */
 
 /* 現在カラー値一覧 -------------------------------------------------------- */
-#define TS_BRACK				(			1 )		/* 黒戻り値				 */
+#define TS_BLACK				(			1 )		/* 黒戻り値				 */
 #define TS_WHITE				(			2 )		/* 白戻り値				 */
 #define TS_GRAY					(			3 )		/* 灰戻り値				 */
 
@@ -46,6 +46,10 @@ private:										/*	プライベート-----------	 */
 	SINT i_white;											 /* 白値		 */
 	SINT i_gray;											 /* 灰値		 */
 	SINT i_current_color;									 /* 現在カラー値 */
+	
+	/* 追加甲田 */
+	SINT i_gray1;
+	SINT i_gray2;
 
 	/* シングルトンに必要な奴 */
 	raLine_Threshold_Value(const raLine_Threshold_Value &x) { };
