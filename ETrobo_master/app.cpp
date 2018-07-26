@@ -1,15 +1,68 @@
-// tag::tracer_def[]
 #include "app.h"
-#include "frLog.h"
-#include "common.h"
-#include "frBluetooth.h"
+#include "common\common.h"
+#include "crStart_Preparation\crStart_Preparation.h"
+#include "frLog\frLog.h"
+#include "frBluetooth\frBluetooth.h"
+
+#include "dgAngular_Velocity_Get\dgAngular_Velocity_Get.h"
+#include "dgBattery_Balance_Amount_Get\dgBattery_Balance_Amount_Get.h"
+#include "dgColor_Get\dgColor_Get.h"
+#include "dgMotor_Get\dgMotor_Get.h"
+
 #include <string.h>
+//using namespace ev3api;
 
-/* LCDフォントサイズ */
-#define CALIB_FONT (EV3_FONT_SMALL)
-#define CALIB_FONT_WIDTH (6/*TODO: magic number*/)
-#define CALIB_FONT_HEIGHT (8/*TODO: magic number*/)
 
+/*	-----------------------------------------------------------------------	 */
+/*	メインタスク															 */
+/*	-----------------------------------------------------------------------	 */
+void main_task(intptr_t unused) {
+/*	変数宣言---------------------------------------------------------------	 */
+	
+/*	変数初期化-------------------------------------------------------------	 */
+	
+/*	クラス宣言-------------------------------------------------------------	 */
+	
+	/* bluetoothハンドラの開始	*/
+	sta_cyc(BT_CYC);
+	//デバイスのハンドラ
+	sta_cyc(DC_CYC);
+	
+	
+	crStart_Preparation StPrepara;
+
+
+frLog &log = frLog::GetInstance();
+	
+log.LOG(LOG_ID_ERR,"log_start\r\n");
+	StPrepara.StartPreparation();
+/*	-----------------------------------------------------------------------	 */
+/*	メインループ															 */
+/*	-----------------------------------------------------------------------	 */
+	//while(1){ }
+	
+  ext_tsk();
+}
+
+/*	-----------------------------------------------------------------------	 */
+/*	デバイス周期ハンドラ													 */
+/*	-----------------------------------------------------------------------	 */
+void dc_cyc(intptr_t unused)
+{
+//ジャイロ
+dgAngular_Velocity_Get &gyro = dgAngular_Velocity_Get::GetInstance();
+	
+//バッテリ
+dgBattery_Balance_Amount_Get &battery =dgBattery_Balance_Amount_Get::GetInstance();
+
+//カラー
+dgColor_Get &color =dgColor_Get::GetInstance();
+	
+	gyro.GyroUpdate();
+	battery.batteryUpdate();
+	color.ColorUpdate();
+	
+}
 
 /*	-----------------------------------------------------------------------	 */
 /*	Bluetoothタイマー割込み													 */
@@ -38,31 +91,6 @@ static	SCHR cBuf;								/*	受信時の比較用配列		 */
 	}
 }
 
-// end::tracer_def[]
-// tag::main_task[]
-
 /*	-----------------------------------------------------------------------	 */
-/*	メインタスク															 */
+/*				Copyright HAL College of Technology & Design				 */
 /*	-----------------------------------------------------------------------	 */
-void main_task(intptr_t unused) {
-/*	変数宣言---------------------------------------------------------------	 */
-	SCHR c_buf=0;/*	受信用	*/
-/*	クラス宣言-------------------------------------------------------------	 */
-	frBluetooth &bluetooth = frBluetooth::GetInstance();
-	frLog &log = frLog::GetInstance();
-
-    /* Bluetooth通信タスクの起動 */
-	sta_cyc(BT_CYC);
-	
-/*	-----------------------------------------------------------------------	 */
-/*	メインループ															 */
-/*	-----------------------------------------------------------------------	 */
-	while(1){
-		log.LOG(LOG_ID_MOTOR,"MotorTest\r\n");
-		tslp_tsk(1);
-	}
-	
-  ext_tsk();
-}
-
-// end::main_task[]
