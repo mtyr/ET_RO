@@ -24,6 +24,8 @@
 #include "..\frLog\frLog.h"
 
 static const motor_port_t
+    R_motor      = EV3_PORT_B,
+    L_motor      = EV3_PORT_C;
 	ev3_motor_config	(R_motor,LARGE_MOTOR );                        //ポート設定
 	ev3_motor_config	(L_motor,LARGE_MOTOR );						   //ポート設定
 
