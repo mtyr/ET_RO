@@ -12,6 +12,7 @@
 /*	----------------------------------------------------------------------	 */
 #include "rnLine_Trace.h"
 #include "dcMotor_Output.h"
+#include "dcTail_Motor_Output.h"
 /* ------------------------------------------------------------------------- */
 /* 関数名	:rsSeesaw::LineTrace										 */
 /* 機能名	:ライントレース走行を行う										 */
@@ -21,10 +22,18 @@
 /* 作成日	: 2018/07/27	高岡　諒太			新規作成				 */
 /* ------------------------------------------------------------------------- */
 void rsSeesaw::LineTrace(){
-	/* グレーゾーンを抜ける処理（直線走行） */
 	class rnLine_Trace LineTrace;					/* ライントレースクラス */
 	class dcMotor_Output MotorOut;					/* モーターアウトプットクラス */
+	class dcTail_Motor_Output TailOut;				/* モーターアウトプットクラス */
+	dgAngular_Velocity_Get &gyro = dgAngular_Velocity_Get::GetInstance();/* ジャイロセンサー取得クラス */
+	SINT i_gyro_info=0;
+	/* グレーゾーンを抜ける処理（直線走行） */
 	LineTrace.LineTracing(/*難所モード設定*/));		/* ライントレース走行 */
 	/* ライン見てまっすぐに姿勢ただす（Line_Traceクラスのメソッド） */
-	MotorOut.MotorOutput(30,30);				/* ゆっくり進む */
+	while(i_gyro_info<100){/*数値は走行させて調整*/
+		i_gyro_info=gyro.GyroGet();
+		MotorOut.MotorOutput(30,30);				/* ゆっくり進む */
+	}
+	/* 指定した距離分走行 */
+	TailOut.TailMotorOutput(75);	/* ガレージ停車 */
 }
