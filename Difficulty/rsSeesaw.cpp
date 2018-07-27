@@ -35,5 +35,6 @@ void rsSeesaw::LineTrace(){
 		MotorOut.MotorOutput(30,30);				/* ゆっくり進む */
 	}
 	/* 指定した距離分走行 */
+	MotorOut.MotorOutput(0,0);		/* ストップ */
 	TailOut.TailMotorOutput(75);	/* ガレージ停車 */
 }
