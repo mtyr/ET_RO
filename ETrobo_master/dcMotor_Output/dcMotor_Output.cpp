@@ -23,11 +23,10 @@
 #include "dcMotor_Output.h"
 #include "..\frLog\frLog.h"
 
-static const motor_port_t
-    R_motor      = EV3_PORT_B,
-    L_motor      = EV3_PORT_C;
-	ev3_motor_config	(R_motor,LARGE_MOTOR );                        //ポート設定
-	ev3_motor_config	(L_motor,LARGE_MOTOR );						   //ポート設定
+dcMotor_Output::dcMotor_Output(){
+	ev3_motor_config(EV3_PORT_B,LARGE_MOTOR );                        //ポート設定
+	ev3_motor_config(EV3_PORT_C,LARGE_MOTOR );						   //ポート設定
+}
 
 void dcMotor_Output::MotorOutput(SINT getPwmLeft,SINT getPwmRight) {   //モーター出力
 
@@ -35,10 +34,10 @@ void dcMotor_Output::MotorOutput(SINT getPwmLeft,SINT getPwmRight) {   //モー�
 	log.LOG(LOG_ID_ERR,"dcMotor_Output_start\r\n");
 
 	/* Lモーターを回す */
-	ev3_motor_set_power(L_motor,getPwmLeft);
+	ev3_motor_set_power(EV3_PORT_C,getPwmLeft);
 	log.LOG(LOG_ID_ERR,"L_motor_Out\r\n");
 	/* Rモーターを回す */
-    ev3_motor_set_power(R_motor,getPwmRight);
+    ev3_motor_set_power(EV3_PORT_B,getPwmRight);
 	log.LOG(LOG_ID_ERR,"R_motor_Out\r\n");
 }
 
