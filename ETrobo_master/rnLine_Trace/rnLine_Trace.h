@@ -23,10 +23,11 @@
 /* ------------------------------------------------------------------------- */
 /* 定数宣言																	 */
 /* ------------------------------------------------------------------------- */
-const SINT rnInverted_Control::ZERO = 0;		/* 0						 */
-const SINT rnInverted_Control::LOW = 30;		/* 低速						 */
-const SINT rnInverted_Control::NORMAL = 50;		/* 通常						 */
-const SINT rnInverted_Control::HIGH = 70;		/* 高速						 */
+#define ZERO (		0)		/* 0						 */
+#define LOW (30)		/* 低速						 */
+#define -LOW(-30)
+#define NORMAL (50)		/* 通常						 */
+#define HIGH (70)	/* 高速						 */
 
 /* ------------------------------------------------------------------------- */
 /* Class																	 */
