@@ -21,10 +21,12 @@
 #include <stdio.h>
 
 /* ------------------------------------------------------------------------- */
-/* 定数定義																	 */
+/* 定数宣言																	 */
 /* ------------------------------------------------------------------------- */
-#define TRUE				(			1 )			/* true 				 */
-#define FALSE				(			0 )			/* false				 */
+const SINT rnInverted_Control::ZERO = 0;		/* 0						 */
+const SINT rnInverted_Control::LOW = 30;		/* 低速						 */
+const SINT rnInverted_Control::NORMAL = 50;		/* 通常						 */
+const SINT rnInverted_Control::HIGH = 70;		/* 高速						 */
 
 /* ------------------------------------------------------------------------- */
 /* Class																	 */
