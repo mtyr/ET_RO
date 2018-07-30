@@ -71,6 +71,31 @@ uint16_t dgMotor_Get::LMotorGet(){
 }
 
 /* ------------------------------------------------------------------------- */
+/* 関数名	: dgMotor_Get::MotorDistance									 */
+/* 機能名	: 角位置取得:走行距離計測											 */
+/* 機能概要	: 呼ばれた関数に戻り値で走行距離を渡します							 */
+/* 引数		: void			: なし											 */
+/* 戻り値	: FLOT			: f_motor_distance								 */
+/* 作成日	: 2018/07/27		髙岡 諒太		新規作成					 */
+/* ------------------------------------------------------------------------- */
+ FLOT dgMotor_Get::MortorDistance(){
+	/* 回転数計測 */
+	if(i_rmotor_info==360){
+		i_rmotor_rotation++;
+	}
+	if(i_lmotor_info==360){
+		i_lmotor_rotation++;
+	}
+	/* 左右走行距離計測 */
+	f_rmotor_distance=(wheel_diameter*pi)*i_rmotor_info;
+	f_lmotor_distance=(wheel_diameter*pi)*i_lmotor_info;
+
+	/* 平均とる */
+	f_motor_distance=(f_lmotor_distance+f_rmotor_distance)/2
+	return f_motor_distance
+	}
+
+/* ------------------------------------------------------------------------- */
 /* 関数名	: dgMotor_Get::GetInstance										 */
 /* 機能名	: 角位置取得:クラス実体の作成、アドレス渡し						 */
 /* 機能概要	: 呼ばれた関数にクラスのアドレスを返却します					 */
