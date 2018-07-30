@@ -12,11 +12,9 @@
 /*	include	ファイル														 */
 /*	-----------------------------------------------------------------------	 */
 #include "dgMotor_Get.h"
-#include <Motor.h>
 #include <stdio.h>								/* 入出力ライブラリ			 */
 #include <stdlib.h>								/* 標準ライブラリー			 */
 #include <string.h>								/* 文字列操作系				 */
-#include"..\frLog\frLog.h"							/* logヘッダー */
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgdgMotor_Get::dgMotor_Get									 */
 /* 機能名	: 角位置取得：コンストラクタ									 */
@@ -30,12 +28,6 @@ dgMotor_Get::dgMotor_Get()
 	
 	/* モータセンサーポート設定 */
 	ev3_motor_config( EV3_PORT_B,LARGE_MOTOR);
-	/* モータセンサーポート設定 */
-	ev3_motor_config( EV3_PORT_C,LARGE_MOTOR);
-}
-void dgMotor_Get::dgMortor_OffSet(){
-	ev3_motor_reset_counts(EV3_PORT_B);
-	ev3_motor_reset_counts(EV3_PORT_C);
 }
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgMotor_Get::MotorUpdate										 */
@@ -46,10 +38,8 @@ void dgMotor_Get::dgMortor_OffSet(){
 /* 作成日	: 2018/07/13		髙岡 諒太		新規作成					 */
 /* ------------------------------------------------------------------------- */
 void dgMotor_Get::MotorUpdate() {
-	/* 右motor情報取得 */
-	i_rmotor_info=ev3_motor_get_counts( EV3_PORT_B);
-	/* 左motor情報取得 */
-	i_lmotor_info=ev3_motor_get_counts( EV3_PORT_C);
+	/* 角位置情報取得 */
+	i_motor_info=ev3_motor_get_counts( EV3_PORT_B);
 }
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgMotor_Get::MotorGet											 */
@@ -59,42 +49,9 @@ void dgMotor_Get::MotorUpdate() {
 /* 戻り値	: SINT			: i_motor_info									 */
 /* 作成日	: 2018/07/13		髙岡 諒太		新規作成					 */
 /* ------------------------------------------------------------------------- */
-uint16_t dgMotor_Get::RMotorGet(){
-	frLog &log = frLog::GetInstance();
-	log.LOG(LOG_ID_MOTOR,"MotorGetOk\r\n");
-	return i_rmotor_info;						/* 右角位置情報を戻す				 */
+uint16_t dgMotor_Get::MotorGet(){
+	return i_motor_info;						/* 色情報を戻す				 */
 }
-uint16_t dgMotor_Get::LMotorGet(){
-	frLog &log = frLog::GetInstance();
-	log.LOG(LOG_ID_MOTOR,"MotorGetOk\r\n");
-	return i_lmotor_info;						/* 左角位置情報を戻す				 */
-}
-
-/* ------------------------------------------------------------------------- */
-/* 関数名	: dgMotor_Get::MotorDistance									 */
-/* 機能名	: 角位置取得:走行距離計測											 */
-/* 機能概要	: 呼ばれた関数に戻り値で走行距離を渡します							 */
-/* 引数		: void			: なし											 */
-/* 戻り値	: FLOT			: f_motor_distance								 */
-/* 作成日	: 2018/07/27		髙岡 諒太		新規作成					 */
-/* ------------------------------------------------------------------------- */
- FLOT dgMotor_Get::MortorDistance(){
-	/* 回転数計測 */
-	if(i_rmotor_info==360){
-		i_rmotor_rotation++;
-	}
-	if(i_lmotor_info==360){
-		i_lmotor_rotation++;
-	}
-	/* 左右走行距離計測 */
-	f_rmotor_distance=(wheel_diameter*pi)*i_rmotor_info;
-	f_lmotor_distance=(wheel_diameter*pi)*i_lmotor_info;
-
-	/* 平均とる */
-	f_motor_distance=(f_lmotor_distance+f_rmotor_distance)/2
-	return f_motor_distance
-	}
-
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgMotor_Get::GetInstance										 */
 /* 機能名	: 角位置取得:クラス実体の作成、アドレス渡し						 */
