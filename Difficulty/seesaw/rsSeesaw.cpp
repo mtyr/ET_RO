@@ -39,32 +39,30 @@ void rsSeesaw::LineTrace(){
 	class dcTail_Motor_Output TailOut;				/* モーターアウトプットクラス */
 	dgAngular_Velocity_Get &gyro = dgAngular_Velocity_Get::GetInstance();/* ジャイロセンサー取得クラス */
 	dgMotor_Get &motor = dgMotor_Get::GetInstance();/* モーター取得クラス */
+	Inverted &myinverted=Inverted::GetInstance();/* 倒立制御クラス */
 	/* 変数宣言-------------------------------------------------------------- */
 	FLOT f_distance=0;
 	SINT i_gyro_info=0;
-
-	/* グレーゾーンを抜ける処理（直線走行） */
 	LineTrace.LineTracing(/*難所モード設定*/));		/* ライントレース走行 */
+
 	/* ライン見てまっすぐに姿勢ただす（Line_Traceクラスのメソッド） */
-	while(i_gyro_info<100){/*数値は走行させて調整*/
+
+	/* シーソー降りるまで走行 */
+	while(i_gyro_info<100){						/*数値は走行させて調整*/
 		i_gyro_info=gyro.GyroGet();
-		/* 直線走行 */
-	}
-	/* 指定した距離分走行 */
-	while(f_distance=100){/* 数値はガレージまでの距離 */
-		/* 直線走行 */
+		Inverted::DriviParame((FLOT)80,(FLOT)0);
 	}
 	MotorOut.MotorOutput(0,0);		/* ストップ */
 	TailOut.TailMotorOutput(75);	/* ガレージ停車 */
 }
 /* ------------------------------------------------------------------------- */
 /* 関数名	:rsSeesaw::rsSeesaw												 */
-/* 機能名	:シーソーのコンストラクタ										 */
-/* 機能概要	: シーソーのコンストラクタ										 */
+/* 機能名	:シーソーのデストラクタ										 */
+/* 機能概要	: シーソーのデストラクタ										 */
 /* 引数		:void			:なし											 */
 /* 戻り値	:void			:なし											 */
 /* 作成日	: 2018/07/31	高岡　諒太			新規作成					 */
 /* ------------------------------------------------------------------------- */
-void rsSeesaw::rsSeesaw(){
+void rsSeesaw::~rsSeesaw(){
 
 }
