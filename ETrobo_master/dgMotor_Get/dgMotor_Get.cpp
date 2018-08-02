@@ -87,8 +87,8 @@ FLOT dgMotor_Get::MotorDistance(){
 	f_lmotor_distance=(f_wheel*f_pi)*i_lmotor_rotation;
 	f_rmotor_distance=(f_wheel*f_pi)*i_rmotor_rotation;
 	/* 平均とる */
-	i_motor_distance=(f_lmotor_distance+f_rmotor_distance)/2;
-	return distance;
+	f_motor_distance=(f_lmotor_distance+f_rmotor_distance)/2;
+	return f_motor_distance;
 }
 
 /* ------------------------------------------------------------------------- */
