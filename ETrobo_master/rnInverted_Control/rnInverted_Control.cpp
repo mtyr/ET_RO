@@ -1,154 +1,206 @@
-/* ------------------------------------------------------------------------- */
-/*	rnInverted_Control.cpp													 */
-/*	<EV3ライントレース>ソフトウェア開発										 */
-/*	倒立制御クラス															 */
-/*	倒立制御を担当。走行用計算クラスに計算指示を送り						 */
-/*	戻り値をモーター出力に送る												 */
-/*																			 */
 /*	-----------------------------------------------------------------------	 */
-/*	番号		更新履歴							日付		氏名		 */
+/*	rnInverted_Control.cpp															 */
+/*	倒立振子のライブラリのラッピング										 */
 /*	-----------------------------------------------------------------------	 */
-/*	000000		新規作成							2018/07/02	田邉  周哉	 */
-/*	000001		レビュー後修正						2018/07/12	田邉  周哉	 */
-/* ------------------------------------------------------------------------- */
+/*	番号	更新履歴								日付		氏名		 */
+/*	-----------------------------------------------------------------------	 */
+/*	000000	新規作成								2018/07/25	小西 巧	 	 */
+/*	-----------------------------------------------------------------------	 */
 
-/* ------------------------------------------------------------------------- */
-/* includeファイル															 */
-/* ------------------------------------------------------------------------- */
+/*	-----------------------------------------------------------------------	 */
+/*	includeファイル															 */
+/*	-----------------------------------------------------------------------	 */
+#include "rnrnInverted_Control_Control.h"
+#include "balancer.h"
 #include "..\frLog\frLog.h"
-#include "rnInverted_Control.h"
-/* ------------------------------------------------------------------------- */
-/* 定数宣言																	 */
-/* ------------------------------------------------------------------------- */
-const SINT rnInverted_Control::LOW = 30;		/* 低速						 */
-const SINT rnInverted_Control::NORMAL = 50;		/* 通常						 */
-const SINT rnInverted_Control::HIGH = 70;		/* 高速						 */
+
+#include "..\DeviceControl\Wheels.h"
+#include "..\DeviceControl\Gyro.h"
+
+/*	-----------------------------------------------------------------------	 */
+/*	define定義																 */
+/*	-----------------------------------------------------------------------	 */
+#define GYRO_OFFSET  0     /* ジャイロセンサオフセット値(角速度0[deg/sec]時) */
 
 /* ------------------------------------------------------------------------- */
-/*	関数名		:rnInverted_Control											 */
-/*	機能名		:コンストラクタ												 */
-/*	機能概要	:変数定義とシングルトン定義を行う							 */
-/*	引数		:無し														 */
-/*	戻り値		:無し														 */
-/*	作成日		:2018/07/02		田邉周哉		新規作成					 */
-/*				:2018/07/12		田邉周哉		レビュー後修正				 */
+/* ■■■ public ■■■														 */
 /* ------------------------------------------------------------------------- */
-rnInverted_Control::rnInverted_Control()
+/* ------------------------------------------------------------------------- */
+/* 関数名	:rnInverted_Control::GetInstance											 */
+/* 機能名	:倒立制御：クラス生成											 */
+/* 機能概要	:クラスの実態を返す												 */
+/* 引数		:void			:なし											 */
+/* 戻り値	:frBluetooth	:obj			:クラスの実態					 */
+/* 作成日	: 2018/07/01	甲田  啓朗		新規作成						 */
+/* ------------------------------------------------------------------------- */
+rnInverted_Control& rnInverted_Control::GetInstance(void)
 {
-	i_forward = LOW;							/* 前進値					 */
-	i_turn = LOW;								/* 旋回値					 */
+	static rnInverted_Control obj;
+	return obj;
+}
+/* ------------------------------------------------------------------------- */
+/* 関数名	rnInverted_Control::rnInverted_Control												 */
+/* 機能名	:倒立：なし														 */
+/* 機能概要	:なし															 */
+/* 引数		:void			:なし											 */
+/* 戻り値	:void			:なし											 */
+/* 作成日	: 2018/07/25	小西 巧			新規作成						 */
+/* ------------------------------------------------------------------------- */
+rnInverted_Control::rnInverted_Control(void){
+
 }
 
 /* ------------------------------------------------------------------------- */
-/*	関数名		:Run														 */
-/*	機能名		:倒立走行指示												 */
-/*	機能概要	:倒立制御・走行の流れを持ち、各クラスに指示をする関数		 */
-/*	引数		:無し														 */
-/*	戻り値		:SINT			FUNK_OK			関数正常終					 */
-/*	作成日		:2018/07/02		田邉周哉		新規作成					 */
-/*				:2018/07/12		田邉周哉		レビュー後修正				 */
+/* 関数名	rnInverted_Control::BalanceInit											 */
+/* 機能名	:倒立：倒立振子ライブラリの初期化								 */
+/* 機能概要	:ライブラリの初期化												 */
+/* 引数		:void			:なし											 */
+/* 戻り値	:void			:なし											 */
+/* 作成日	: 2018/07/25	小西 巧			新規作成						 */
 /* ------------------------------------------------------------------------- */
-SINT rnInverted_Control::Run() {
-	/* frLog */
+void rnInverted_Control::BalanceInit(void)
+{
+	Wheels &wheels 	= Wheels::GetInstance();
+	Gyro &gyro 		= Gyro::GetInstance();
+	f_forward	= 0;
+	f_turn		= 0;
+
+	 /* 走行モーターエンコーダーリセット */
+    ev3_motor_reset_counts(EV3_PORT_B);
+    ev3_motor_reset_counts(EV3_PORT_C);
+	
+	/*	ジャイロリセット	*/
+	ev3_gyro_sensor_reset(EV3_PORT_4);
+	//tslp_tsk(100);
+	
+	balance_init();
+}
+
+/* ------------------------------------------------------------------------- */
+/* 関数名	rnInverted_Control::BalanceInit											 */
+/* 機能名	:倒立：倒立振子ライブラリに渡すパラメータ						 */
+/* 機能概要	:ライブラリ前進と旋回											 */
+/* 引数		:float			:f_drivi	:前進後退値							 */
+/*			:float			:f_turning	:旋回値								 */
+/* 戻り値	:void			:なし											 */
+/* 作成日	: 2018/07/25	小西 巧			新規作成						 */
+/* ------------------------------------------------------------------------- */
+void rnInverted_Control::DriviParame(FLOT f_drivi,FLOT f_turning)
+{
+	f_forward	= f_drivi;
+	f_turn		= f_turning;
+}
+
+/* ------------------------------------------------------------------------- */
+/* 関数名	rnInverted_Control::~rnInverted_Control												 */
+/* 機能名	:倒立：倒立振子ライブラリのデストラクタ							 */
+/* 機能概要	:なし															 */
+/* 引数		:void			:なし											 */
+/* 戻り値	:void			:なし											 */
+/* 作成日	: 2018/07/25	小西 巧			新規作成						 */
+/* ------------------------------------------------------------------------- */
+rnInverted_Control::~rnInverted_Control(void){
+
+}
+
+
+/* ------------------------------------------------------------------------- */
+/* 関数名	rnInverted_Control::BalanceControl										 */
+/* 機能名	:倒立：倒立振子ライブラリのバランスコントロール					 */
+/* 機能概要	:なし															 */
+/* 引数		:void			:なし											 */
+/* 戻り値	:void			:なし											 */
+/* 作成日	: 2018/07/25	小西 巧			新規作成						 */
+/* ------------------------------------------------------------------------- */
+void rnInverted_Control::BalanceControl(void){
+
+	/*	変数宣言-----------------------------------------------------------	 */
+	int32_t motor_ang_l;						/*	左モーター値			 */
+	int32_t motor_ang_r;						/*	右モーター値			 */
+	SINT i_gyro;								/*	ジャイロ値				 */
+	SINT i_volt;								/*	電圧値(mV)				 */
+	
+	/*	クラス宣言---------------------------------------------------------	 */
+
+	/*	ログ	*/
 	frLog &log = frLog::GetInstance();
-	log.LOG(LOG_ID_LINETRACE, "倒立制御走行開始\n");
-	
-	
-	dgBattery_Balance_Amount_Get &battery =dgBattery_Balance_Amount_Get::GetInstance();
-	dgMotor_Get	&right_wheel = dgMotor_Get::GetInstance();
-	dgMotor_Get	&left_wheel = dgMotor_Get::GetInstance();
-	dgAngular_Velocity_Get	&gyro_sensor=dgAngular_Velocity_Get::GetInstance();
-	
-	
-	/* ジャイロセンサ値取得 */
-	SSHT s_angle = gyro_sensor.GyroGet();
-	
-	/* frLog */
-	log.LOG(LOG_ID_LINETRACE, "ジャイロ角速度:%d[deg/sec]\n",s_angle);
-	
-	/* 右モータ回転角度取得 */
-	SINT i_right_wheel_enc = right_wheel.RMotorGet();
-	/* 左モータ回転角度取得 */
-	SINT i_left_wheel_enc = left_wheel.LMotorGet();
 
-	/* rnCalculationにデータを渡す */
-	rncalculation.SetCommand(i_forward, i_turn);
+	/*	各センサーの値を取得-----------------------------------------------	 */
+	 motor_ang_l = ev3_motor_get_counts(EV3_PORT_C);
+     motor_ang_r = ev3_motor_get_counts(EV3_PORT_B);
+     i_gyro = ev3_gyro_sensor_get_rate( EV3_PORT_4);
+     i_volt = ev3_battery_voltage_mV();
 
-	/* バッテリー電圧値を取得する */
-	SINT i_battery = battery.batteryGet();
-
-	/* 左右モーター出力値を得る */
-	rncalculation.Update(s_angle, i_right_wheel_enc, i_left_wheel_enc, i_battery);
-	/* 左右モータに回転を指示する */
-	int8_t left	 = rncalculation.GetPwmLeft();
-	int8_t right = rncalculation.GetPwmRight();
-	motor_output.MotorOutput(left, right);
-//	motor_output.MotorOutput(rncalculation.GetPwmLeft(), rncalculation.GetPwmRight());
-
+	/*
+	log.LOG(LOG_ID_ERR,"L_motor:%d\r\n",motor_ang_l);
+	log.LOG(LOG_ID_ERR,"R_motor:%d\r\n",motor_ang_r);
 	
-	/* frLog */
-	log.LOG(LOG_ID_LINETRACE, "倒立制御走行終了\n");
+	log.LOG(LOG_ID_ERR,"V:%d\r\n",i_volt);
+	log.LOG(LOG_ID_ERR,"gyro:%d\r\n",i_gyro);
+	*/
+
+	BacklashCancel(pwm_L, pwm_R, &motor_ang_l, &motor_ang_r);
+
+	balance_control(f_forward, 					/*	前進					 */
+					f_turn, 					/*	旋回					 */
+					(FLOT)i_gyro, 				/*	角位置					 */
+					(FLOT)GYRO_OFFSET,			/*	基本0(ジャイロオフセット)*/
+					(FLOT)motor_ang_l, 			/*	左モーター角位置		 */
+					(FLOT)motor_ang_r, 			/*	右モーター角位置		 */
+					(FLOT)i_volt,				/*	電圧					 */
+					(signed char*)&pwm_L,		/*	左モーター前回出力値	 */
+					(signed char*)&pwm_R		/*	右モーター前回出力値	 */
+	);
 	
-	return FUNC_OK;
+	
+    /* EV3ではモーター停止時のブレーキ設定が事前にできないため */
+    /* 出力0時に、その都度設定する */
+	
+	/*	左モーター	*/
+  	if (pwm_L == 0)
+    {
+         ev3_motor_stop(EV3_PORT_C, true);
+    }
+    else
+    {
+        ev3_motor_set_power(EV3_PORT_C, (int)pwm_L);
+    }
+    
+	/*	右モータ	*/
+    if (pwm_R == 0)
+    {
+         ev3_motor_stop(EV3_PORT_B, true);
+    }
+    else
+    {
+        ev3_motor_set_power(EV3_PORT_B, (int)pwm_R);
+  	}
 }
 
 /* ------------------------------------------------------------------------- */
-/*	関数名		:Initialize													 */
-/*	機能名		:デバイス初期化												 */
-/*	機能概要	:バランス走行に必要な数値をリセットする						 */
-/*	引数		:無し														 */
-/*	戻り値		:SINT			FUNK_OK			関数正常終了				 */
-/*	作成日		:2018/07/02		田邉周哉		新規作成					 */
-/*				:2018/07/12		田邉周哉		レビュー後修正				 */
+/* ■■■ private ■■■													 */
 /* ------------------------------------------------------------------------- */
-SINT rnInverted_Control::Initialize() {
-	/* frLog */
-	frLog &log = frLog::GetInstance();
-	log.LOG(LOG_ID_LINETRACE, "倒立制御初期化開始\n");
-	
-//	dgMotor_Get	&right_wheel = dgMotor_Get::GetInstance();
-//	dgMotor_Get	&left_wheel = dgMotor_Get::GetInstance();
-	dgAngular_Velocity_Get	&gyro_sensor=dgAngular_Velocity_Get::GetInstance();
-	
-	SINT i_offset = gyro_sensor.GyroGet();	// ジャイロセンサ値
+/* ------------------------------------------------------------------------- */
+/* 関数名	rnInverted_Control::BacklashCancel										 */
+/* 機能名	:倒立：倒立振子バックラッシュキャンセル							 */
+/* 機能概要	:なし															 */
+/* 引数		:void			:なし											 */
+/* 戻り値	:void			:なし											 */
+/* 作成日	: 2018/07/25	小西 巧			新規作成						 */
+/* ------------------------------------------------------------------------- */
+void rnInverted_Control::BacklashCancel(signed char lpwm, signed char rpwm,
+							  int32_t *lenc, 	int32_t *renc		){
+	/*	クラス宣言---------------------------------------------------------	 */
+	//frLog &log = frLog::GetInstance();			/*	ログクラス				 */
 
-	/* モータエンコーダをリセットする（高岡の関数待ち） */
-		dgMotor_Get &motor_reset = dgMotor_Get::GetInstance();
-		motor_reset.dgMortor_OffSet();
+    const int BACKLASHHALF = 4;   				/* バックラッシュの半分[deg] */
 
-	/* 倒立振子制御初期化 */
-	rncalculation.Initialize(i_offset);
-	
-	/* frLog */
-	log.LOG(LOG_ID_LINETRACE, "倒立制御初期化終了\n");
-	
-	return FUNC_OK;
+    if(lpwm < 0) *lenc += BACKLASHHALF;
+    else if(lpwm > 0) *lenc -= BACKLASHHALF;
+
+    if(rpwm < 0) *renc += BACKLASHHALF;
+    else if(rpwm > 0) *renc -= BACKLASHHALF;
 }
-
-/* ------------------------------------------------------------------------- */
-/*	関数名		:SetCommand													 */
-/*	機能名		:PWM設定													 */
-/*	機能概要	:走行用計算に渡す値を設定する								 */
-/*	引数		:SINT			forward			上記の定数が入る(前進値)	 */
-/*				:SINT			turn			上記の定数が入る(旋回値)	 */
-/*	戻り値		:SINT			FUNK_OK			関数正常終了				 */
-/*	作成日		:2018/07/02		田邉周哉		新規作成					 */
-/*				:2018/07/12		田邉周哉		レビュー後修正				 */
-/* ------------------------------------------------------------------------- */
-SINT rnInverted_Control::SetCommand(SINT forward, SINT turn) {
-	/* frLog */
-	frLog &log = frLog::GetInstance();
-	log.LOG(LOG_ID_LINETRACE, "倒立制御格納開始\n");
-	
-	i_forward = forward;
-	i_turn = turn;
-	
-	/* frLog */
-	log.LOG(LOG_ID_LINETRACE, "倒立制御格納終了\n");
-	
-	return FUNC_OK;
-}
-
 
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */

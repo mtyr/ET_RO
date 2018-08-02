@@ -1,51 +1,50 @@
+#ifndef RNINVERTED_CONTROL
+#define RNINVERTED_CONTROL
 /*	-----------------------------------------------------------------------	 */
 /*	rnInverted_Control.h													 */
-/*	<EV3ライントレース>ソフトウェア開発										 */
-/*	倒立制御を担当															 */
-/*																			 */
+/*	倒立振子のライブラリのラッピングヘッダ									 */
 /*	-----------------------------------------------------------------------	 */
-/*	番号		更新履歴							日付		氏名		 */
+/*	番号	更新履歴								日付		氏名		 */
 /*	-----------------------------------------------------------------------	 */
-/*	000000		新規作成							2018/07/02	田邉  周哉	 */
+/*	000000	新規作成								2018/07/25	小西 巧	 	 */
 /*	-----------------------------------------------------------------------	 */
 
-#ifndef RNINVERTED_CONTROL_H_
-#define RNINVERTED_CONTROL_H_
-
-#include "ev3api.h"
-/* コーディング規約 */
+/*	-----------------------------------------------------------------------	 */
+/*	includeファイル															 */
+/*	-----------------------------------------------------------------------	 */
 #include "..\common\common.h"
-/* 走行用計算・管理 */
-#include "..\rnCalculation_Cpp\rnCalculation_Cpp.h"
-/* デバイス取得（ジャイロ） */
-#include "..\dgAngular_Velocity_get\dgAngular_Velocity_get.h"
-/* デバイス取得（バッテリー） */
-#include "..\dgBattery_Balance_Amount_get\dgBattery_Balance_Amount_get.h"
-/* デバイス取得（モーター） */
-#include "..\dgMotor_get\dgMotor_get.h"
-/* モーター出力 */
-#include "..\dcMotor_Output\dcMotor_Output.h"
+#include "ev3api.h"
 
-class rnInverted_Control {
-public:
-	static const SINT LOW;
-	static const SINT NORMAL;
-	static const SINT HIGH;
+/*	-----------------------------------------------------------------------	 */
+/*	クラス定義																 */
+/*	-----------------------------------------------------------------------	 */
+class rnInverted_Control{
+public:											/*	パブリック-------------	 */
+	
+	void BalanceControl(void);				/*	バランスの制御			 */
+	void BalanceInit(void);					/*	倒立ライブラリの初期化	 */
+	void DriviParame(FLOT,FLOT);			/*	走行と旋回の値			 */
+	
+	static rnInverted_Control& GetInstance(void);/*	クラス生成用			 */
 
-	rnInverted_Control();
-	SINT Initialize();
-	SINT Run();
-	SINT SetCommand(SINT forward, SINT turn);
-
-private:
-	SINT i_forward;
-	SINT i_turn;
-	dcMotor_Output motor_output;
-	class rnCalculation rncalculation;
+private:								/*	プライベート-----------	 */
+	rnInverted_Control();				/*	コンストラクタ			 */
+	~rnInverted_Control();				/*	デストラクタ			 */
+	
+	signed char pwm_L;					/*	左モーターPWM出力前回	 */
+	signed char pwm_R; 					/*	右モーターPWM出力前回	 */
+	
+	FLOT f_forward;
+	FLOT f_turn;
+	
+	void BacklashCancel(signed char, signed char,
+						int32_t*, 	 int32_t*	 );
+	
+	/*	シングルトン作成用-------------------------------------------------	 */
+	rnInverted_Control(const rnInverted_Control &x){ };
+	rnInverted_Control&operator=(const rnInverted_Control&){return *this;};
 };
-
-#endif	// RNINVERTED_CONTROL_H_
-
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */
 /*	-----------------------------------------------------------------------	 */
+#endif
