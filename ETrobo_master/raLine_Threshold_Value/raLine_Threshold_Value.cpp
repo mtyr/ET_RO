@@ -50,7 +50,7 @@ SINT raLine_Threshold_Value::raLineSet(void)
 	i_current_color = raLineGet(i_current_color);
 	log.LOG(LOG_ID_ERR,"currnt=%d\r\n",i_current_color);
 	/* 現在カラー値の比較													 */
-	if(i_current_color < i_gray)
+	/*if(i_current_color < i_gray)
 	{
 		
 		log.LOG(LOG_ID_ERR,"BLACK=%d\r\n",i_black);
@@ -67,8 +67,9 @@ SINT raLine_Threshold_Value::raLineSet(void)
 		log.LOG(LOG_ID_ERR,"ERR%d\r\n");
 		return FUNC_ERR;
 		
-	}
-	/*i_gray1=i_gray+10;
+	}*/
+	
+	i_gray1=i_gray+10;
 	i_gray2=i_gray-10;
 	
 	if (i_current_color <= i_white&&i_gray1 < i_current_color){
@@ -81,13 +82,13 @@ SINT raLine_Threshold_Value::raLineSet(void)
 		return TS_WHITE;
 	}
 	else if (i_current_color >= i_black&&i_current_color < i_gray2){
-		log.LOG(LOG_ID_ERR,"BRACK\r\n");
-		return TS_BRACK;
+		log.LOG(LOG_ID_ERR,"BLACK\r\n");
+		return TS_BLACK;
 	}
 	else if(i_current_color < i_black)
 	{
-		log.LOG(LOG_ID_ERR,"BRACK\r\n");
-		return TS_BRACK;
+		log.LOG(LOG_ID_ERR,"BLACK\r\n");
+		return TS_BLACK;
 	}
 	else if (i_gray1 >= i_current_color &&i_gray2 <= i_current_color){
 		log.LOG(LOG_ID_ERR,"GRAY\r\n");
@@ -97,7 +98,7 @@ SINT raLine_Threshold_Value::raLineSet(void)
 	{
 		return FUNC_ERR;
 	}
-	*/
+	
 }
 
 /* ------------------------------------------------------------------------- */

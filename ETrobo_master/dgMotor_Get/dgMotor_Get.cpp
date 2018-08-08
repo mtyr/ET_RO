@@ -16,7 +16,7 @@
 #include <stdio.h>								/* 入出力ライブラリ			 */
 #include <stdlib.h>								/* 標準ライブラリー			 */
 #include <string.h>								/* 文字列操作系				 */
-#include"..\frLog\frLog.h"							/* logヘッダー */
+#include"frLog.h"							/* logヘッダー */
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgdgMotor_Get::dgMotor_Get									 */
 /* 機能名	: 角位置取得：コンストラクタ									 */
@@ -33,7 +33,7 @@ dgMotor_Get::dgMotor_Get()
 	/* モータセンサーポート設定 */
 	ev3_motor_config( EV3_PORT_C,LARGE_MOTOR);
 }
-void dgMotor_Get::dgMortor_OffSet(){
+void dgMotor_Get::dgmotor_OffSet(){
 	ev3_motor_reset_counts(EV3_PORT_B);
 	ev3_motor_reset_counts(EV3_PORT_C);
 }
@@ -68,6 +68,27 @@ uint16_t dgMotor_Get::LMotorGet(){
 	frLog &log = frLog::GetInstance();
 	log.LOG(LOG_ID_MOTOR,"MotorGetOk\r\n");
 	return i_lmotor_info;						/* 左角位置情報を戻す				 */
+}
+
+/* ------------------------------------------------------------------------- */
+/* 関数名	: dgMotor_Get::MotorDistance									 */
+/* 機能名	: 角位置取得:走行距離計測											 */
+/* 機能概要	: 呼ばれた関数に戻り値で走行距離を渡します							 */
+/* 引数		: void			: なし											 */
+/* 戻り値	: FLOT			: f_motor_distance								 */
+/* 作成日	: 2018/07/27		髙岡 諒太		新規作成					 */
+/* ------------------------------------------------------------------------- */
+FLOT dgMotor_Get::MotorDistance(){
+	/* 回転数計測 */
+	frLog &log = frLog::GetInstance();
+	i_lmotor_rotation=i_lmotor_info/360;
+	i_rmotor_rotation=i_lmotor_info/360;
+	/* 左右走行距離計測 */
+	f_lmotor_distance=(f_wheel*f_pi)*i_lmotor_rotation;
+	f_rmotor_distance=(f_wheel*f_pi)*i_rmotor_rotation;
+	/* 平均とる */
+	f_motor_distance=(f_lmotor_distance+f_rmotor_distance)/2;
+	return f_motor_distance;
 }
 
 /* ------------------------------------------------------------------------- */

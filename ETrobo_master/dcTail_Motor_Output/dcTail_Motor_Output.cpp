@@ -50,11 +50,11 @@ void dcTail_Motor_Output::TailStart(SINT i_tail){
 		ev3_motor_reset_counts	(EV3_PORT_A);
 		
 		/*	尻尾を下げる	*/
-		ev3_motor_rotate(EV3_PORT_A,100,+50, true);
+		ev3_motor_rotate(EV3_PORT_A,75,+30, true);
 		
 	}else if( i_tail == TAIL_UP ){
 		/*	尻尾を上げる	*/
-		ev3_motor_rotate(EV3_PORT_A,100,+50, false);
+		ev3_motor_rotate(EV3_PORT_A,-75,+50, false);
 	}
 }
 

@@ -22,6 +22,7 @@
 class dcMotor_Output{
 	
 	public:
+	dcMotor_Output();
 	void MotorOutput(SINT getPwmLeft,SINT getPwmRight);
 	
 	private:

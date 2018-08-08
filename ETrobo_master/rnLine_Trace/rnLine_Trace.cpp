@@ -22,7 +22,6 @@
 #include "..\common\common.h"
 #include "rnLine_Trace.h"
 #include "..\raLine_Threshold_Value\raLine_Threshold_Value.h"
-#include "..\rnInverted_Control\rnInverted_Control.h"
 #include "..\frLog\frLog.h"
 
 /* ------------------------------------------------------------------------- */
@@ -34,8 +33,7 @@
 /* 作成日	:2018/07/02		甲田  啓朗	新規作成							 */
 /* ------------------------------------------------------------------------- */
 rnLine_Trace::rnLine_Trace(){
-	/* バランス走行に必要なものをリセットするか決める変数					 */
-	i_initialized = FALSE;
+	/* スケルトン */
 }
 
 /* ------------------------------------------------------------------------- */
@@ -64,64 +62,43 @@ SINT rnLine_Trace::LineTracing() {
 	/* ログクラスのGetInstance */
 	frLog &log = frLog::GetInstance();
 
-	/* 倒立制御クラスの生成 */
-	//class rnInverted_Control myrnInverted_Control;
 
 	/* ラインしきい値クラス  GetInstance */
 	static raLine_Threshold_Value &ColorGet 
 					= raLine_Threshold_Value::GetInstance();
 	
+	/* 倒立クラス生成 */
+	class Inverted myInverted;
+	
 	log.LOG( LOG_ID_LINETRACE,"raLineSet_before1\r\n");		/* Logメソッド	 */
 	i_color = ColorGet.raLineSet();				/* i_colorにラインの色を格納 */
 	log.LOG( LOG_ID_LINETRACE,"raLineSet_after1\r\n");		/* Logメソッド	 */
 	log.LOG( LOG_ID_LINETRACE,"1Give_Color=%d\r\n",i_color);	/* Logメソッド	 */
-	/* 倒立走行に必要なものをリセットするかのチェック */
-	//if (i_initialized == FALSE) {
-		/* Logメソッド	 */
-		//log.LOG( LOG_ID_LINETRACE,"Inverted_Control.Initialize_before\n");
-		//myrnInverted_Control.Initialize();
-		/* Logメソッド	 */
-		//log.LOG( LOG_ID_LINETRACE,"Inverted_Control.Initialize_after\n");
-		
-		//i_initialized = TRUE;
-	//}
 
 	/* ラインの色が灰色になるまでループ */
 	while (TS_GRAY != i_color)
-{
-		
-	log.LOG( LOG_ID_LINETRACE,"raLineSet_before2\r\n");		/* Logメソッド	 */
-	/* ラインしきい値Classのしきい値セットMethodを呼ぶ */
-	/* 現在のラインの色を取得 */
-	i_color = ColorGet.raLineSet();
-	log.LOG( LOG_ID_LINETRACE,"raLineSet_after2\r\n");		/* Logメソッド	 */
-	log.LOG( LOG_ID_LINETRACE,"2Give_Color=%d\r\n",i_color);	/* Logメソッド	 */
-		
-	log.LOG( LOG_ID_LINETRACE,"ColorDirection_before\r\n");	/* Logメソッド	 */
-	/* 走行体の向きを決める */
-	i_direction = ColorDirection(i_color);
-	log.LOG( LOG_ID_LINETRACE,"ColorDirection_after\r\n");	/* Logメソッド	 */
-	log.LOG( LOG_ID_LINETRACE,"i_direction=%d\r\n",i_direction);	/* Logメソッド	 */
+	{
+		log.LOG( LOG_ID_LINETRACE,"ColorDirection_before\r\n");	/* Logメソッド	 */
+		/* 走行体の向きを決める */
+		i_direction = ColorDirection(i_color);
+		log.LOG( LOG_ID_LINETRACE,"ColorDirection_after\r\n");	/* Logメソッド	 */
+		log.LOG( LOG_ID_LINETRACE,"i_direction=%d\r\n",i_direction);/* Logメソッド	 */
 	
-	/* Logメソッド	 */
-	//log.LOG( LOG_ID_LINETRACE,"Inverted_Control.SetCommand_before\n");
-	/* 倒立制御ClassのSetCommandMethodを呼ぶ */
-	/* PWM値を設定する */
-	//myrnInverted_Control.SetCommand(rnInverted_Control::LOW, i_direction);
-	/* Logメソッド	 */
-	//log.LOG( LOG_ID_LINETRACE,"Inverted_Control.SetCommand_after\n");
+		/* Logメソッド	 */
+		log.LOG( LOG_ID_LINETRACE,"Inverted_Control.SetCommand_before\n");
+		/* 倒立制御ClassのSetCommandMethodを呼ぶ */
+		/* PWM値を設定する */
+		myrnInverted.DriviParam(LOW, i_direction);
 
-	/* Logメソッド	 */
-	//log.LOG( LOG_ID_LINETRACE,"Inverted_Control.Run_before\n");
-	/* 倒立走行を行う */
-	//myrnInverted_Control.Run();
-	/* Logメソッド	 */
-	//log.LOG( LOG_ID_LINETRACE,"Inverted_Control.Run_after\n");
-
-	}
-	log.LOG( LOG_ID_LINETRACE,"rnLine_Trace_OK\r\n");			/* Logメソッド	 */
-	return FUNC_OK;									/* 灰色が来たことを報告	 */
-}
+		/* ラインしきい値Classのしきい値セットMethodを呼ぶ */
+		/* 現在のラインの色を取得 */
+		i_color = ColorGet.raLineSet();
+		log.LOG( LOG_ID_LINETRACE,"raLineSet_after2\r\n");		/* Logメソッド	 */
+		log.LOG( LOG_ID_LINETRACE,"2Give_Color=%d\r\n",i_color);/* Logメソッド	 */
+		}
+		log.LOG( LOG_ID_LINETRACE,"rnLine_Trace_OK\r\n");	/* Logメソッド	 */
+		return FUNC_OK;								/* 灰色が来たことを報告	 */
+		}
 
 
 /* ------------------------------------------------------------------------- */
@@ -141,11 +118,11 @@ SINT rnLine_Trace::ColorDirection(SINT i_color) {
 	
 	/* 現在のラインの色チェック */
 	if (TS_BLACK == i_color) {								/* ライン黒色	 */
-			return rnInverted_Control::LOW;
+			return LOW;
 		}
 		else if (TS_WHITE == i_color)						/* ライン白色	 */
 		{
-			return -rnInverted_Control::LOW;
+			return -LOW;
 		}
 		else
 		{
