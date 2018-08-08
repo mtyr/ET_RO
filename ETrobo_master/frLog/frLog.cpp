@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------------- */
-/* Log.cpp																	 */
+/* frLog.cpp																 */
 /* ＲＯ３３																	 */
 /* ログ情報を統括するクラス									 				 */
 /* ------------------------------------------------------------------------- */
@@ -21,13 +21,18 @@
 /* ------------------------------------------------------------------------- */
 /* コンパイルスイッチ														 */
 /* ------------------------------------------------------------------------- */
+
+/* ログをBluetooth経由で出力する場合はＯＮ、printf出力の場合はＯＦＦ ------- */
 #define __BLUETOOTH_DEBUG__
+
+/* 初期状態で全ログを出力する場合はＯＮ、出力しない場合はＯＦＦ ------------ */
+#define __LOG_PRINT_ON__
 
 /* ------------------------------------------------------------------------- */
 /* includeファイル															 */
 /* ------------------------------------------------------------------------- */
 #include "frLog.h"								/* ログヘッダ				 */
-#include "..\frBluetooth\frBluetooth.h"						/* Bluetoothヘッダ			 */
+#include "..\frBluetooth\frBluetooth.h"			/* Bluetoothヘッダ			 */
 #include <stdio.h>								/* 基本入出力				 */
 #include <string.h>								/* 文字列操作系				 */
 #include <stdlib.h>								/* 初期化系					 */
@@ -180,9 +185,13 @@ void frLog::SetLog( SCHR code )
 frLog::frLog()
 {
 	memset(&_buf[0], 0, sizeof(_buf));
+#ifdef __LOG_PRINT_ON__
 	_logmode = ( LOG_ID_MOTOR     | LOG_ID_TAIL  | LOG_ID_SONIC | 
 			 	 LOG_ID_BATTERY   | LOG_ID_COLOR | LOG_ID_GYRO  | 
 				 LOG_ID_LINETRACE | LOG_ID_TRACE | LOG_ID_ERR );
+#else  /* __LOG_PRINT_ON__ */
+	_logmode = 0;
+#endif /* __LOG_PRINT_ON__ */
 }
 
 /* ------------------------------------------------------------------------- */
@@ -301,4 +310,3 @@ void frLog::FlgSet( const ULNG flg, ULNG* log, SINT id )
 /* ------------------------------------------------------------------------- */
 /*              Copyright HAL Collage of Technology & Design                 */
 /* ------------------------------------------------------------------------- */
-
