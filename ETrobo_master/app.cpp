@@ -1,3 +1,15 @@
+/*	-----------------------------------------------------------------------	 */
+/*	app.cpp																	 */
+/*	2018_ETロボコンのメインソース											 */
+/*	-----------------------------------------------------------------------	 */
+/*	番号	更新履歴								日付		氏名		 */
+/*	-----------------------------------------------------------------------	 */
+/*	000000	新規作成								2018/07/25	小西 巧	 	 */
+/*	-----------------------------------------------------------------------	 */
+
+/*	-----------------------------------------------------------------------	 */
+/*	includeファイル															 */
+/*	-----------------------------------------------------------------------	 */
 #include "app.h"
 #include "common\common.h"
 #include "crStart_Preparation\crStart_Preparation.h"
@@ -8,6 +20,7 @@
 #include "dgBattery_Balance_Amount_Get\dgBattery_Balance_Amount_Get.h"
 #include "dgColor_Get\dgColor_Get.h"
 #include "dgMotor_Get\dgMotor_Get.h"
+#include "rnInverted_Control\rnInverted_Control.h"
 
 #include <string.h>
 //using namespace ev3api;
@@ -82,6 +95,25 @@ void bt_cyc(intptr_t unused)
         log.SetLog(cBuf);
 		cBuf=EOF;
 	}
+}
+
+/*	-----------------------------------------------------------------------	 */
+/*	倒立振子周期ハンドラ用関数												 */
+/*	-----------------------------------------------------------------------	 */
+void bla_cyc(intptr_t unused)
+{
+	/*	クラス宣言---------------------------------------------------------	 */
+	//frLog &log = frLog::GetInstance();					/*	ログクラス	*/
+	dgMotor_Get &motor=dgMotor_Get::GetInstance();/*	モータークラス	*/
+	rnInverted_Control &inverted = rnInverted_Control::GetInstance();/*	倒立クラス	*/
+	
+	inverted.BalanceControl();
+
+		motor.MotorUpdate();
+		
+		//FLOT Kyori=motor.MotorDistance();
+		//log.LOG( LOG_ID_LINETRACE,"Kyori= %f\r\n",Kyori);/* Logメソッド	 */
+
 }
 
 /*	-----------------------------------------------------------------------	 */
