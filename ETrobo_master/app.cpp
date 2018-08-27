@@ -39,8 +39,8 @@ void main_task(intptr_t unused) {
 	//frLog &log = frLog::GetInstance();			/*	ログクラス				 */
 	
 	/*	周期ハンドラの開始-------------------------------------------------	 */
-	sta_cyc(BT_CYC);							/* bluetooth受信			 */
-	sta_cyc(DC_CYC);							/*	デバイス更新			 */
+	ev3_sta_cyc(BT_CYC);						/* bluetooth受信			 */
+	//ev3_sta_cyc(DC_CYC);						/*	デバイス更新			 */
 	
 	StPrepara.StartPreparation();				/*	スタート準備開始		 */
 	

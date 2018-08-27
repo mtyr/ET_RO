@@ -22,6 +22,8 @@
 #include "..\dcTail_Motor_Output\dcTail_Motor_Output.h"
 #include "..\Lcd\Lcd.h"
 #include "..\frBluetooth\frBluetooth.h"
+#include "..\rnInverted_Control\rnInverted_Control.h"
+#include "ev3api.h"
 
 /* ------------------------------------------------------------------------- */
 /* ■■■ public ■■■														 */
@@ -78,6 +80,7 @@ void crStart_Preparation::StartPreparation(void)
 	Lcd 						lcd;			/*	LCDクラス	*/
 	frLog &log = frLog::GetInstance();			/*	ログ機能の追加			 */
 	frBluetooth &bluetooth=frBluetooth::GetInstance();/* bluetoothクラス	 */
+	rnInverted_Control &invert=rnInverted_Control::GetInstance();/*	倒立クラス	*/
 	
 	/*	スタート準備開始-------------------------------------------------------	 */
 
@@ -125,6 +128,8 @@ void crStart_Preparation::StartPreparation(void)
 	}
 	
 	/*	ドライビング開始---------------------------------------------------	 */
+	invert.BalanceInit();
+	ev3_sta_cyc(BLA_CYC);
 	DriviOder.RunWayDecision();
 }
 
