@@ -10,12 +10,13 @@
 /*	-----------------------------------------------------------------------	 */
 /*	includeファイル															 */
 /*	-----------------------------------------------------------------------	 */
-#include "rnrnInverted_Control_Control.h"
+#include "rnInverted_Control.h"
 #include "balancer.h"
 #include "..\frLog\frLog.h"
 
-#include "..\DeviceControl\Wheels.h"
-#include "..\DeviceControl\Gyro.h"
+#include "..\dgMotor_Get\dgMotor_Get.h"
+#include "..\dgBattery_Balance_Amount_Get\dgBattery_Balance_Amount_Get.h"
+#include "..\dgAngular_Velocity_Get\dgAngular_Velocity_Get.h"
 
 /*	-----------------------------------------------------------------------	 */
 /*	define定義																 */
@@ -60,10 +61,6 @@ rnInverted_Control::rnInverted_Control(void){
 /* ------------------------------------------------------------------------- */
 void rnInverted_Control::BalanceInit(void)
 {
-	Wheels &wheels 	= Wheels::GetInstance();
-	Gyro &gyro 		= Gyro::GetInstance();
-	f_forward	= 0;
-	f_turn		= 0;
 
 	 /* 走行モーターエンコーダーリセット */
     ev3_motor_reset_counts(EV3_PORT_B);
@@ -121,16 +118,28 @@ void rnInverted_Control::BalanceControl(void){
 	SINT i_volt;								/*	電圧値(mV)				 */
 	
 	/*	クラス宣言---------------------------------------------------------	 */
-
-	/*	ログ	*/
-	frLog &log = frLog::GetInstance();
+	dgAngular_Velocity_Get &gyro = 
+	dgAngular_Velocity_Get::GetInstance();			/*	ジャイロクラス	*/
+	
+	dgMotor_Get &motor=dgMotor_Get::GetInstance();	/*	モータークラス	*/
+	//frLog &log = frLog::GetInstance();				/*	ログクラス	*/
 
 	/*	各センサーの値を取得-----------------------------------------------	 */
+	/*
 	 motor_ang_l = ev3_motor_get_counts(EV3_PORT_C);
      motor_ang_r = ev3_motor_get_counts(EV3_PORT_B);
      i_gyro = ev3_gyro_sensor_get_rate( EV3_PORT_4);
      i_volt = ev3_battery_voltage_mV();
-
+	*/
+	
+	motor.MotorUpdate();
+	motor_ang_l = motor.LMotorGet();
+	motor_ang_r = motor.RMotorGet();
+	
+	gyro.GyroUpdate();
+	i_gyro = gyro.GyroGet();
+	i_volt = ev3_battery_voltage_mV();
+	
 	/*
 	log.LOG(LOG_ID_ERR,"L_motor:%d\r\n",motor_ang_l);
 	log.LOG(LOG_ID_ERR,"R_motor:%d\r\n",motor_ang_r);
@@ -152,29 +161,8 @@ void rnInverted_Control::BalanceControl(void){
 					(signed char*)&pwm_R		/*	右モーター前回出力値	 */
 	);
 	
-	
-    /* EV3ではモーター停止時のブレーキ設定が事前にできないため */
-    /* 出力0時に、その都度設定する */
-	
-	/*	左モーター	*/
-  	if (pwm_L == 0)
-    {
-         ev3_motor_stop(EV3_PORT_C, true);
-    }
-    else
-    {
-        ev3_motor_set_power(EV3_PORT_C, (int)pwm_L);
-    }
-    
-	/*	右モータ	*/
-    if (pwm_R == 0)
-    {
-         ev3_motor_stop(EV3_PORT_B, true);
-    }
-    else
-    {
-        ev3_motor_set_power(EV3_PORT_B, (int)pwm_R);
-  	}
+	ev3_motor_set_power(EV3_PORT_C, (int)pwm_L);
+	ev3_motor_set_power(EV3_PORT_B, (int)pwm_R);
 }
 
 /* ------------------------------------------------------------------------- */

@@ -1,0 +1,302 @@
+!_TAG_FILE_ENCODING	cp932	//
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_JP_AUTHOR	HIGASHI Hirohito	/Twitter: @h_east/
+!_TAG_PROGRAM_JP_URL	http://hp.vector.co.jp/authors/VA025040/	//
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8J2	//
+A_D	rnInverted_Control\balancer_param.c	15;"	v
+A_R	rnInverted_Control\balancer_param.c	16;"	v
+BATTERY_GAIN	rnInverted_Control\balancer_param.c	30;"	v
+BATTERY_OFFSET	rnInverted_Control\balancer_param.c	31;"	v
+BLT_ARG_ERROR	frBluetooth\frBluetooth.h	27;"	d
+BLT_DIS_CONNECTED	frBluetooth\frBluetooth.h	26;"	d
+BLUETOOTH	frBluetooth\frBluetooth.h	2;"	d
+BacklashCancel	rnInverted_Control\rnInverted_Control.cpp	206;"	f	class:rnInverted_Control
+BalanceControl	rnInverted_Control\rnInverted_Control.cpp	112;"	f	class:rnInverted_Control
+BalanceInit	rnInverted_Control\rnInverted_Control.cpp	62;"	f	class:rnInverted_Control
+CMD_MAX	rnInverted_Control\balancer.h	35;"	d
+CR_DRIVING_ORDER	crDriving_Order\crDriving_Order.h	2;"	d
+CR_START_PREPARATION	crStart_Preparation\crStart_Preparation.h	2;"	d
+ColorDirection	rnLine_Trace\rnLine_Trace.cpp	114;"	f	class:rnLine_Trace
+ColorGet	dgColor_Get\dgColor_Get.cpp	55;"	f	class:dgColor_Get
+ColorUpdate	dgColor_Get\dgColor_Get.cpp	43;"	f	class:dgColor_Get
+CommandAnaryze	frLog\frLog.cpp	220;"	f	class:frLog
+Connect	frBluetooth\frBluetooth.cpp	145;"	f	class:frBluetooth
+DBLE	common\common.h	32;"	t
+DEG2RAD	rnInverted_Control\balancer.h	36;"	d
+DisConnect	frBluetooth\frBluetooth.cpp	86;"	f	class:frBluetooth
+DistanceGet	dgUltrasonic_Wave_Get\dgUltrasonic_Wave_Get.cpp	53;"	f	class:dgUltrasonic_Wave_Get
+DistanceUpdate	dgUltrasonic_Wave_Get\dgUltrasonic_Wave_Get.cpp	41;"	f	class:dgUltrasonic_Wave_Get
+DriviParame	rnInverted_Control\rnInverted_Control.cpp	85;"	f	class:rnInverted_Control
+EV3CPPAPI_MOTOR_H_	dcMotor_Output\Motor.h	8;"	d
+EV3CPPAPI_MOTOR_H_	dcTail_Motor_Output\Motor.h	8;"	d
+EXEC_PERIOD	rnInverted_Control\balancer.h	37;"	d
+FLOT	common\common.h	31;"	t
+FUNC_ERR	common\common.h	14;"	d
+FUNC_OK	common\common.h	13;"	d
+FlgSet	frLog\frLog.cpp	302;"	f	class:frLog
+GYRO_OFFSET	rnInverted_Control\rnInverted_Control.cpp	24;"	d	file:
+GYRO_SET	stGyro_Set\stGyro_Set.h	2;"	d
+GetInstance	dgAngular_Velocity_Get\dgAngular_Velocity_Get.cpp	74;"	f	class:dgAngular_Velocity_Get
+GetInstance	dgBattery_Balance_Amount_Get\dgBattery_Balance_Amount_Get.cpp	63;"	f	class:dgBattery_Balance_Amount_Get
+GetInstance	dgColor_Get\dgColor_Get.cpp	68;"	f	class:dgColor_Get
+GetInstance	dgMotor_Get\dgMotor_Get.cpp	102;"	f	class:dgMotor_Get
+GetInstance	dgUltrasonic_Wave_Get\dgUltrasonic_Wave_Get.cpp	66;"	f	class:dgUltrasonic_Wave_Get
+GetInstance	frBluetooth\frBluetooth.cpp	33;"	f	class:frBluetooth
+GetInstance	frLog\frLog.cpp	74;"	f	class:frLog
+GetInstance	raLine_Threshold_Value\raLine_Threshold_Value.cpp	151;"	f	class:raLine_Threshold_Value
+GetInstance	rnInverted_Control\rnInverted_Control.cpp	37;"	f	class:rnInverted_Control
+GyroGet	dgAngular_Velocity_Get\dgAngular_Velocity_Get.cpp	51;"	f	class:dgAngular_Velocity_Get
+GyroUpdate	dgAngular_Velocity_Get\dgAngular_Velocity_Get.cpp	39;"	f	class:dgAngular_Velocity_Get
+HIGH	rnLine_Trace\rnLine_Trace.h	30;"	d
+HW_ERR	common\common.h	17;"	d
+K_F	rnInverted_Control\balancer_param.c	24;"	v
+K_I	rnInverted_Control\balancer_param.c	25;"	v
+K_PHIDOT	rnInverted_Control\balancer_param.c	27;"	v
+K_THETADOT	rnInverted_Control\balancer_param.c	28;"	v
+LGearPlayRange	stMotor_Initialization\stMotor_Initialization.cpp	68;"	f	class:stMotor_Initialization
+LGearPlayvalue	stMotor_Initialization\stMotor_Initialization.h	29;"	m	class:stMotor_Initialization
+LMotorGet	dgMotor_Get\dgMotor_Get.cpp	67;"	f	class:dgMotor_Get
+LOG	frLog\frLog.cpp	89;"	f	class:frLog
+LOGLINK	frLog\frLog.cpp	62;"	t	typeref:struct:_LogLink	file:
+LOG_CMD_BATTERY	frLog\frLog.h	46;"	d
+LOG_CMD_COLOR	frLog\frLog.h	47;"	d
+LOG_CMD_GYRO	frLog\frLog.h	44;"	d
+LOG_CMD_LINETRACE	frLog\frLog.h	45;"	d
+LOG_CMD_LOGOFF	frLog\frLog.h	41;"	d
+LOG_CMD_LOGON	frLog\frLog.h	40;"	d
+LOG_CMD_MOTOR	frLog\frLog.h	42;"	d
+LOG_CMD_SONIC	frLog\frLog.h	48;"	d
+LOG_CMD_TAIL	frLog\frLog.h	43;"	d
+LOG_CMD_TRACE	frLog\frLog.h	49;"	d
+LOG_FLG_OFF	frLog\frLog.cpp	53;"	d	file:
+LOG_FLG_ON	frLog\frLog.cpp	52;"	d	file:
+LOG_ID_BATTERY	frLog\frLog.h	29;"	d
+LOG_ID_COLOR	frLog\frLog.h	30;"	d
+LOG_ID_ERR	frLog\frLog.h	34;"	d
+LOG_ID_GYRO	frLog\frLog.h	31;"	d
+LOG_ID_LINETRACE	frLog\frLog.h	32;"	d
+LOG_ID_MOTOR	frLog\frLog.h	26;"	d
+LOG_ID_SONIC	frLog\frLog.h	28;"	d
+LOG_ID_TAIL	frLog\frLog.h	27;"	d
+LOG_ID_TERMINATE	frLog\frLog.h	35;"	d
+LOG_ID_TRACE	frLog\frLog.h	33;"	d
+LOG_KEY_BACKSPACE	frLog\frLog.cpp	46;"	d	file:
+LOG_KEY_DELETE	frLog\frLog.cpp	45;"	d	file:
+LOG_KEY_ENTER_CR	frLog\frLog.cpp	47;"	d	file:
+LOG_KEY_ENTER_LF	frLog\frLog.cpp	48;"	d	file:
+LOG_KEY_HYPHEN	frLog\frLog.cpp	50;"	d	file:
+LOG_KEY_SPACE	frLog\frLog.cpp	49;"	d	file:
+LOG_MAX_BUF	frLog\frLog.h	37;"	d
+LOW	rnLine_Trace\rnLine_Trace.h	27;"	d
+LineTracing	rnLine_Trace\rnLine_Trace.cpp	60;"	f	class:rnLine_Trace
+MAIN_PRIORITY	app.h	8;"	d
+Motor	dcMotor_Output\Motor.h	17;"	c	namespace:ev3api
+Motor	dcTail_Motor_Output\Motor.h	17;"	c	namespace:ev3api
+MotorDistance	dgMotor_Get\dgMotor_Get.cpp	81;"	f	class:dgMotor_Get
+MotorMeasurement	stMotor_Initialization\stMotor_Initialization.cpp	44;"	f	class:stMotor_Initialization
+MotorUpdate	dgMotor_Get\dgMotor_Get.cpp	48;"	f	class:dgMotor_Get
+MotorValueSet	raMotor_Setting_Value\raMotor_Setting_Value.cpp	47;"	f	class:raMotor_Setting_Value
+NORMAL	rnLine_Trace\rnLine_Trace.h	29;"	d
+OffSet	dgAngular_Velocity_Get\dgAngular_Velocity_Get.cpp	62;"	f	class:dgAngular_Velocity_Get
+OffSetStart	stGyro_Set\stGyro_Set.cpp	45;"	f	class:stGyro_Set
+PARAM_ERR	common\common.h	16;"	d
+PWM_MAX	dcMotor_Output\Motor.h	25;"	m	class:ev3api::Motor
+PWM_MAX	dcTail_Motor_Output\Motor.h	25;"	m	class:ev3api::Motor
+PWM_MIN	dcMotor_Output\Motor.h	30;"	m	class:ev3api::Motor
+PWM_MIN	dcTail_Motor_Output\Motor.h	30;"	m	class:ev3api::Motor
+RETRY_ERR	common\common.h	18;"	d
+RGearPlayRange	stMotor_Initialization\stMotor_Initialization.cpp	85;"	f	class:stMotor_Initialization
+RGearPlayvalue	stMotor_Initialization\stMotor_Initialization.h	30;"	m	class:stMotor_Initialization
+RMotorGet	dgMotor_Get\dgMotor_Get.cpp	62;"	f	class:dgMotor_Get
+RNINVERTED_CONTROL	rnInverted_Control\rnInverted_Control.h	2;"	d
+Receive	frBluetooth\frBluetooth.cpp	68;"	f	class:frBluetooth
+RunWayDecision	crDriving_Order\crDriving_Order.cpp	58;"	f	class:crDriving_Order
+SCHR	common\common.h	23;"	t
+SINT	common\common.h	29;"	t
+SLNG	common\common.h	27;"	t
+SSHT	common\common.h	25;"	t
+STACK_SIZE	app.h	11;"	d
+SYS_ERR	common\common.h	15;"	d
+Send	frBluetooth\frBluetooth.cpp	47;"	f	class:frBluetooth
+SetLog	frLog\frLog.cpp	136;"	f	class:frLog
+StartPreparation	crStart_Preparation\crStart_Preparation.cpp	62;"	f	class:crStart_Preparation
+StringSend	frBluetooth\frBluetooth.cpp	117;"	f	class:frBluetooth
+TAIL_DOWN	dcTail_Motor_Output\dcTail_Motor_Output.h	24;"	d
+TAIL_UP	dcTail_Motor_Output\dcTail_Motor_Output.h	23;"	d
+TS_BLACK	raLine_Threshold_Value\raLine_Threshold_Value.h	23;"	d
+TS_GRAY	raLine_Threshold_Value\raLine_Threshold_Value.h	25;"	d
+TS_WHITE	raLine_Threshold_Value\raLine_Threshold_Value.h	24;"	d
+TailGearPlayRange	stMotor_Initialization\stMotor_Initialization.cpp	102;"	f	class:stMotor_Initialization
+TailGearPlayvalue	stMotor_Initialization\stMotor_Initialization.h	31;"	m	class:stMotor_Initialization
+TailMotorOutput	dcTail_Motor_Output\dcTail_Motor_Output.cpp	70;"	f	class:dcTail_Motor_Output
+TailStart	dcTail_Motor_Output\dcTail_Motor_Output.cpp	45;"	f	class:dcTail_Motor_Output
+UCHR	common\common.h	24;"	t
+UINT	common\common.h	30;"	t
+ULNG	common\common.h	28;"	t
+USHT	common\common.h	26;"	t
+ZERO	rnLine_Trace\rnLine_Trace.h	26;"	d
+_ETROBO_BALANCER_H_INCLUDED	rnInverted_Control\balancer.h	16;"	d
+_LogLink	frLog\frLog.cpp	59;"	s	file:
+__BATTERY__	dgBattery_Balance_Amount_Get\dgBattery_Balance_Amount_Get.h	2;"	d
+__BLUETOOTH_DEBUG__	frLog\frLog.cpp	27;"	d	file:
+__COLOR__	dgColor_Get\dgColor_Get.h	2;"	d
+__COMMON__	common\common.h	2;"	d
+__GYRO__	dgAngular_Velocity_Get\dgAngular_Velocity_Get.h	2;"	d
+__LOG_PRINT_ON__	frLog\frLog.cpp	30;"	d	file:
+__MOTOR__	dgMotor_Get\dgMotor_Get.h	2;"	d
+__SONIC__	dgUltrasonic_Wave_Get\dgUltrasonic_Wave_Get.h	2;"	d
+_buf	frLog\frLog.h	72;"	m	class:frLog
+_logmode	frLog\frLog.h	71;"	m	class:frLog
+balance_control	rnInverted_Control\balancer.c	173;"	f
+balance_init	rnInverted_Control\balancer.c	344;"	f
+batteryGet	dgBattery_Balance_Amount_Get\dgBattery_Balance_Amount_Get.cpp	50;"	f	class:dgBattery_Balance_Amount_Get
+batteryUpdate	dgBattery_Balance_Amount_Get\dgBattery_Balance_Amount_Get.cpp	38;"	f	class:dgBattery_Balance_Amount_Get
+bt	frBluetooth\frBluetooth.h	54;"	m	class:frBluetooth
+bt_cyc	app.cpp	70;"	f
+crDriving_Order	crDriving_Order\crDriving_Order.cpp	32;"	f	class:crDriving_Order
+crDriving_Order	crDriving_Order\crDriving_Order.h	22;"	c
+crStart_Preparation	crStart_Preparation\crStart_Preparation.cpp	36;"	f	class:crStart_Preparation
+crStart_Preparation	crStart_Preparation\crStart_Preparation.h	23;"	c
+dcMotor_Output	dcMotor_Output\dcMotor_Output.cpp	26;"	f	class:dcMotor_Output
+dcMotor_Output	dcMotor_Output\dcMotor_Output.h	22;"	c
+dcTail_Motor_Output	dcTail_Motor_Output\dcTail_Motor_Output.cpp	31;"	f	class:dcTail_Motor_Output
+dcTail_Motor_Output	dcTail_Motor_Output\dcTail_Motor_Output.h	30;"	c
+dc_cyc	app.cpp	50;"	f
+dgAngular_Velocity_Get	dgAngular_Velocity_Get\dgAngular_Velocity_Get.cpp	26;"	f	class:dgAngular_Velocity_Get
+dgAngular_Velocity_Get	dgAngular_Velocity_Get\dgAngular_Velocity_Get.h	17;"	c
+dgAngular_Velocity_Get	dgAngular_Velocity_Get\dgAngular_Velocity_Get.h	30;"	f	class:dgAngular_Velocity_Get
+dgBattery_Balance_Amount_Get	dgBattery_Balance_Amount_Get\dgBattery_Balance_Amount_Get.cpp	27;"	f	class:dgBattery_Balance_Amount_Get
+dgBattery_Balance_Amount_Get	dgBattery_Balance_Amount_Get\dgBattery_Balance_Amount_Get.h	17;"	c
+dgBattery_Balance_Amount_Get	dgBattery_Balance_Amount_Get\dgBattery_Balance_Amount_Get.h	29;"	f	class:dgBattery_Balance_Amount_Get
+dgColor_Get	dgColor_Get\dgColor_Get.cpp	30;"	f	class:dgColor_Get
+dgColor_Get	dgColor_Get\dgColor_Get.h	18;"	c
+dgColor_Get	dgColor_Get\dgColor_Get.h	30;"	f	class:dgColor_Get
+dgMotor_Get	dgMotor_Get\dgMotor_Get.cpp	28;"	f	class:dgMotor_Get
+dgMotor_Get	dgMotor_Get\dgMotor_Get.h	21;"	c
+dgMotor_Get	dgMotor_Get\dgMotor_Get.h	38;"	f	class:dgMotor_Get
+dgUltrasonic_Wave_Get	dgUltrasonic_Wave_Get\dgUltrasonic_Wave_Get.cpp	27;"	f	class:dgUltrasonic_Wave_Get
+dgUltrasonic_Wave_Get	dgUltrasonic_Wave_Get\dgUltrasonic_Wave_Get.h	17;"	c
+dgUltrasonic_Wave_Get	dgUltrasonic_Wave_Get\dgUltrasonic_Wave_Get.h	29;"	f	class:dgUltrasonic_Wave_Get
+dgmotor_OffSet	dgMotor_Get\dgMotor_Get.cpp	36;"	f	class:dgMotor_Get
+ev3api	dcMotor_Output\Motor.h	13;"	n
+ev3api	dcTail_Motor_Output\Motor.h	13;"	n
+f_forward	rnInverted_Control\rnInverted_Control.h	37;"	m	class:rnInverted_Control
+f_lmotor_distance	dgMotor_Get\dgMotor_Get.h	48;"	m	class:dgMotor_Get
+f_motor_distance	dgMotor_Get\dgMotor_Get.h	49;"	m	class:dgMotor_Get
+f_pi	dgMotor_Get\dgMotor_Get.h	50;"	m	class:dgMotor_Get
+f_rmotor_distance	dgMotor_Get\dgMotor_Get.h	47;"	m	class:dgMotor_Get
+f_turn	rnInverted_Control\rnInverted_Control.h	38;"	m	class:rnInverted_Control
+f_wheel	dgMotor_Get\dgMotor_Get.h	51;"	m	class:dgMotor_Get
+frBluetooth	frBluetooth\frBluetooth.cpp	173;"	f	class:frBluetooth
+frBluetooth	frBluetooth\frBluetooth.h	33;"	c
+frBluetooth	frBluetooth\frBluetooth.h	51;"	f	class:frBluetooth
+frLog	frLog\frLog.cpp	186;"	f	class:frLog
+frLog	frLog\frLog.h	54;"	c
+frLog	frLog\frLog.h	65;"	f	class:frLog
+getBrake	dcMotor_Output\Motor.h	113;"	f	class:ev3api::Motor
+getBrake	dcTail_Motor_Output\Motor.h	113;"	f	class:ev3api::Motor
+getCount	dcMotor_Output\Motor.h	67;"	f	class:ev3api::Motor
+getCount	dcTail_Motor_Output\Motor.h	67;"	f	class:ev3api::Motor
+getPWM	dcMotor_Output\Motor.h	120;"	f	class:ev3api::Motor
+getPWM	dcTail_Motor_Output\Motor.h	120;"	f	class:ev3api::Motor
+getPort	dcMotor_Output\Motor.h	105;"	f	class:ev3api::Motor
+getPort	dcTail_Motor_Output\Motor.h	105;"	f	class:ev3api::Motor
+i_battery	dgBattery_Balance_Amount_Get\dgBattery_Balance_Amount_Get.h	33;"	m	class:dgBattery_Balance_Amount_Get
+i_black	raLine_Threshold_Value\raLine_Threshold_Value.h	45;"	m	class:raLine_Threshold_Value
+i_black	stLine_Threshold_Value_Set\stLine_Threshold_Value_Set.h	31;"	m	class:stLine_Threshold_Value_Set
+i_color	rnLine_Trace\rnLine_Trace.h	45;"	m	class:rnLine_Trace
+i_color	stLine_Threshold_Value_Set\stLine_Threshold_Value_Set.h	34;"	m	class:stLine_Threshold_Value_Set
+i_color_info	dgColor_Get\dgColor_Get.h	33;"	m	class:dgColor_Get
+i_current_color	raLine_Threshold_Value\raLine_Threshold_Value.h	48;"	m	class:raLine_Threshold_Value
+i_direction	rnLine_Trace\rnLine_Trace.h	46;"	m	class:rnLine_Trace
+i_distance_info	dgUltrasonic_Wave_Get\dgUltrasonic_Wave_Get.h	32;"	m	class:dgUltrasonic_Wave_Get
+i_gray	raLine_Threshold_Value\raLine_Threshold_Value.h	47;"	m	class:raLine_Threshold_Value
+i_gray	stLine_Threshold_Value_Set\stLine_Threshold_Value_Set.h	33;"	m	class:stLine_Threshold_Value_Set
+i_gray1	raLine_Threshold_Value\raLine_Threshold_Value.h	51;"	m	class:raLine_Threshold_Value
+i_gray2	raLine_Threshold_Value\raLine_Threshold_Value.h	52;"	m	class:raLine_Threshold_Value
+i_gyro_info	dgAngular_Velocity_Get\dgAngular_Velocity_Get.h	35;"	m	class:dgAngular_Velocity_Get
+i_initialized	rnLine_Trace\rnLine_Trace.h	47;"	m	class:rnLine_Trace
+i_lmotor_info	dgMotor_Get\dgMotor_Get.h	44;"	m	class:dgMotor_Get
+i_lmotor_rotation	dgMotor_Get\dgMotor_Get.h	46;"	m	class:dgMotor_Get
+i_rmotor_info	dgMotor_Get\dgMotor_Get.h	43;"	m	class:dgMotor_Get
+i_rmotor_rotation	dgMotor_Get\dgMotor_Get.h	45;"	m	class:dgMotor_Get
+i_white	raLine_Threshold_Value\raLine_Threshold_Value.h	46;"	m	class:raLine_Threshold_Value
+i_white	stLine_Threshold_Value_Set\stLine_Threshold_Value_Set.h	32;"	m	class:stLine_Threshold_Value_Set
+id	frLog\frLog.cpp	61;"	m	struct:_LogLink	file:
+log	dgColor_Get\dgColor_Get.cpp	27;"	v
+mBrake	dcMotor_Output\Motor.h	124;"	m	class:ev3api::Motor
+mBrake	dcTail_Motor_Output\Motor.h	124;"	m	class:ev3api::Motor
+mOffset	dcMotor_Output\Motor.h	127;"	m	class:ev3api::Motor
+mOffset	dcTail_Motor_Output\Motor.h	127;"	m	class:ev3api::Motor
+mPWM	dcMotor_Output\Motor.h	126;"	m	class:ev3api::Motor
+mPWM	dcTail_Motor_Output\Motor.h	126;"	m	class:ev3api::Motor
+mPort	dcMotor_Output\Motor.h	123;"	m	class:ev3api::Motor
+mPort	dcTail_Motor_Output\Motor.h	123;"	m	class:ev3api::Motor
+mType	dcMotor_Output\Motor.h	125;"	m	class:ev3api::Motor
+mType	dcTail_Motor_Output\Motor.h	125;"	m	class:ev3api::Motor
+main_task	app.cpp	19;"	f
+operator =	dgAngular_Velocity_Get\dgAngular_Velocity_Get.h	31;"	f	class:dgAngular_Velocity_Get
+operator =	dgBattery_Balance_Amount_Get\dgBattery_Balance_Amount_Get.h	30;"	f	class:dgBattery_Balance_Amount_Get
+operator =	dgColor_Get\dgColor_Get.h	31;"	f	class:dgColor_Get
+operator =	dgMotor_Get\dgMotor_Get.h	39;"	f	class:dgMotor_Get
+operator =	dgUltrasonic_Wave_Get\dgUltrasonic_Wave_Get.h	30;"	f	class:dgUltrasonic_Wave_Get
+operator =	frBluetooth\frBluetooth.h	52;"	f	class:frBluetooth
+operator =	frLog\frLog.h	66;"	f	class:frLog
+operator =	raLine_Threshold_Value\raLine_Threshold_Value.h	56;"	f	class:raLine_Threshold_Value
+operator =	rnInverted_Control\rnInverted_Control.h	45;"	f	class:rnInverted_Control
+pwm_L	rnInverted_Control\rnInverted_Control.h	34;"	m	class:rnInverted_Control
+pwm_R	rnInverted_Control\rnInverted_Control.h	35;"	m	class:rnInverted_Control
+raLineGet	raLine_Threshold_Value\raLine_Threshold_Value.cpp	132;"	f	class:raLine_Threshold_Value
+raLineSet	raLine_Threshold_Value\raLine_Threshold_Value.cpp	42;"	f	class:raLine_Threshold_Value
+raLineUP	raLine_Threshold_Value\raLine_Threshold_Value.cpp	112;"	f	class:raLine_Threshold_Value
+raLine_Threshold_Value	raLine_Threshold_Value\raLine_Threshold_Value.cpp	27;"	f	class:raLine_Threshold_Value
+raLine_Threshold_Value	raLine_Threshold_Value\raLine_Threshold_Value.h	31;"	c
+raLine_Threshold_Value	raLine_Threshold_Value\raLine_Threshold_Value.h	55;"	f	class:raLine_Threshold_Value
+raMotor_Setting_Value	raMotor_Setting_Value\raMotor_Setting_Value.cpp	23;"	f	class:raMotor_Setting_Value
+raMotor_Setting_Value	raMotor_Setting_Value\raMotor_Setting_Value.h	24;"	c
+reset	dcMotor_Output\Motor.h	55;"	f	class:ev3api::Motor
+reset	dcTail_Motor_Output\Motor.h	55;"	f	class:ev3api::Motor
+rnInverted_Control	rnInverted_Control\rnInverted_Control.cpp	50;"	f	class:rnInverted_Control
+rnInverted_Control	rnInverted_Control\rnInverted_Control.h	21;"	c
+rnInverted_Control	rnInverted_Control\rnInverted_Control.h	44;"	f	class:rnInverted_Control
+rnLine_Trace	rnLine_Trace\rnLine_Trace.cpp	35;"	f	class:rnLine_Trace
+rnLine_Trace	rnLine_Trace\rnLine_Trace.h	35;"	c
+rt_SATURATE	rnInverted_Control\balancer.c	62;"	d	file:
+rtmGetErrorStatus	rnInverted_Control\balancer.h	24;"	d
+rtmGetStopRequested	rnInverted_Control\balancer.h	32;"	d
+rtmSetErrorStatus	rnInverted_Control\balancer.h	28;"	d
+setCount	dcMotor_Output\Motor.h	75;"	f	class:ev3api::Motor
+setCount	dcTail_Motor_Output\Motor.h	75;"	f	class:ev3api::Motor
+stGyro_Set	stGyro_Set\stGyro_Set.cpp	22;"	f	class:stGyro_Set
+stGyro_Set	stGyro_Set\stGyro_Set.h	26;"	c
+stLineGRAY	stLine_Threshold_Value_Set\stLine_Threshold_Value_Set.cpp	105;"	f	class:stLine_Threshold_Value_Set
+stLineUP	stLine_Threshold_Value_Set\stLine_Threshold_Value_Set.cpp	32;"	f	class:stLine_Threshold_Value_Set
+stLine_Threshold_Value_Set	stLine_Threshold_Value_Set\stLine_Threshold_Value_Set.h	22;"	c
+stMotor_Initialization	stMotor_Initialization\stMotor_Initialization.cpp	21;"	f	class:stMotor_Initialization
+stMotor_Initialization	stMotor_Initialization\stMotor_Initialization.h	19;"	c
+stop	dcMotor_Output\Motor.h	97;"	f	class:ev3api::Motor
+stop	dcTail_Motor_Output\Motor.h	97;"	f	class:ev3api::Motor
+ud_err_theta	rnInverted_Control\balancer.c	67;"	v	file:
+ud_psi	rnInverted_Control\balancer.c	68;"	v	file:
+ud_theta_lpf	rnInverted_Control\balancer.c	69;"	v	file:
+ud_theta_ref	rnInverted_Control\balancer.c	70;"	v	file:
+ud_thetadot_cmd_lpf	rnInverted_Control\balancer.c	71;"	v	file:
+~crDriving_Order	crDriving_Order\crDriving_Order.cpp	45;"	f	class:crDriving_Order
+~crStart_Preparation	crStart_Preparation\crStart_Preparation.cpp	49;"	f	class:crStart_Preparation
+~dgAngular_Velocity_Get	dgAngular_Velocity_Get\dgAngular_Velocity_Get.cpp	87;"	f	class:dgAngular_Velocity_Get
+~dgBattery_Balance_Amount_Get	dgBattery_Balance_Amount_Get\dgBattery_Balance_Amount_Get.cpp	76;"	f	class:dgBattery_Balance_Amount_Get
+~dgColor_Get	dgColor_Get\dgColor_Get.cpp	81;"	f	class:dgColor_Get
+~dgMotor_Get	dgMotor_Get\dgMotor_Get.cpp	115;"	f	class:dgMotor_Get
+~dgUltrasonic_Wave_Get	dgUltrasonic_Wave_Get\dgUltrasonic_Wave_Get.cpp	79;"	f	class:dgUltrasonic_Wave_Get
+~frBluetooth	frBluetooth\frBluetooth.cpp	192;"	f	class:frBluetooth
+~frLog	frLog\frLog.cpp	206;"	f	class:frLog
+~raLine_Threshold_Value	raLine_Threshold_Value\raLine_Threshold_Value.cpp	164;"	f	class:raLine_Threshold_Value
+~raMotor_Setting_Value	raMotor_Setting_Value\raMotor_Setting_Value.cpp	29;"	f	class:raMotor_Setting_Value
+~rnInverted_Control	rnInverted_Control\rnInverted_Control.cpp	99;"	f	class:rnInverted_Control
+~rnLine_Trace	rnLine_Trace\rnLine_Trace.cpp	47;"	f	class:rnLine_Trace
+~stGyro_Set	stGyro_Set\stGyro_Set.cpp	29;"	f	class:stGyro_Set
+~stMotor_Initialization	stMotor_Initialization\stMotor_Initialization.cpp	26;"	f	class:stMotor_Initialization

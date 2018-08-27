@@ -23,6 +23,7 @@
 #include "rnLine_Trace.h"
 #include "..\raLine_Threshold_Value\raLine_Threshold_Value.h"
 #include "..\frLog\frLog.h"
+#include "..\rnInverted_Control\rnInverted_Control.h"
 
 /* ------------------------------------------------------------------------- */
 /* 関数名	:rnLine_Trace													 */
@@ -68,7 +69,7 @@ SINT rnLine_Trace::LineTracing() {
 					= raLine_Threshold_Value::GetInstance();
 	
 	/* 倒立クラス生成 */
-	class Inverted myInverted;
+	rnInverted_Control &myInverted = rnInverted_Control::GetInstance();
 	
 	log.LOG( LOG_ID_LINETRACE,"raLineSet_before1\r\n");		/* Logメソッド	 */
 	i_color = ColorGet.raLineSet();				/* i_colorにラインの色を格納 */
@@ -88,7 +89,7 @@ SINT rnLine_Trace::LineTracing() {
 		log.LOG( LOG_ID_LINETRACE,"Inverted_Control.SetCommand_before\n");
 		/* 倒立制御ClassのSetCommandMethodを呼ぶ */
 		/* PWM値を設定する */
-		myrnInverted.DriviParam(LOW, i_direction);
+		myInverted.DriviParame(LOW, i_direction);
 
 		/* ラインしきい値Classのしきい値セットMethodを呼ぶ */
 		/* 現在のラインの色を取得 */

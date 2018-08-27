@@ -31,8 +31,8 @@ private:								/*	プライベート-----------	 */
 	rnInverted_Control();				/*	コンストラクタ			 */
 	~rnInverted_Control();				/*	デストラクタ			 */
 	
-	signed char pwm_L;					/*	左モーターPWM出力前回	 */
-	signed char pwm_R; 					/*	右モーターPWM出力前回	 */
+	signed char pwm_L;					/*	左モーターPWM出力値	 */
+	signed char pwm_R; 					/*	右モーターPWM出力値	 */
 	
 	FLOT f_forward;
 	FLOT f_turn;

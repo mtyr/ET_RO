@@ -15,6 +15,8 @@
 /* ------------------------------------------------------------------------- */
 #include "..\common\common.h"					/* 共通ヘッダー				 */
 #include <stdio.h>								/* 基本入出力				 */
+#include "PIDCalculator.h"
+#include "MathHelper.h"
 /* ------------------------------------------------------------------------- */
 /* 定数定義																	 */
 /* ------------------------------------------------------------------------- */
@@ -23,6 +25,10 @@
 #define TS_BLACK				(			1 )		/* 黒戻り値				 */
 #define TS_WHITE				(			2 )		/* 白戻り値				 */
 #define TS_GRAY					(			3 )		/* 灰戻り値				 */
+#define DELTA_T					(		0.004 )		/* 処理周期4msecの場合	 */
+#define KP						(		  1.0 )		/* 定数					 */
+#define KI						(		  0.0 )		/* 定数				 	 */
+#define KD						(		  0.0 )		/* 定数				 	 */
 
 /* ------------------------------------------------------------------------- */
 /* クラス定義																 */
@@ -37,24 +43,29 @@ public:											/*	パブリック-------------	 */
 	
 	SINT raLineSet(void);						/*	現在カラー値を返信		 */		
 	SINT raLineGet(SINT);						/*	現在カラー値の更新		 */
-	SINT raLineUP(SINT, SINT, SINT);			/*	しきい値取得			 */
+	SINT raLineUP(SINT);						/*	しきい値取得			 */
 	static raLine_Threshold_Value&
 		GetInstance(void);						/* 実体作成メソッド			 */
 private:										/*	プライベート-----------	 */
-	
-	SINT i_black;											 /* 黒値		 */
-	SINT i_white;											 /* 白値		 */
+	FLOT raLinePID(SINT ,SINT );						/*	しきい値取得	 */
+	FLOT Turning;
+	//SINT i_black;											 /* 黒値		 */
+	//SINT i_white;											 /* 白値		 */
 	SINT i_gray;											 /* 灰値		 */
 	SINT i_current_color;									 /* 現在カラー値 */
 	
-	/* 追加甲田 */
-	SINT i_gray1;
-	SINT i_gray2;
+	FLOT P;
+	FLOT I;
+	FLOT D;
+	FLOT PID;
 
 	/* シングルトンに必要な奴 */
 	raLine_Threshold_Value(const raLine_Threshold_Value &x) { };
 	raLine_Threshold_Value&operator=
 		(const raLine_Threshold_Value &) { return *this; };
+	
+	/*	クラス宣言	*/
+	PIDCalculator PIDCal;
 };
 
 /* ------------------------------------------------------------------------- */

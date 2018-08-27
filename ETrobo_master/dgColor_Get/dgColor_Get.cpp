@@ -53,8 +53,6 @@ void dgColor_Get::ColorUpdate() {
 /* 作成日	: 2018/07/2		髙岡 諒太		新規作成						 */
 /* ------------------------------------------------------------------------- */
 uint8_t dgColor_Get::ColorGet(){
-	frLog &log = frLog::GetInstance();
-	log.LOG(LOG_ID_COLOR,"ColorGetOk\r\n");
 	return i_color_info;						/* 色情報を戻す				 */
 }
 /* ------------------------------------------------------------------------- */

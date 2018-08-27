@@ -56,11 +56,11 @@ crDriving_Order::~crDriving_Order()
 /* 作成日	: 2018/07/03	宇都宮  正章			新規作成				 */
 /* ------------------------------------------------------------------------- */
 void crDriving_Order::RunWayDecision(){
-	frLog &log = frLog::GetInstance();
-	log.LOG(LOG_ID_TRACE,"crDrive_class_in\n");
-	class rnLine_Trace LineTrace;
+	/*	クラス宣言	*/
+	rnLine_Trace LineTrace;						/*	ライントレースクラス	 */
+	
 	LineTrace.LineTracing();
-	log.LOG(LOG_ID_TRACE,"frDifficulty_class_in\n");
+	
 	//void Difficulty();
 }
 

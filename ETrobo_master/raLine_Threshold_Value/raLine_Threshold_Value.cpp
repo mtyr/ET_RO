@@ -15,6 +15,8 @@
 #include "raLine_Threshold_Value.h"
 #include "..\dgColor_Get\dgColor_Get.h"
 #include "..\frLog\frLog.h"
+#include <math.h>/* Local追加 */
+
 
 /* ------------------------------------------------------------------------- */
 /* 関数名	: raLine_Threshold_Value::raLine_Threshold_Value				 */
@@ -26,6 +28,7 @@
 /* ------------------------------------------------------------------------- */
 raLine_Threshold_Value::raLine_Threshold_Value()
 {
+	 PIDCal.Reset();
 }
 /* ------------------------------------------------------------------------- */
 /* ■■■ public ■■■														 */
@@ -41,64 +44,17 @@ raLine_Threshold_Value::raLine_Threshold_Value()
 /* ------------------------------------------------------------------------- */
 SINT raLine_Threshold_Value::raLineSet(void)
 {
-	frLog &log = frLog::GetInstance();
-	log.LOG(LOG_ID_ERR,"raLine\r\n");
-	log.LOG(LOG_ID_ERR,"WHITE=%d\r\n",i_white);
-	log.LOG(LOG_ID_ERR,"BLACK=%d\r\n",i_black);
-	log.LOG(LOG_ID_ERR,"GRAY=%d\r\n",i_gray);
+	/*	クラス宣言	*/
+	//frLog &log = frLog::GetInstance();/*	ログクラス	*/
+	
 	/* 現在カラー値の更新													 */
 	i_current_color = raLineGet(i_current_color);
-	log.LOG(LOG_ID_ERR,"currnt=%d\r\n",i_current_color);
-	/* 現在カラー値の比較													 */
-	/*if(i_current_color < i_gray)
-	{
-		
-		log.LOG(LOG_ID_ERR,"BLACK=%d\r\n",i_black);
-		return TS_BLACK;
-	}
-	else if(i_current_color > i_gray )
-	{
-		log.LOG(LOG_ID_ERR,"WHITE=%d\r\n",i_white);
-		
-		return TS_WHITE;
-	}
-	else
-	{
-		log.LOG(LOG_ID_ERR,"ERR%d\r\n");
-		return FUNC_ERR;
-		
-	}*/
+	//log.LOG(LOG_ID_ERR,"currnt=%d\r\n",i_current_color);
 	
-	i_gray1=i_gray+10;
-	i_gray2=i_gray-10;
+	Turning=raLinePID(i_current_color, i_gray);
+	//log.LOG(LOG_ID_ERR,"Turning=%f\r\n",Turning);
 	
-	if (i_current_color <= i_white&&i_gray1 < i_current_color){
-		log.LOG(LOG_ID_ERR,"WHITE\r\n");
-		return TS_WHITE;
-	}
-	else if(i_current_color > i_white)
-	{
-		log.LOG(LOG_ID_ERR,"WHITE\r\n");
-		return TS_WHITE;
-	}
-	else if (i_current_color >= i_black&&i_current_color < i_gray2){
-		log.LOG(LOG_ID_ERR,"BLACK\r\n");
-		return TS_BLACK;
-	}
-	else if(i_current_color < i_black)
-	{
-		log.LOG(LOG_ID_ERR,"BLACK\r\n");
-		return TS_BLACK;
-	}
-	else if (i_gray1 >= i_current_color &&i_gray2 <= i_current_color){
-		log.LOG(LOG_ID_ERR,"GRAY\r\n");
-		return TS_GRAY;
-	}
-	else
-	{
-		return FUNC_ERR;
-	}
-	
+	return Turning;
 }
 
 /* ------------------------------------------------------------------------- */
@@ -109,17 +65,39 @@ SINT raLine_Threshold_Value::raLineSet(void)
 /* 戻り値	: SINT: FUNC_ERR		:関数異常終了							 */
 /* 作成日	: 2018/07/10	松浦 侑矢		新規作成						 */
 /* ------------------------------------------------------------------------- */
-SINT raLine_Threshold_Value::raLineUP(SINT black, SINT white, SINT gray)
+SINT raLine_Threshold_Value::raLineUP(SINT gray)
 {
-	i_black = black;
 	i_gray  = gray;
-	i_white = white;
 
 	return FUNC_OK;
 }
 /* ------------------------------------------------------------------------- */
 /* ■■■ private ■■■													 */
 /* ------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------- */
+/* 関数名	: raLine_Threshold_Value::raLinePID							     */
+/* 機能名	: ラインしきい値：現在カラー値の更新							 */
+/* 機能概要	: 現在カラー値の更新											 */
+/* 引数		: SINT: i_current_color,i_gray		:現在カラー値,灰色	 		 */
+/* 戻り値	: math_limit(P + I + D, -100.0,100.0);	:旋回値					 */
+/* 作成日	: 2018/07/10 	松浦 侑矢		新規作成						 */
+/* ------------------------------------------------------------------------- */
+FLOT raLine_Threshold_Value::raLinePID(SINT i_current_color,SINT i_gray){
+
+	/* ログクラスのGetInstance */
+	//frLog &log = frLog::GetInstance();
+	
+	PIDCal.Reset();
+
+	PIDCal.SetTarget( (float) i_gray );
+	PIDCal.SetPID(KP, KI, KD, 60);
+	
+	//log.LOG(LOG_ID_LINETRACE,"nowColor=%d\r\n",i_current_color);
+	  PID =PIDCal.Get( (float)  i_current_color );
+			//PID値を-100~100にクランプして出力
+    return (MathHelper::Clamp(PID, -1.0f, 1.0f) * 100);
+	
+}
 
 /* ------------------------------------------------------------------------- */
 /* 関数名	: raLine_Threshold_Value::raLineGet							     */
@@ -132,7 +110,7 @@ SINT raLine_Threshold_Value::raLineUP(SINT black, SINT white, SINT gray)
 SINT raLine_Threshold_Value::raLineGet(SINT i_current_color){
 	/* カラー情報取得クラス生成 											 */
 	dgColor_Get &dgColor = dgColor_Get::GetInstance(); 
-	
+	dgColor.ColorUpdate();
 	/* ラインしきい値取得からしきい値を取得									 */
 	i_current_color = dgColor.ColorGet();
 
@@ -164,6 +142,7 @@ raLine_Threshold_Value& raLine_Threshold_Value::GetInstance(void)
 raLine_Threshold_Value::~raLine_Threshold_Value()
 {
 }
+
 /*	-----------------------------------------------------------------------	 */
 /*				Copyright HAL College of Technology & Design				 */
 /*	-----------------------------------------------------------------------	 */

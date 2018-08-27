@@ -28,7 +28,7 @@ dgUltrasonic_Wave_Get::dgUltrasonic_Wave_Get()
 {
 	/* 超音波センサーポート設定 */
 	ev3_sensor_config 	(EV3_PORT_2,ULTRASONIC_SENSOR);	
-	int  logindex  = 0;
+	//int  logindex  = 0;
 }
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgUltrasonic_Wave_Get::SonicUpdate							 */

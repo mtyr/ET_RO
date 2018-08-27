@@ -16,7 +16,7 @@
 #include <stdio.h>								/* 入出力ライブラリ			 */
 #include <stdlib.h>								/* 標準ライブラリー			 */
 #include <string.h>								/* 文字列操作系				 */
-#include"frLog.h"							/* logヘッダー */
+#include"..\frLog\frLog.h"							/* logヘッダー */
 /* ------------------------------------------------------------------------- */
 /* 関数名	: dgdgMotor_Get::dgMotor_Get									 */
 /* 機能名	: 角位置取得：コンストラクタ									 */
@@ -80,7 +80,6 @@ uint16_t dgMotor_Get::LMotorGet(){
 /* ------------------------------------------------------------------------- */
 FLOT dgMotor_Get::MotorDistance(){
 	/* 回転数計測 */
-	frLog &log = frLog::GetInstance();
 	i_lmotor_rotation=i_lmotor_info/360;
 	i_rmotor_rotation=i_lmotor_info/360;
 	/* 左右走行距離計測 */

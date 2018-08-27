@@ -17,6 +17,7 @@
 #include "..\raLine_Threshold_Value\raLine_Threshold_Value.h"
 #include "..\frLog\frLog.h"
 #include "ev3api.h"
+#include "..\Lcd\Lcd.h"
 
 /* ------------------------------------------------------------------------- */
 /* ■■■ public ■■■														 */
@@ -30,34 +31,32 @@
 /* 作成日	: 2018/07/10	松浦 侑矢		新規作成						 */
 /* ------------------------------------------------------------------------- */
 SINT stLine_Threshold_Value_Set::stLineUP(void){
-	frLog &log = frLog::GetInstance();
 	
-	log.LOG(LOG_ID_ERR,"stLineUP\r\n");
+	/*	クラス宣言---------------------------------------------------------	 */
+	dgColor_Get &color =dgColor_Get::GetInstance();	/*	カラークラス		 */
+	frLog &log = frLog::GetInstance();				/*	ログクラス			 */
 	
-	/* カラー情報取得クラス生成 											 */
-	dgColor_Get &dgColor=dgColor_Get::GetInstance(); 
-	/* しきい値情報取得クラス生成 											 */
-	class raLine_Threshold_Value &raLine=
-	raLine_Threshold_Value::GetInstance();
+	raLine_Threshold_Value &raLine =
+	raLine_Threshold_Value::GetInstance();			/*	しきい値クラス		 */
+	Lcd lcd;										/*	LCDクラス			 */
 	
 	
+	/*	タッチセンサーセット	*/
 	static const sensor_port_t
     	touch_sensor = EV3_PORT_1;
 	
-	log.LOG(LOG_ID_ERR,"log_stLine\r\n");
-	ev3_lcd_draw_string
-	("black_touch_sensor\0", 0, 0);
-
+	lcd.LcdPrint("black_get");
 	while (1)
 	{   /* タッチセンサーが押されている間とそうでないときで処理を分ける */
 		if (ev3_touch_sensor_is_pressed(touch_sensor) == true){
 			/* しきい値の更新												   */
-			i_black = dgColor.ColorGet();
-			log.LOG(LOG_ID_ERR,"black=%d\r\n",i_black);
+			i_black = color.ColorGet();
+			log.LOG(LOG_ID_LINETRACE,"black=%d\r\n",i_black);
 			break;
 		}else{
-			i_black = dgColor.ColorGet();
-			log.LOG(LOG_ID_ERR,"black=%d\r\n",i_black);
+			color.ColorUpdate();
+			i_black = color.ColorGet();
+			log.LOG(LOG_ID_LINETRACE,"black=%d\r\n",i_black);
 		}
 	}
 	while (1)
@@ -67,27 +66,25 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 		}
 	}
 	
-	ev3_lcd_draw_string
-	("white_touch_sensor\0", 0, 0);
+	lcd.LcdPrint("white_get");
 	
 	while (1)
 	{   /* タッチセンサーが押されている間とそうでないときで処理を分ける */
 		if (ev3_touch_sensor_is_pressed(touch_sensor) == true){
 			/* しきい値の更新												   */
-			i_white = dgColor.ColorGet();
-			log.LOG(LOG_ID_ERR,"white=%d\r\n",i_white);
+			i_white = color.ColorGet();
+			log.LOG(LOG_ID_LINETRACE,"white=%d\r\n",i_white);
 			break;
 		}else{
-			i_white = dgColor.ColorGet();
-			log.LOG(LOG_ID_ERR,"white=%d\r\n",i_white);
+			color.ColorUpdate();
+			i_white = color.ColorGet();
+			log.LOG(LOG_ID_LINETRACE,"white=%d\r\n",i_white);
 		}
 	}
 
 	i_gray = stLineGRAY();
-	log.LOG(LOG_ID_ERR,"stLine_Set\r\n");
 
-	raLine.raLineUP(i_black,i_white,i_gray);
-
+	raLine.raLineUP(i_gray);
 	return FUNC_OK;
 }
 
@@ -104,9 +101,10 @@ SINT stLine_Threshold_Value_Set::stLineUP(void){
 /* ------------------------------------------------------------------------- */
 SINT stLine_Threshold_Value_Set::stLineGRAY(void){
 	SINT gray = 0;
-	gray = i_white - i_black;
+	gray = i_white + i_black;
 	gray = gray / 2;
 	i_gray = gray;
+	//i_gray=i_gray+10;//甲田テスト追加
 	return i_gray;
 }
 /*	-----------------------------------------------------------------------	 */

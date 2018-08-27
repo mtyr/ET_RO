@@ -17,31 +17,21 @@
 /*	メインタスク															 */
 /*	-----------------------------------------------------------------------	 */
 void main_task(intptr_t unused) {
-/*	変数宣言---------------------------------------------------------------	 */
+	/*	変数宣言-----------------------------------------------------------	 */
+		
+	/*	変数初期化---------------------------------------------------------	 */
+		
+	/*	クラス宣言---------------------------------------------------------	 */
+	crStart_Preparation StPrepara;				/*	スタート準備クラス		 */
+	//frLog &log = frLog::GetInstance();			/*	ログクラス				 */
 	
-/*	変数初期化-------------------------------------------------------------	 */
+	/*	周期ハンドラの開始-------------------------------------------------	 */
+	sta_cyc(BT_CYC);							/* bluetooth受信			 */
+	sta_cyc(DC_CYC);							/*	デバイス更新			 */
 	
-/*	クラス宣言-------------------------------------------------------------	 */
+	StPrepara.StartPreparation();				/*	スタート準備開始		 */
 	
-	/* bluetoothハンドラの開始	*/
-	sta_cyc(BT_CYC);
-	//デバイスのハンドラ
-	sta_cyc(DC_CYC);
-	
-	
-	crStart_Preparation StPrepara;
-
-
-frLog &log = frLog::GetInstance();
-	
-log.LOG(LOG_ID_ERR,"log_start\r\n");
-	StPrepara.StartPreparation();
-/*	-----------------------------------------------------------------------	 */
-/*	メインループ															 */
-/*	-----------------------------------------------------------------------	 */
-	//while(1){ }
-	
-  ext_tsk();
+	ext_tsk();
 }
 
 /*	-----------------------------------------------------------------------	 */
@@ -49,15 +39,17 @@ log.LOG(LOG_ID_ERR,"log_start\r\n");
 /*	-----------------------------------------------------------------------	 */
 void dc_cyc(intptr_t unused)
 {
-//ジャイロ
-dgAngular_Velocity_Get &gyro = dgAngular_Velocity_Get::GetInstance();
+	/*	クラス宣言---------------------------------------------------------	 */
+	dgAngular_Velocity_Get &gyro = 
+	dgAngular_Velocity_Get::GetInstance();		/*	ジャイロクラス			 */
 	
-//バッテリ
-dgBattery_Balance_Amount_Get &battery =dgBattery_Balance_Amount_Get::GetInstance();
-
-//カラー
-dgColor_Get &color =dgColor_Get::GetInstance();
+	dgBattery_Balance_Amount_Get &battery = 
+	dgBattery_Balance_Amount_Get::GetInstance();/*	バッテリークラス		 */
 	
+	dgColor_Get &color = 
+	dgColor_Get::GetInstance();					/*	カラークラス			 */
+	
+	/*	各デバイスの更新---------------------------------------------------	 */
 	gyro.GyroUpdate();
 	battery.batteryUpdate();
 	color.ColorUpdate();
@@ -69,22 +61,22 @@ dgColor_Get &color =dgColor_Get::GetInstance();
 /*	-----------------------------------------------------------------------	 */
 void bt_cyc(intptr_t unused)
 {
-/*	変数宣言---------------------------------------------------------------	 */
-static	SCHR cBuf;								/*	受信時の比較用配列		 */
+	/*	変数宣言-----------------------------------------------------------	 */
+	static	SCHR cBuf;							/*	受信時の比較用配列		 */
 	
-/*	クラス宣言-------------------------------------------------------------	 */
+	/*	クラス宣言---------------------------------------------------------	 */
 	 frBluetooth &bluetooth = frBluetooth::GetInstance();
 	 frLog &log = frLog::GetInstance();
 
-/*	Bluetooth文字受信------------------------------------------------------	 */
+	/*	Bluetooth文字受信--------------------------------------------------	 */
 	cBuf = bluetooth.Receive();
 	
 	/*	比較	*/
 	if( cBuf != EOF ){
 
 		/*	ログの出力	*/
-		log.LOG(LOG_ID_ERR,&cBuf);
-		log.LOG(LOG_ID_ERR,"\0");
+		//log.LOG(LOG_ID_ERR,&cBuf);
+		//log.LOG(LOG_ID_ERR,"\0");
 		
 		/*	ログのIDセット	*/
         log.SetLog(cBuf);

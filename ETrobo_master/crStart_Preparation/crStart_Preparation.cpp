@@ -13,13 +13,15 @@
 /*	includeファイル														 	 */
 /*	----------------------------------------------------------------------	 */
 #include <string.h>
-#include"crStart_Preparation.h"
-#include"..\stGyro_Set\stGyro_Set.h"
-#include"..\stLine_Threshold_Value_Set\stLine_Threshold_Value_Set.h"
-#include"..\stMotor_Initialization\stMotor_Initialization.h"
+#include "crStart_Preparation.h"
+#include "..\stGyro_Set\stGyro_Set.h"
+#include "..\stLine_Threshold_Value_Set\stLine_Threshold_Value_Set.h"
+#include "..\stMotor_Initialization\stMotor_Initialization.h"
 #include "..\crDriving_Order\crDriving_Order.h"
 #include "..\frLog\frLog.h"
 #include "..\dcTail_Motor_Output\dcTail_Motor_Output.h"
+#include "..\Lcd\Lcd.h"
+#include "..\frBluetooth\frBluetooth.h"
 
 /* ------------------------------------------------------------------------- */
 /* ■■■ public ■■■														 */
@@ -62,78 +64,68 @@ crStart_Preparation::~crStart_Preparation()
 void crStart_Preparation::StartPreparation(void)
 {
 
-/*	変数宣言---------------------------------------------------------------	 */
-	SINT i_moter_l = 0;							/*	左モータ遊び値			 */
-	SINT i_moter_r = 0;							/*	右モーター遊び値		 */
-	SINT i_moter_t = 0;							/*	尻尾モーター遊び値		 */
-
-/*	初期化-----------------------------------------------------------------	 */
-
-/*	クラス宣言-------------------------------------------------------------	 */	
- stGyro_Set 				 	GyroSet;		/*	ジャイロセット			 */
- stLine_Threshold_Value_Set 	LineTraceVal;	/*	ラインしきい値			 */
- crDriving_Order 			 	DriviOder;		/*	ドライビング開始		 */
- stMotor_Initialization 	 	MotorInit;		/*	モーター初期化			 */
-frLog &log = frLog::GetInstance();				/*	ログ機能の追加			 */
-dcTail_Motor_Output TailMotor;					/*	尻尾モーター			 */
-
-/*	スタート準備開始-------------------------------------------------------	 */
-
-
-/*	タッチセンサー設定-----------------------------------------------------	 */
-ev3_lcd_draw_string	("switch_settings\0",0,0);
-	log.LOG(LOG_ID_ERR,"switch_settings\r\n");
-ev3_sensor_config	( EV3_PORT_1 ,TOUCH_SENSOR);
-
-/*	カラーセンサーしきい値設定---------------------------------------------	 */
-ev3_lcd_draw_string	("color_settings\0",0,0);
-	log.LOG(LOG_ID_ERR,"color_settings\r\n");
-LineTraceVal.stLineUP();
+	/*	変数宣言-----------------------------------------------------------	 */
+	//SINT i_moter_l = 0;							/*	左モータ遊び値			 */
+	//SINT i_moter_r = 0;							/*	右モーター遊び値		 */
+	//SINT i_moter_t = 0;							/*	尻尾モーター遊び値		 */
+	
+	/*	クラス宣言---------------------------------------------------------	 */
+	stGyro_Set 				 	GyroSet;		/*	ジャイロセット			 */
+	stLine_Threshold_Value_Set 	LineTraceVal;	/*	ラインしきい値			 */
+	crDriving_Order 			DriviOder;		/*	ドライビング開始		 */
+	//stMotor_Initialization 	 	MotorInit;		/*	モーター初期化			 */
+	dcTail_Motor_Output 		TailMotor;		/*	尻尾モーター			 */
+	Lcd 						lcd;			/*	LCDクラス	*/
+	frLog &log = frLog::GetInstance();			/*	ログ機能の追加			 */
+	frBluetooth &bluetooth=frBluetooth::GetInstance();/* bluetoothクラス	 */
+	
+	/*	スタート準備開始-------------------------------------------------------	 */
 
 
-/*	モーター初期化---------------------------------------------------------	 */
-ev3_lcd_draw_string	("motor_init\0",0,0);
-log.LOG(LOG_ID_ERR,"motor_init\r\n");
-MotorInit.MotorMeasurement(&i_moter_l,&i_moter_r,&i_moter_t);
+	/*	タッチセンサー設定-----------------------------------------------------	 */
+	lcd.LcdPrint("switch_set");
+	ev3_sensor_config	( EV3_PORT_1 ,TOUCH_SENSOR);
 
-/*	尻尾モーターの下す	*/
-	ev3_lcd_draw_string	("tail_moter_down\0",0,0);
-	log.LOG(LOG_ID_ERR,"tail_moter_down\r\n");
-/*	スタート待ち-----------------------------------------------------------	 */
-ev3_lcd_draw_string	("touch\0",0,0);
+	/*	カラーセンサーしきい値設定---------------------------------------------	 */
+	lcd.LcdPrint("color_set");
+	LineTraceVal.stLineUP();
+
+
+	/*	モーター初期化---------------------------------------------------------	 */
+	lcd.LcdPrint("motor_init_not");
+	//MotorInit.MotorMeasurement(&i_moter_l,&i_moter_r,&i_moter_t);
+	
+	/*	スタート待ち-----------------------------------------------------------	 */
+	lcd.LcdPrint("touch");
 	log.LOG(LOG_ID_ERR,"touch\r\n");
 	
-while(1){
+	while(1){
 
-	if(ev3_touch_sensor_is_pressed	(EV3_PORT_1) == true)	
-	{
-		TailMotor.TailStart(TAIL_DOWN);
-		break;
-	}
-}
-
-ev3_lcd_draw_string	("release\0",0,0);
-	log.LOG(LOG_ID_ERR,"release\r\n");
-while(1){
-	if(ev3_touch_sensor_is_pressed	(EV3_PORT_1) == false)
-	{
-		/*	ジャイロセンサーセット-------------------------------------------------	 */
-		ev3_lcd_draw_string	("gyro_set\0",0,0);
-		log.LOG(LOG_ID_ERR,"gyro_set\n");
-		GyroSet.OffSetStart();
+		if( ( ev3_touch_sensor_is_pressed	(EV3_PORT_1) == true ) || 
+			( bluetooth.Receive() == '1' ) )	
 		
-		/*	尻尾もたーを上げる	*/
-		TailMotor.TailStart(TAIL_UP);
-		break;	
+		{
+			TailMotor.TailStart(TAIL_DOWN);		/*	尻尾モーターの下す		 */
+			break;
+		}
 	}
-}
-
-
-/*	ドライビングオーダー開始---------------------------------------------------	*/
-ev3_lcd_draw_string	("Driving_start\0",0,0);
-	log.LOG(LOG_ID_ERR,"Driving_start\n");
+	
+	lcd.LcdPrint("release");
+	log.LOG(LOG_ID_ERR,"release\r\n");
+	
+	while(1){
+		if( ( ev3_touch_sensor_is_pressed	(EV3_PORT_1) == false ) || 
+			( bluetooth.Receive() == '1' ) )
+		
+		{
+			/*	尻尾もたーを上げる	*/
+			TailMotor.TailStart(TAIL_UP);
+			break;	
+		}
+	}
+	
+	/*	ドライビング開始---------------------------------------------------	 */
 	DriviOder.RunWayDecision();
-
 }
 
 /* ------------------------------------------------------------------------- */
